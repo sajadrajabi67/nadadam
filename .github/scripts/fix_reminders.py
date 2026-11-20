@@ -149,3 +149,81 @@ s = s.replace(
 )
 app.write_text(s, encoding="utf-8")
 print("Emergency reminder shutdown applied; debt data is untouched.")
+
+
+# Reminder engine v2 follow-up: restore safe opt-in and limit choices to 0..3 days.
+p = Path("src/reminderSync.ts")
+s = p.read_text(encoding="utf-8")
+s = re.sub(
+    r"      if \(saved\.enabled\) \{\s*try \{ localStorage\.setItem\(OPTIONS_KEY, JSON\.stringify\(\{ \.\.\.saved, enabled: false \}\)\); \} catch \{\}\s*\}\s*return \{ enabled: false,",
+    "      return { enabled: saved.enabled,",
+    s,
+    count=1,
+    flags=re.S
+)
+s = s.replace("export const reminderDayChoices = [0, 1, 2, 3, 5, 7, 10] as const;",
+              "export const reminderDayChoices = [0, 1, 2, 3] as const;")
+s = s.replace("  if (!options.enabled) return Promise.resolve();\n", "")
+s = s.replace("entry.daysBefore === 0 ? 'امروز روز قسطته!' : 'حواست به قسطت باشه!'",
+              "entry.daysBefore === 0 ? 'یادآوری همان روز سررسید' : 'یادآوری سررسید قسط'")
+s = s.replace("' امروز سررسید می‌شه. اگه دادی، برو توی برنامه و بزن «دادم».",
+              "' همان روز سررسید است. اگر پرداخت کردی، در برنامه وضعیت قسط را ثبت کن.")
+s = s.replace("' تا ' + entry.daysBefore.toLocaleString('fa-IR') + ' روز دیگه سررسید می‌شه. هنوز ندادیش!'",
+              "' — ' + entry.daysBefore.toLocaleString('fa-IR') + ' روز جلوتر از سررسید.")
+# Schedule one notification per native bridge call; a failed item must not abort the rest.
+pattern = r"    if \(additions\.length\) \{.*?\n    \}\n  \}\)\(\);"
+replacement = """    for (const entry of additions) {
+      try {
+        await scheduleReminder(makeNotice(entry));
+        saved[entry.key] = { id: entry.id, at: entry.at, title: entry.title };
+        localStorage.setItem(SCHEDULE_KEY, JSON.stringify(saved));
+        try { localStorage.setItem('nadadam-reminder-last-error-v1', ''); } catch {}
+      } catch (error) {
+        try { localStorage.setItem('nadadam-reminder-last-error-v1', error instanceof Error ? error.message : String(error)); } catch {}
+      }
+    }
+  })();"""
+s, count = re.subn(pattern, replacement, s, count=1, flags=re.S)
+if count != 1:
+    raise SystemExit("Could not safely convert reminder scheduling to isolated calls")
+p.write_text(s, encoding="utf-8")
+
+# Restore the reminder switch. Permissions are requested only after the user turns it on.
+app = Path("src/App.tsx")
+s = app.read_text(encoding="utf-8")
+s = s.replace(
+    '<input data-testid="reminder-toggle" type="checkbox" className="h-6 w-6 accent-[#0F9D8A]" checked={false} disabled aria-label="یادآوری موقتاً غیرفعال است"/>',
+    """<input data-testid="reminder-toggle" type="checkbox" className="h-6 w-6 accent-[#0F9D8A]" checked={reminderOptions.enabled} onChange={async e=>{const enabled=e.target.checked;if(!enabled){const next={...reminderOptions,enabled:false};saveReminderOptions(next);setReminderOptions(next);setReminderError('یادآوری‌ها غیرفعال شدند.');return;}setReminderError('در حال بررسی مجوزهای اعلان...');const allowed=await enableReminderPermission();if(!allowed){setReminderError('مجوز نمایش اعلان و هشدار دقیق را تأیید کن.');return;}const next={...reminderOptions,enabled:true,days:reminderOptions.days.filter(d=>[0,1,2,3].includes(d))};saveReminderOptions(next);setReminderOptions(next);setReminderError('یادآوری اقساط فعال شد.');}} aria-label="فعال‌سازی یادآوری اقساط"/>"""
+)
+s = s.replace("به‌دلیل رفع اشکال فنی، موقتاً غیرفعال شده است.",
+              "اعلان‌ها در ساعت انتخابی، حتی با بسته‌بودن برنامه زمان‌بندی می‌شوند.")
+s = s.replace("{day===0?'امروز':fa(day)}", "{day===0?'همان روز':fa(day)+' روز جلوتر'}")
+s = s.replace('className="grid grid-cols-7 gap-1.5"', 'className="grid grid-cols-2 sm:grid-cols-4 gap-2"')
+app.write_text(s, encoding="utf-8")
+
+# Dedicated notification channel and status-bar icon.
+lib = Path("src/lib/reminders.ts")
+s = lib.read_text(encoding="utf-8")
+if "nadadam_reminders_v2" not in s:
+    s = s.replace(
+        "    const exact = await native.checkExactNotificationSetting();",
+        "    const exact = await native.checkExactNotificationSetting();",
+        1
+    )
+    s = s.replace(
+        "    return true;\n  }\n  if (typeof Notification",
+        "    await native.createChannel({ id: 'nadadam_reminders_v2', name: 'یادآوری اقساط', description: 'یادآوری سررسید اقساط ندادم' });\n    return true;\n  }\n  if (typeof Notification",
+        1
+    )
+    s = s.replace(
+        "      return { id: item.id, title: item.title, body: item.body ?? '', schedule: { at, allowWhileIdle: true } };",
+        "      return { id: item.id, title: item.title, body: item.body ?? '', channelId: 'nadadam_reminders_v2', schedule: { at, allowWhileIdle: true } };",
+        1
+    )
+lib.write_text(s, encoding="utf-8")
+
+config = Path("capacitor.config.json")
+data = json.loads(config.read_text(encoding="utf-8"))
+data.setdefault("plugins", {})["LocalNotifications"] = {"smallIcon": "ic_stat_nadadam", "iconColor": "#0F9D8A"}
+config.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+print("Reminder engine v2 settings applied.")
