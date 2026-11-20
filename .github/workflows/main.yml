@@ -116,6 +116,10 @@ jobs:
           keytool -list -keystore nadadam-release.jks -storepass "$NADADAM_STORE_PASSWORD" -alias "$NADADAM_KEY_ALIAS" >/dev/null
 
       - name: Build APK
+        env:
+          NADADAM_STORE_PASSWORD: ${{ secrets.NADADAM_STORE_PASSWORD }}
+          NADADAM_KEY_ALIAS: ${{ secrets.NADADAM_KEY_ALIAS }}
+          NADADAM_KEY_PASSWORD: ${{ secrets.NADADAM_KEY_PASSWORD }}
         run: |
           cd app/android
           chmod +x gradlew
