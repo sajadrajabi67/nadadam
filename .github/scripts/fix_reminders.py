@@ -113,9 +113,11 @@ app.write_text(s, encoding="utf-8")
 print("Reminder hardening patch applied.")
 
 
-// Emergency safety switch: reminders stay disabled until native scheduling is repaired.
-// This also clears a previously persisted "enabled" flag without touching debts/installments.
+# Emergency safety switch: reminders stay disabled until native scheduling is repaired.
+# Clear the persisted enabled flag without touching debt/installment data.
 from pathlib import Path
+import re
+
 p = Path("src/reminderSync.ts")
 s = p.read_text(encoding="utf-8")
 s = s.replace(
@@ -133,7 +135,6 @@ p.write_text(s, encoding="utf-8")
 
 app = Path("src/App.tsx")
 s = app.read_text(encoding="utf-8")
-import re
 s, n = re.subn(
     r'<input data-testid="reminder-toggle" type="checkbox".*?/>',
     '<input data-testid="reminder-toggle" type="checkbox" className="h-6 w-6 accent-[#0F9D8A]" checked={false} disabled aria-label="یادآوری موقتاً غیرفعال است"/>',
