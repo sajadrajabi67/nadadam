@@ -109,12 +109,8 @@ jobs:
           }
           '''
               s = s.replace("    buildTypes {", block + "    buildTypes {", 1)
-          import re
-          m = re.search(r"(?m)^(\s*)debug\s*\{", s)
-          if not m:
-              raise SystemExit("Could not find Android debug build type")
-          pos = m.end()
-          s = s[:pos] + chr(10) + "            signingConfig signingConfigs.release" + s[pos:]
+          if "signingConfig signingConfigs.release" not in s:
+              s = s.replace("    buildTypes {", "    buildTypes {\\n        debug {\\n            signingConfig signingConfigs.release\\n        }", 1)
           p.write_text(s)
           PY
           keytool -list -keystore nadadam-release.jks -storepass "$NADADAM_STORE_PASSWORD" -alias "$NADADAM_KEY_ALIAS" >/dev/null
