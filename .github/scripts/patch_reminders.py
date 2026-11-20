@@ -4,12 +4,20 @@ import re
 app = Path("src/App.tsx")
 source = app.read_text(encoding="utf-8")
 source = source.replace("type ReminderOptions } from './reminderSync';", "type ReminderOptions, reminderDayChoices } from './reminderSync';", 1)
+source = source.replace("type ReminderOptions, reminderDayChoices } from './reminderSync';", "type ReminderOptions, reminderDayChoices, runReminderTest } from './reminderSync';", 1)
 pattern = r'\{reminderOptions\.enabled&&<label className="mt-3 block text-sm font-bold">چند روز قبل از سررسید بهت خبر بدم؟.*?</select></label>\}'
 replacement = r'''{reminderOptions.enabled&&<div className="mt-4 space-y-4"><div><p className="mb-3 text-sm font-bold">یادآوری سررسید قسط‌ها چند روز قبل از سررسید بهت خبر بدم؟</p><div data-testid="reminder-days" role="group" aria-label="روزهای یادآوری" className="grid grid-cols-7 gap-1.5">{reminderDayChoices.map(day=><button key={day} type="button" data-testid={'reminder-day-' + day} role="checkbox" aria-checked={reminderOptions.days.includes(day)} onClick={()=>{const days=reminderOptions.days.includes(day)?reminderOptions.days.filter(d=>d!==day):[...reminderOptions.days,day].sort((a,b)=>a-b);if(!days.length)return;const next={...reminderOptions,days};try{saveReminderOptions(next);setReminderOptions(next);setReminderError('');}catch{setReminderError('تنظیمات ذخیره نشد.');}}} className={'min-h-11 rounded-xl border text-sm font-bold transition ' + (reminderOptions.days.includes(day)?'border-[#0F9D8A] bg-[#0F9D8A] text-white shadow-sm':'border-slate-200 bg-slate-50 text-slate-600')}>{day===0?'امروز':fa(day)}</button>)}</div><p className="mt-2 text-xs text-slate-500">می‌تونی چند روز رو هم‌زمان انتخاب کنی.</p></div><label className="block text-sm font-bold">ساعت ارسال یادآوری<input data-testid="reminder-time" type="time" dir="ltr" required className={field + ' mt-2'} value={reminderOptions.time} onChange={e=>{if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(e.target.value))return;const next={...reminderOptions,time:e.target.value};try{saveReminderOptions(next);setReminderOptions(next);setReminderError('');}catch{setReminderError('تنظیمات ذخیره نشد.');}}}/></label></div>}'''
 source, count = re.subn(pattern, lambda _: replacement, source, count=1, flags=re.S)
 if count != 1:
     raise SystemExit("Could not locate the original reminder-day dropdown.")
 source = source.replace("در نسخهٔ نصب‌شده، یادآورها حتی وقتی برنامه بسته است هم نمایش داده می‌شوند؛ در مرورگر فقط وقتی برنامه باز باشد.", "در نسخهٔ مرورگر، یادآورها فقط وقتی برنامه باز باشد قابل اجرا هستند.")
+app.write_text(source, encoding="utf-8")
+source = app.read_text(encoding="utf-8")
+error_anchor = '{reminderError&&<p role="alert" className="mt-3 text-sm text-[#0B2F2B]">{reminderError}</p>}'
+test_button = '{remindersAreNative()&&reminderOptions.enabled&&<button data-testid="reminder-test" type="button" onClick={async()=>{setReminderError("در حال ثبت اعلان آزمایشی...");try{setReminderError(await runReminderTest());}catch(error){setReminderError("ثبت اعلان آزمایشی ناموفق بود: "+(error instanceof Error?error.message:String(error)));}}} className="mt-4 min-h-12 w-full rounded-2xl border border-[#0F9D8A] bg-[#E3F5F2] px-4 font-bold text-[#0B6E63]">ارسال اعلان آزمایشی (یک دقیقه بعد)</button>}'
+if error_anchor not in source:
+    raise SystemExit("Could not locate reminder error display in App.tsx")
+source = source.replace(error_anchor, test_button + error_anchor, 1)
 app.write_text(source, encoding="utf-8")
 
 Path("src/reminderSync.ts").write_text("""import { cancelReminder, scheduleReminder, requestReminderPermission, remindersAreNative, listReminderIds } from './lib/reminders';
@@ -44,6 +52,16 @@ export async function enableReminderPermission(): Promise<boolean> {
   return await requestReminderPermission();
 }
 export { remindersAreNative };
+export async function runReminderTest(): Promise<string> {
+  if (!remindersAreNative()) throw new Error('این آزمایش فقط در نسخه نصب‌شده قابل اجراست.');
+  const allowed = await requestReminderPermission();
+  if (!allowed) throw new Error('مجوز اعلان یا هشدار دقیق فعال نیست.');
+  const id = 1900000000 + (Date.now() % 90000000);
+  await scheduleReminder({ id, title: 'اعلان آزمایشی ندادم', body: 'اگر این پیام را دیدی، اعلان اندروید درست کار می‌کند.', at: new Date(Date.now() + 60_000) });
+  const pending = await listReminderIds();
+  if (!pending.includes(id)) throw new Error('اندروید اعلان را در فهرست اعلان‌های در انتظار ثبت نکرد.');
+  return 'اعلان آزمایشی ثبت شد؛ تا یک دقیقه دیگر منتظر بمان و برنامه را ببند.';
+}
 
 function sync(store: Store, options: ReminderOptions): Promise<void> {
   return (async () => {
