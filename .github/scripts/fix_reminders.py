@@ -170,7 +170,7 @@ s = s.replace("entry.daysBefore === 0 ? 'امروز روز قسطته!' : 'حو�
 s = s.replace("' امروز سررسید می‌شه. اگه دادی، برو توی برنامه و بزن «دادم».",
               "' همان روز سررسید است. اگر پرداخت کردی، در برنامه وضعیت قسط را ثبت کن.")
 s = s.replace("' تا ' + entry.daysBefore.toLocaleString('fa-IR') + ' روز دیگه سررسید می‌شه. هنوز ندادیش!'",
-              "' — ' + entry.daysBefore.toLocaleString('fa-IR') + ' روز جلوتر از سررسید.")
+              "' — ' + entry.daysBefore.toLocaleString('fa-IR') + ' روز جلوتر از سررسید.'")
 # Schedule one notification per native bridge call; a failed item must not abort the rest.
 pattern = r"    if \(additions\.length\) \{.*?\n    \}\n  \}\)\(\);"
 replacement = """    for (const entry of additions) {
