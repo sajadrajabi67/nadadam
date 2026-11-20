@@ -308,3 +308,14 @@ s = s.replace(
 s = s.replace(r"\\n", r"\n")
 p.write_text(s, encoding="utf-8")
 print("Reminder grouping, cleanup, and diagnostics refinement applied.")
+
+
+# Keep the user's requested wording consistent: do not use the word "امروز" in reminder copy.
+p = Path("src/reminderSync.ts")
+s = p.read_text(encoding="utf-8")
+s = s.replace(
+    "'امروز موعد پرداخت این قسط‌هاست: '",
+    "'همان روز سررسید موعد پرداخت این قسط‌هاست: '"
+)
+p.write_text(s, encoding="utf-8")
+print("Same-day reminder wording finalized.")
