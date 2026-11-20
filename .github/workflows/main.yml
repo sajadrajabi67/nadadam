@@ -29,6 +29,7 @@ jobs:
           mkdir app
           unzip -o project-updated.zip -d app
           cd app
+          sed -i 's#cursor-default"/>}}#cursor-default"/>}#' src/App.tsx
           npm install
           npm install --no-save vazirmatn@33.0.3
           mkdir -p public/fonts
