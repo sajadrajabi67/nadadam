@@ -69,6 +69,17 @@ jobs:
           # Fail the build if the compiled CSS still points at the wrong font path.
           grep -q '/fonts/Vazirmatn-wght.woff2' dist/assets/*.css
           npx cap add android
+          # Exact alarms are required for reminders to fire at the selected clock time on Android 12+.
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("android/app/src/main/AndroidManifest.xml")
+          s = p.read_text()
+          permission = '<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />'
+          if permission not in s:
+              pos = s.find(">", s.find("<manifest"))
+              s = s[:pos+1] + "\\n    " + permission + s[pos+1:]
+              p.write_text(s)
+          PY
           npx capacitor-assets generate --android
           npx cap sync android
 
