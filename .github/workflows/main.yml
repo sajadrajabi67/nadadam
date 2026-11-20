@@ -88,10 +88,10 @@ jobs:
           NADADAM_KEY_PASSWORD: ${{ secrets.NADADAM_KEY_PASSWORD }}
         run: |
           set -euo pipefail
-          test -n "$NADADAM_KEYSTORE_BASE64"
-          test -n "$NADADAM_STORE_PASSWORD"
-          test -n "$NADADAM_KEY_ALIAS"
-          test -n "$NADADAM_KEY_PASSWORD"
+          if [ -z "$NADADAM_KEYSTORE_BASE64" ] || [ -z "$NADADAM_STORE_PASSWORD" ] || [ -z "$NADADAM_KEY_ALIAS" ] || [ -z "$NADADAM_KEY_PASSWORD" ]; then
+            echo "Permanent signing secrets are not configured; building with the temporary debug signature."
+            exit 0
+          fi
           cd app/android/app
           printf '%s' "$NADADAM_KEYSTORE_BASE64" | base64 --decode > nadadam-release.jks
           python3 - <<'PY'
