@@ -108,7 +108,7 @@ jobs:
           '''
               s = s.replace("    buildTypes {", block + "    buildTypes {", 1)
           import re
-          m = re.search(r"(?m)^(\\s*)debug\\s*\\{", s)
+          m = re.search(r"(?m)^(\s*)debug\s*\{", s)
           if not m:
               raise SystemExit("Could not find Android debug build type")
           pos = m.end()
