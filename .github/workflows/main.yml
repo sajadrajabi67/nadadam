@@ -34,6 +34,17 @@ jobs:
           sed -i 's#Vazirmatn\[wght\]\.woff2#Vazirmatn-wght.woff2#g' src/index.css
           # Ensure the native Android status bar is explicitly visible and the WebView does not draw behind it.
           sed -i "s/void StatusBar.setOverlaysWebView({ overlay: false })/void StatusBar.show().catch(() => {}); void StatusBar.setOverlaysWebView({ overlay: false })/" src/App.tsx
+          # Move the app header below the Android status bar and keep it pinned with a subtle divider while content scrolls underneath.
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("src/App.tsx")
+          s = p.read_text()
+          old = 'className:"flex items-center gap-3 py-5"'
+          new = 'className:"sticky top-0 z-40 -mx-4 flex items-center gap-3 border-b border-[#DCE5E2]/80 bg-[#F3F6F5]/95 px-4 pt-7 pb-5 shadow-[0_1px_8px_rgba(11,31,42,0.035)] backdrop-blur-sm sm:-mx-6 sm:px-6"'
+          if old not in s:
+              raise SystemExit("Expected header class was not found; stopping without changing the layout.")
+          p.write_text(s.replace(old, new, 1))
+          PY
           # Apply the selected font consistently to form controls as well.
           cat >> src/index.css <<'CSS'
 
