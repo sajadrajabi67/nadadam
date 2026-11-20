@@ -30,6 +30,17 @@ jobs:
           unzip -o project-updated.zip -d app
           cd app
           sed -i 's#cursor-default"/>}}#cursor-default"/>}#' src/App.tsx
+          # Make the CSS font URL match the actual font file copied below.
+          sed -i 's#Vazirmatn\\[wght\\]\\.woff2#Vazirmatn-wght.woff2#g' src/index.css
+          # Ensure the native Android status bar is explicitly visible and the WebView does not draw behind it.
+          sed -i "s/void StatusBar.setOverlaysWebView({ overlay: false })/void StatusBar.show().catch(() => {}); void StatusBar.setOverlaysWebView({ overlay: false })/" src/App.tsx
+          # Apply the selected font consistently to form controls as well.
+          cat >> src/index.css <<'CSS'
+
+          body, button, input, textarea, select {
+            font-family: 'Vazirmatn', system-ui, sans-serif;
+          }
+          CSS
           npm install
           npm install --no-save vazirmatn@33.0.3
           mkdir -p public/fonts
