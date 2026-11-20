@@ -9,6 +9,7 @@ replacement = r'''{reminderOptions.enabled&&<div className="mt-4 space-y-4"><div
 source, count = re.subn(pattern, lambda _: replacement, source, count=1, flags=re.S)
 if count != 1:
     raise SystemExit("Could not locate the original reminder-day dropdown.")
+source = source.replace("در نسخهٔ نصب‌شده، یادآورها حتی وقتی برنامه بسته است هم نمایش داده می‌شوند؛ در مرورگر فقط وقتی برنامه باز باشد.", "در نسخهٔ مرورگر، یادآورها فقط وقتی برنامه باز باشد قابل اجرا هستند.")
 app.write_text(source, encoding="utf-8")
 
 Path("src/reminderSync.ts").write_text("""import { cancelReminder, scheduleReminder, requestReminderPermission, remindersAreNative } from './lib/reminders';
