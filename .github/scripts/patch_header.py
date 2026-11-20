@@ -17,7 +17,7 @@ if old_main not in s:
     raise SystemExit("Expected main opening was not found; refusing to patch.")
 s = s.replace(old_main, new_main, 1)
 
-if 'className="fixed inset-x-0 top-0 z-40 bg-[linear-gradient(to_bottom' not in s or 'className="pt-32 pb-6"' not in s:
+if 'className="fixed inset-x-0 top-0 z-40 bg-[linear-gradient(to_bottom' not in s or 'className="pt-37 pb-6"' not in s:
     raise SystemExit("Header patch verification failed.")
 p.write_text(s, encoding="utf-8")
 print("Header fixed-position and fading-bottom treatment applied.")
