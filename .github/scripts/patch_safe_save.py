@@ -26,12 +26,9 @@ export function createInstallments(debt: Debt): Installment[] {
   }));
 }"""
 if old not in s: raise SystemExit("createInstallments block not found")
-logic.write_text(s.replace(old, new, 1), encoding="utf-8")
+s = s.replace(old, new, 1)
 
-# Avoid thousands of Intl calendar conversions per installment. The old
-# conversion searched a three-year interval one day at a time; each installment
-# called daysInMonth twice. Narrow the search around an approximate Gregorian
-# date (Persian new year is around March 20).
+# Narrow the Gregorian search interval to avoid the old three-year daily scan.
 needle = """export function toGregorian(j: JDate): Date {
   let lo = Date.UTC(j.y + 620, 0, 1), hi = Date.UTC(j.y + 623, 0, 1);
   while (lo <= hi) {
@@ -56,13 +53,10 @@ optimized = """export function toGregorian(j: JDate): Date {
   }
   throw new Error('تاریخ نامعتبر است');
 }"""
-if needle not in s:
-  raise SystemExit("Original toGregorian block not found; refusing unsafe patch")
+if needle not in s: raise SystemExit("Original toGregorian block not found")
 s = s.replace(needle, optimized, 1)
 
-# Month lengths are fixed for the first eleven Persian months. Only Esfand
-# needs a leap-year lookup. Cache that result once per Persian year instead of
-# running two calendar conversions for every single installment.
+# Only Esfand length depends on leap years. Cache it once per Persian year.
 old_days = """export function daysInMonth(y: number, m: number): number {
   const start = toGregorian({ y, m, d: 1 }).getTime();
   const next = shiftMonth({ y, m, d: 1 }, 1);
@@ -82,9 +76,9 @@ export function daysInMonth(y: number, m: number): number {
   esfandLengthCache.set(y, length);
   return length;
 }"""
-if old_days not in s:
-  raise SystemExit("Original daysInMonth block not found; refusing unsafe patch")
-logic.write_text(s.replace(old_days, new_days, 1), encoding="utf-8")
+if old_days not in s: raise SystemExit("Original daysInMonth block not found")
+s = s.replace(old_days, new_days, 1)
+logic.write_text(s, encoding="utf-8")
 
 app = Path("src/App.tsx")
 s = app.read_text(encoding="utf-8")
