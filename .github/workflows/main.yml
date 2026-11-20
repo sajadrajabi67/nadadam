@@ -34,34 +34,17 @@ jobs:
           sed -i 's#Vazirmatn\[wght\]\.woff2#Vazirmatn-wght.woff2#g' src/index.css
           # Ensure the native Android status bar is explicitly visible and the WebView does not draw behind it.
           sed -i "s/void StatusBar.setOverlaysWebView({ overlay: false })/void StatusBar.show().catch(() => {}); void StatusBar.setOverlaysWebView({ overlay: false })/" src/App.tsx
-          # Temporary source inspection: expose reminder UI, app identity, and header markup in the build log.
+          # Inspect the exact reminder model, scheduler, settings UI, and app header before applying source-safe edits.
           python3 - <<'PY'
           from pathlib import Path
           import re
           app = Path("src/App.tsx").read_text()
-          for term in ["یادآوری", "اعلان", "سررسید", "Reminder", "Notification", "reminder", "notification"]:
-              pos = 0
-              while True:
-                  pos = app.find(term, pos)
-                  if pos < 0: break
-                  print("\\n--- SOURCE MATCH:", term, "---\\n", app[max(0,pos-700):pos+1100])
-                  pos += len(term)
-          print("\\n--- HEADER-LIKE CLASSNAMES ---")
-          for m in re.finditer(r'className:[\\\"\\\']([^\\\"\\\']*(?:items-center|sticky|header)[^\\\"\\\']*)', app):
-              print(m.group(0)[:500])
-          print("\\n--- APP CONFIG ---\\n", Path("capacitor.config.json").read_text())
-          print("\\n--- PACKAGE ---\\n", Path("package.json").read_text())
-          PY
-          # Move the app header below the Android status bar and keep it pinned with a subtle divider while content scrolls underneath.
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path("src/App.tsx")
-          s = p.read_text()
-          old = 'className:"flex items-center gap-3 py-5"'
-          new = 'className:"sticky top-0 z-40 -mx-4 flex items-center gap-3 border-b border-[#DCE5E2]/80 bg-[#F3F6F5]/95 px-4 pt-7 pb-5 shadow-[0_1px_8px_rgba(11,31,42,0.035)] backdrop-blur-sm sm:-mx-6 sm:px-6"'
-          if old not in s:
-              raise SystemExit("Expected header class was not found; stopping without changing the layout.")
-          p.write_text(s.replace(old, new, 1))
+          for file in ["src/reminderSync.ts", "src/lib/reminders.ts"]:
+              print("\\n--- FILE:", file, "---\\n", Path(file).read_text())
+          for term in ["type ReminderOptions", "interface ReminderOptions", "loadReminderOptions", "logo.png", "ندادم", "rounded-full", "settings"]:
+              pos = app.find(term)
+              if pos >= 0:
+                  print("\\n--- APP CONTEXT:", term, "---\\n", app[max(0,pos-900):pos+1800])
           PY
           # Apply the selected font consistently to form controls as well.
           cat >> src/index.css <<'CSS'
