@@ -228,3 +228,83 @@ data = json.loads(config.read_text(encoding="utf-8"))
 data.setdefault("plugins", {})["LocalNotifications"] = {"smallIcon": "ic_stat_nadadam", "iconColor": "#0F9D8A"}
 config.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print("Reminder engine v2 settings applied.")
+
+
+# Reliability refinement: aggregate same-date reminders and clear orphaned alarms when disabled.
+p = Path("src/reminderSync.ts")
+s = p.read_text(encoding="utf-8")
+s = s.replace(
+    "type Scheduled = Record<string, { id: number; at: number; title: string }>;",
+    "type Scheduled = Record<string, { id: number; at: number; title: string; body?: string }>;"
+)
+s = s.replace(
+    "const desired: Record<string, { at: number; title: string; daysBefore: number }> = {};",
+    "const desired: Record<string, { at: number; title: string; body: string; daysBefore: number }> = {};"
+)
+pattern = r"    if \(options\.enabled && validTime\(options\.time\)\) for \(const item of store\.installments\) \{.*?\n    \}\n    for \(const \[key, entry\] of Object\.entries\(saved\)\) \{"
+replacement = """    if (!options.enabled && pendingIds !== null) {
+      for (const id of pendingIds) {
+        try { await cancelReminder(id); }
+        catch (error) { try { localStorage.setItem('nadadam-reminder-last-error-v1', error instanceof Error ? error.message : String(error)); } catch {} }
+      }
+      try { localStorage.setItem(SCHEDULE_KEY, '{}'); } catch {}
+      return;
+    }
+    const groups = new Map<string, { at: number; daysBefore: number; names: string[] }>();
+    if (options.enabled && validTime(options.time)) for (const item of store.installments) {
+      if (item.isPaid) continue;
+      const date = toGregorian(item.dueDate);
+      const title = item.titleOverride || store.debts.find(d => d.id === item.debtId)?.title || 'قسط';
+      for (const daysBefore of options.days) {
+        const at = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() - daysBefore, hour, minute).getTime();
+        if (at <= now) continue;
+        const key = item.dueDate.y + '-' + item.dueDate.m + '-' + item.dueDate.d + ':' + daysBefore;
+        const group = groups.get(key) || { at, daysBefore, names: [] };
+        group.names.push(title);
+        groups.set(key, group);
+      }
+    }
+    for (const [key, group] of groups) {
+      const names = [...new Set(group.names)];
+      const visibleNames = names.length > 3
+        ? names.slice(0, 3).join('، ') + ' و ' + (names.length - 3).toLocaleString('fa-IR') + ' مورد دیگر'
+        : names.join('، ');
+      desired[key] = {
+        at: group.at,
+        title: group.daysBefore === 0 ? 'یادآوری همان روز سررسید' : 'یادآوری سررسید قسط',
+        body: group.daysBefore === 0
+          ? 'امروز موعد پرداخت این قسط‌هاست: ' + visibleNames
+          : group.daysBefore.toLocaleString('fa-IR') + ' روز جلوتر از سررسید این قسط‌ها را به یادت می‌آوریم: ' + visibleNames,
+        daysBefore: group.daysBefore
+      };
+    }
+    for (const [key, entry] of Object.entries(saved)) {"""
+s, count = re.subn(pattern, replacement, s, count=1, flags=re.S)
+if count != 1:
+    raise SystemExit("Could not safely aggregate reminders by due date")
+s = s.replace(
+    "desired[key].title !== entry.title || nativeMissing",
+    "desired[key].title !== entry.title || desired[key].body !== entry.body || nativeMissing"
+)
+s = s.replace(
+    "const additions: Array<{ key: string; id: number; at: number; title: string; daysBefore: number }> = [];",
+    "const additions: Array<{ key: string; id: number; at: number; title: string; body: string; daysBefore: number }> = [];"
+)
+pattern = r"    const makeNotice = \(entry: typeof additions\[number\]\) => \(\{.*?\n    \}\);"
+replacement = """    const makeNotice = (entry: typeof additions[number]) => ({
+      id: entry.id,
+      title: entry.title,
+      body: entry.body,
+      at: new Date(entry.at)
+    });"""
+s, count = re.subn(pattern, replacement, s, count=1, flags=re.S)
+if count != 1:
+    raise SystemExit("Could not safely replace reminder notification content")
+s = s.replace(
+    "saved[entry.key] = { id: entry.id, at: entry.at, title: entry.title };",
+    "saved[entry.key] = { id: entry.id, at: entry.at, title: entry.title, body: entry.body };"
+)
+# Render real line breaks in the diagnostics instead of the two visible characters backslash+n.
+s = s.replace(r"\\n", r"\n")
+p.write_text(s, encoding="utf-8")
+print("Reminder grouping, cleanup, and diagnostics refinement applied.")
