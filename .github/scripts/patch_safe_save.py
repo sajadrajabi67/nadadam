@@ -28,6 +28,39 @@ export function createInstallments(debt: Debt): Installment[] {
 if old not in s: raise SystemExit("createInstallments block not found")
 logic.write_text(s.replace(old,new,1),encoding="utf-8")
 
+# Avoid thousands of Intl calendar conversions per installment. The old
+# conversion searched a three-year interval one day at a time; each installment
+# calls daysInMonth twice. Narrow the search to a safe window around the
+# Gregorian estimate (Persian new year is around March 20).
+needle = """export function toGregorian(j: JDate): Date {
+  let lo = Date.UTC(j.y + 620, 0, 1), hi = Date.UTC(j.y + 623, 0, 1);
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2 / 86400000) * 86400000;
+    const cmp = compare(fromGregorian(new Date(mid)), j);
+    if (cmp === 0) return new Date(mid);
+    if (cmp < 0) lo = mid + 86400000; else hi = mid - 86400000;
+  }
+  throw new Error('تاریخ نامعتبر است');
+}"""
+optimized = """export function toGregorian(j: JDate): Date {
+  if (!Number.isInteger(j.y) || !Number.isInteger(j.m) || !Number.isInteger(j.d) ||
+      j.m < 1 || j.m > 12 || j.d < 1 || j.d > 31) throw new Error('تاریخ نامعتبر است');
+  const estimate = Date.UTC(j.y + 621, 2, 20) + ((j.m - 1) * 30.5 + j.d - 1) * 86400000;
+  let lo = Math.floor((estimate - 15 * 86400000) / 86400000) * 86400000;
+  let hi = Math.floor((estimate + 15 * 86400000) / 86400000) * 86400000;
+  while (lo <= hi) {
+    const mid = Math.floor(((lo + hi) / 2) / 86400000) * 86400000;
+    const cmp = compare(fromGregorian(new Date(mid)), j);
+    if (cmp === 0) return new Date(mid);
+    if (cmp < 0) lo = mid + 86400000; else hi = mid - 86400000;
+  }
+  throw new Error('تاریخ نامعتبر است');
+}"""
+if needle not in s:
+  raise SystemExit("Original toGregorian block not found; refusing unsafe patch")
+logic.write_text(logic.read_text(encoding="utf-8").replace(needle, optimized, 1), encoding="utf-8")
+
+
 app = Path("src/App.tsx")
 s = app.read_text(encoding="utf-8")
 s = s.replace("compare, createInstallments, dateLabel", "compare, createId, createInstallments, dateLabel", 1)
