@@ -26,12 +26,12 @@ export function createInstallments(debt: Debt): Installment[] {
   }));
 }"""
 if old not in s: raise SystemExit("createInstallments block not found")
-logic.write_text(s.replace(old,new,1),encoding="utf-8")
+logic.write_text(s.replace(old, new, 1), encoding="utf-8")
 
 # Avoid thousands of Intl calendar conversions per installment. The old
 # conversion searched a three-year interval one day at a time; each installment
-# calls daysInMonth twice. Narrow the search to a safe window around the
-# Gregorian estimate (Persian new year is around March 20).
+# called daysInMonth twice. Narrow the search around an approximate Gregorian
+# date (Persian new year is around March 20).
 needle = """export function toGregorian(j: JDate): Date {
   let lo = Date.UTC(j.y + 620, 0, 1), hi = Date.UTC(j.y + 623, 0, 1);
   while (lo <= hi) {
@@ -58,8 +58,33 @@ optimized = """export function toGregorian(j: JDate): Date {
 }"""
 if needle not in s:
   raise SystemExit("Original toGregorian block not found; refusing unsafe patch")
-logic.write_text(logic.read_text(encoding="utf-8").replace(needle, optimized, 1), encoding="utf-8")
+s = s.replace(needle, optimized, 1)
 
+# Month lengths are fixed for the first eleven Persian months. Only Esfand
+# needs a leap-year lookup. Cache that result once per Persian year instead of
+# running two calendar conversions for every single installment.
+old_days = """export function daysInMonth(y: number, m: number): number {
+  const start = toGregorian({ y, m, d: 1 }).getTime();
+  const next = shiftMonth({ y, m, d: 1 }, 1);
+  return Math.round((toGregorian(next).getTime() - start) / 86400000);
+}"""
+new_days = """const esfandLengthCache = new Map<number, number>();
+export function daysInMonth(y: number, m: number): number {
+  if (!Number.isInteger(y) || !Number.isInteger(m) || m < 1 || m > 12) throw new Error('ماه نامعتبر است');
+  if (m <= 6) return 31;
+  if (m <= 11) return 30;
+  const cached = esfandLengthCache.get(y);
+  if (cached) return cached;
+  const start = toGregorian({ y, m: 12, d: 1 }).getTime();
+  const next = toGregorian({ y: y + 1, m: 1, d: 1 }).getTime();
+  const length = Math.round((next - start) / 86400000);
+  if (length !== 29 && length !== 30) throw new Error('محاسبه طول اسفند نامعتبر است');
+  esfandLengthCache.set(y, length);
+  return length;
+}"""
+if old_days not in s:
+  raise SystemExit("Original daysInMonth block not found; refusing unsafe patch")
+logic.write_text(s.replace(old_days, new_days, 1), encoding="utf-8")
 
 app = Path("src/App.tsx")
 s = app.read_text(encoding="utf-8")
@@ -77,5 +102,5 @@ new = """      try {
         notice('ثبت قسط انجام نشد؛ اطلاعات قبلی محفوظ ماند. دوباره تلاش کن.');
       }"""
 if old not in s: raise SystemExit("new debt save block not found")
-app.write_text(s.replace(old,new,1),encoding="utf-8")
+app.write_text(s.replace(old, new, 1), encoding="utf-8")
 print("Safe debt creation patch applied.")
