@@ -78,6 +78,45 @@ jobs:
           path: /tmp/nadadam-inspection-artifact
           if-no-files-found: warn
 
+      - name: Configure permanent APK signing
+        env:
+          NADADAM_KEYSTORE_BASE64: ${{ secrets.NADADAM_KEYSTORE_BASE64 }}
+          NADADAM_STORE_PASSWORD: ${{ secrets.NADADAM_STORE_PASSWORD }}
+          NADADAM_KEY_ALIAS: ${{ secrets.NADADAM_KEY_ALIAS }}
+          NADADAM_KEY_PASSWORD: ${{ secrets.NADADAM_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test -n "$NADADAM_KEYSTORE_BASE64"
+          test -n "$NADADAM_STORE_PASSWORD"
+          test -n "$NADADAM_KEY_ALIAS"
+          test -n "$NADADAM_KEY_PASSWORD"
+          cd app/android/app
+          printf '%s' "$NADADAM_KEYSTORE_BASE64" | base64 --decode > nadadam-release.jks
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("build.gradle")
+          s = p.read_text()
+          if "signingConfigs {" not in s:
+              block = '''    signingConfigs {
+              release {
+                  storeFile file("nadadam-release.jks")
+                  storePassword System.getenv("NADADAM_STORE_PASSWORD")
+                  keyAlias System.getenv("NADADAM_KEY_ALIAS")
+                  keyPassword System.getenv("NADADAM_KEY_PASSWORD")
+              }
+          }
+          '''
+              s = s.replace("    buildTypes {", block + "    buildTypes {", 1)
+          import re
+          m = re.search(r"(?m)^(\\s*)debug\\s*\\{", s)
+          if not m:
+              raise SystemExit("Could not find Android debug build type")
+          pos = m.end()
+          s = s[:pos] + '\\n            signingConfig signingConfigs.release' + s[pos:]
+          p.write_text(s)
+          PY
+          keytool -list -keystore nadadam-release.jks -storepass "$NADADAM_STORE_PASSWORD" -alias "$NADADAM_KEY_ALIAS" >/dev/null
+
       - name: Build APK
         run: |
           cd app/android
