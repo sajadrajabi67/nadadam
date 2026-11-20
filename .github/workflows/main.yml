@@ -34,6 +34,24 @@ jobs:
           sed -i 's#Vazirmatn\[wght\]\.woff2#Vazirmatn-wght.woff2#g' src/index.css
           # Ensure the native Android status bar is explicitly visible and the WebView does not draw behind it.
           sed -i "s/void StatusBar.setOverlaysWebView({ overlay: false })/void StatusBar.show().catch(() => {}); void StatusBar.setOverlaysWebView({ overlay: false })/" src/App.tsx
+          # Temporary source inspection: expose reminder UI, app identity, and header markup in the build log.
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          app = Path("src/App.tsx").read_text()
+          for term in ["یادآوری", "اعلان", "سررسید", "Reminder", "Notification", "reminder", "notification"]:
+              pos = 0
+              while True:
+                  pos = app.find(term, pos)
+                  if pos < 0: break
+                  print("\\n--- SOURCE MATCH:", term, "---\\n", app[max(0,pos-700):pos+1100])
+                  pos += len(term)
+          print("\\n--- HEADER-LIKE CLASSNAMES ---")
+          for m in re.finditer(r'className:[\\\"\\\']([^\\\"\\\']*(?:items-center|sticky|header)[^\\\"\\\']*)', app):
+              print(m.group(0)[:500])
+          print("\\n--- APP CONFIG ---\\n", Path("capacitor.config.json").read_text())
+          print("\\n--- PACKAGE ---\\n", Path("package.json").read_text())
+          PY
           # Move the app header below the Android status bar and keep it pinned with a subtle divider while content scrolls underneath.
           python3 - <<'PY'
           from pathlib import Path
