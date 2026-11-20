@@ -111,3 +111,40 @@ if "data-testid=\"reminder-diagnostics\"" not in s:
     s = s[:pos] + diag + s[pos:]
 app.write_text(s, encoding="utf-8")
 print("Reminder hardening patch applied.")
+
+
+// Emergency safety switch: reminders stay disabled until native scheduling is repaired.
+// This also clears a previously persisted "enabled" flag without touching debts/installments.
+from pathlib import Path
+p = Path("src/reminderSync.ts")
+s = p.read_text(encoding="utf-8")
+s = s.replace(
+    "      return { enabled: saved.enabled, days: validDays.length ? validDays : [3], time: validTime(saved.time) ? saved.time : '09:00' };",
+    """      if (saved.enabled) {
+        try { localStorage.setItem(OPTIONS_KEY, JSON.stringify({ ...saved, enabled: false })); } catch {}
+      }
+      return { enabled: false, days: validDays.length ? validDays : [3], time: validTime(saved.time) ? saved.time : '09:00' };"""
+)
+s = s.replace(
+    "function sync(store: Store, options: ReminderOptions): Promise<void> {\n  return (async () => {",
+    "function sync(store: Store, options: ReminderOptions): Promise<void> {\n  if (!options.enabled) return Promise.resolve();\n  return (async () => {"
+)
+p.write_text(s, encoding="utf-8")
+
+app = Path("src/App.tsx")
+s = app.read_text(encoding="utf-8")
+import re
+s, n = re.subn(
+    r'<input data-testid="reminder-toggle" type="checkbox".*?/>',
+    '<input data-testid="reminder-toggle" type="checkbox" className="h-6 w-6 accent-[#0F9D8A]" checked={false} disabled aria-label="یادآوری موقتاً غیرفعال است"/>',
+    s, count=1, flags=re.S
+)
+if n != 1:
+    raise SystemExit("Could not safely disable reminder toggle")
+s = s.replace(
+    '<span>یادآوری سررسید قسط‌ها</span>',
+    '<span>یادآوری سررسید قسط‌ها <small className="block pt-1 font-normal text-amber-700">به‌دلیل رفع اشکال فنی، موقتاً غیرفعال شده است.</small></span>',
+    1
+)
+app.write_text(s, encoding="utf-8")
+print("Emergency reminder shutdown applied; debt data is untouched.")
