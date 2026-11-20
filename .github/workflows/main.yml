@@ -32,9 +32,9 @@ jobs:
           npm install
           npm install --no-save vazirmatn@33.0.3
           mkdir -p public/fonts
-          FONT_FILE="$(find node_modules/vazirmatn -type f -name 'Vazirmatn[wght].woff2' -print -quit)"
+          FONT_FILE="$(find node_modules/vazirmatn -type f -name '*wght*.woff2' -print -quit)"
           test -n "$FONT_FILE"
-          cp "$FONT_FILE" public/fonts/
+          cp "$FONT_FILE" public/fonts/Vazirmatn-wght.woff2
           npm run build
           npx cap add android
           npx capacitor-assets generate --android
