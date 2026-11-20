@@ -30,8 +30,8 @@ jobs:
           unzip -o project-updated.zip -d app
           cd app
           sed -i 's#cursor-default"/>}}#cursor-default"/>}#' src/App.tsx
-          # Make the CSS font URL match the actual font file copied below.
-          sed -i 's#Vazirmatn\\[wght\\]\\.woff2#Vazirmatn-wght.woff2#g' src/index.css
+          # Match the CSS URL to the actual font filename (literal square brackets).
+          sed -i 's#Vazirmatn\[wght\]\.woff2#Vazirmatn-wght.woff2#g' src/index.css
           # Ensure the native Android status bar is explicitly visible and the WebView does not draw behind it.
           sed -i "s/void StatusBar.setOverlaysWebView({ overlay: false })/void StatusBar.show().catch(() => {}); void StatusBar.setOverlaysWebView({ overlay: false })/" src/App.tsx
           # Apply the selected font consistently to form controls as well.
@@ -48,6 +48,8 @@ jobs:
           test -n "$FONT_FILE"
           cp "$FONT_FILE" public/fonts/Vazirmatn-wght.woff2
           npm run build
+          # Fail the build if the compiled CSS still points at the wrong font path.
+          grep -q '/fonts/Vazirmatn-wght.woff2' dist/assets/*.css
           npx cap add android
           npx capacitor-assets generate --android
           npx cap sync android
