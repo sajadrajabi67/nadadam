@@ -12,7 +12,7 @@ if count != 1:
 source = source.replace("در نسخهٔ نصب‌شده، یادآورها حتی وقتی برنامه بسته است هم نمایش داده می‌شوند؛ در مرورگر فقط وقتی برنامه باز باشد.", "در نسخهٔ مرورگر، یادآورها فقط وقتی برنامه باز باشد قابل اجرا هستند.")
 app.write_text(source, encoding="utf-8")
 
-Path("src/reminderSync.ts").write_text("""import { cancelReminder, scheduleReminder, requestReminderPermission, remindersAreNative } from './lib/reminders';
+Path("src/reminderSync.ts").write_text("""import { cancelReminder, scheduleReminder, requestReminderPermission, remindersAreNative, listReminderIds } from './lib/reminders';
 import { toGregorian, type Store } from './logic';
 
 export const reminderDayChoices = [0, 1, 2, 3, 5, 7, 10] as const;
@@ -41,8 +41,7 @@ export function saveReminderOptions(options: ReminderOptions) {
   localStorage.setItem(OPTIONS_KEY, JSON.stringify(options));
 }
 export async function enableReminderPermission(): Promise<boolean> {
-  const result = await requestReminderPermission();
-  return result !== false;
+  return await requestReminderPermission();
 }
 export { remindersAreNative };
 
@@ -50,6 +49,7 @@ function sync(store: Store, options: ReminderOptions): Promise<void> {
   return (async () => {
     let saved: Scheduled = {};
     try { saved = JSON.parse(localStorage.getItem(SCHEDULE_KEY) || '{}') || {}; } catch { saved = {}; }
+    const pendingIds = remindersAreNative() ? new Set(await listReminderIds()) : null;
     const desired: Record<string, { at: number; title: string; daysBefore: number }> = {};
     const now = Date.now();
     const [hour, minute] = options.time.split(':').map(Number);
@@ -64,8 +64,9 @@ function sync(store: Store, options: ReminderOptions): Promise<void> {
       }
     }
     for (const [key, entry] of Object.entries(saved)) {
-      if (!desired[key] || desired[key].at !== entry.at || desired[key].title !== entry.title) {
-        await cancelReminder(entry.id);
+      const nativeMissing = pendingIds !== null && !pendingIds.has(entry.id);
+      if (!desired[key] || desired[key].at !== entry.at || desired[key].title !== entry.title || nativeMissing) {
+        if (!nativeMissing) await cancelReminder(entry.id);
         delete saved[key];
         localStorage.setItem(SCHEDULE_KEY, JSON.stringify(saved));
       }
@@ -88,4 +89,131 @@ export function syncReminders(store: Store, options: ReminderOptions): Promise<v
   return queue;
 }
 """, encoding="utf-8")
-print("Reminder settings and scheduling patch applied.")
+
+Path("src/lib/reminders.ts").write_text("""/**
+ * Native Android reminders through the official Capacitor 7 Local Notifications plugin.
+ * Browser preview uses web notifications only while the page is open.
+ */
+import { Capacitor } from '@capacitor/core';
+import { LocalNotifications } from '@capacitor/local-notifications';
+
+export interface ReminderOptions {
+  id: number;
+  title: string;
+  body?: string;
+  at: Date;
+  repeats?: 'daily' | 'weekly' | null;
+}
+
+function nativePlugin() {
+  return Capacitor.isNativePlatform() ? LocalNotifications : null;
+}
+
+export function remindersAreNative(): boolean {
+  return nativePlugin() !== null;
+}
+
+export async function requestReminderPermission(): Promise<boolean> {
+  const native = nativePlugin();
+  if (native) {
+    const current = await native.checkPermissions();
+    const display = current.display === 'granted'
+      ? current
+      : await native.requestPermissions();
+    if (display.display !== 'granted') return false;
+
+    const exact = await native.checkExactNotificationSetting();
+    if (exact.exact_alarm !== 'granted') {
+      await native.changeExactNotificationSetting();
+      const refreshed = await native.checkExactNotificationSetting();
+      if (refreshed.exact_alarm !== 'granted') return false;
+    }
+    return true;
+  }
+  if (typeof Notification === 'undefined') return false;
+  if (Notification.permission === 'granted') return true;
+  return (await Notification.requestPermission()) === 'granted';
+}
+
+const STORE_KEY = '__platform_reminders_v1';
+type StoredReminder = { id: number; title: string; body?: string; at: number; repeats?: 'daily' | 'weekly' | null };
+const webTimers = new Map<number, ReturnType<typeof setTimeout>>();
+
+function readStore(): StoredReminder[] {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch { return []; }
+}
+function writeStore(items: StoredReminder[]): void {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(items)); } catch { /* storage full */ }
+}
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function armWebTimer(r: StoredReminder): void {
+  const existing = webTimers.get(r.id);
+  if (existing) clearTimeout(existing);
+  let fireAt = r.at;
+  const period = r.repeats === 'daily' ? DAY_MS : r.repeats === 'weekly' ? 7 * DAY_MS : 0;
+  if (period > 0) while (fireAt <= Date.now()) fireAt += period;
+  webTimers.set(r.id, setTimeout(() => {
+    try {
+      if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+        new Notification(r.title, { body: r.body, tag: String(r.id) });
+      }
+    } catch { /* notification blocked */ }
+    if (period > 0) armWebTimer({ ...r, at: fireAt + period });
+    else {
+      writeStore(readStore().filter((s) => s.id !== r.id));
+      webTimers.delete(r.id);
+    }
+  }, Math.max(0, fireAt - Date.now())));
+}
+
+if (typeof window !== 'undefined' && !nativePlugin()) {
+  for (const r of readStore()) armWebTimer(r);
+}
+
+export async function scheduleReminder(opts: ReminderOptions): Promise<{ native: boolean }> {
+  const native = nativePlugin();
+  if (native) {
+    await native.schedule({
+      notifications: [{
+        id: opts.id,
+        title: opts.title,
+        body: opts.body ?? '',
+        schedule: {
+          at: opts.at,
+          allowWhileIdle: true,
+          ...(opts.repeats === 'daily' ? { every: 'day' } : opts.repeats === 'weekly' ? { every: 'week' } : {}),
+        },
+      }],
+    });
+    return { native: true };
+  }
+  const stored: StoredReminder = { id: opts.id, title: opts.title, body: opts.body, at: opts.at.getTime(), repeats: opts.repeats ?? null };
+  writeStore([...readStore().filter((s) => s.id !== opts.id), stored]);
+  armWebTimer(stored);
+  return { native: false };
+}
+
+export async function cancelReminder(id: number): Promise<void> {
+  const native = nativePlugin();
+  if (native) {
+    await native.cancel({ notifications: [{ id }] });
+    return;
+  }
+  const t = webTimers.get(id);
+  if (t) clearTimeout(t);
+  webTimers.delete(id);
+  writeStore(readStore().filter((s) => s.id !== id));
+}
+
+export async function listReminderIds(): Promise<number[]> {
+  const native = nativePlugin();
+  if (native) {
+    const { notifications } = await native.getPending();
+    return notifications.map((n) => n.id);
+  }
+  return readStore().map((r) => r.id);
+}
+""", encoding="utf-8")
+
+print("Updated build-time reminder patch.")
