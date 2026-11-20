@@ -36,6 +36,8 @@ jobs:
           sed -i "s/void StatusBar.setOverlaysWebView({ overlay: false })/void StatusBar.show().catch(() => {}); void StatusBar.setOverlaysWebView({ overlay: false })/" src/App.tsx
           # Patch the reminder settings and real scheduled notifications in the extracted app source.
           python3 ../.github/scripts/patch_reminders.py
+          # Guard debt creation against UUID/WebView failures and catch pre-save exceptions.
+          python3 ../.github/scripts/patch_safe_save.py
           # Keep the app header fixed while content scrolls underneath, with a soft fading lower edge.
           python3 ../.github/scripts/patch_header.py
           # Export the actual project sources for precise review before editing.
