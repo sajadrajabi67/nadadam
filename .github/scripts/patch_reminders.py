@@ -5,13 +5,13 @@ app = Path("src/App.tsx")
 source = app.read_text(encoding="utf-8")
 source = source.replace("type ReminderOptions } from './reminderSync';", "type ReminderOptions, reminderDayChoices } from './reminderSync';", 1)
 pattern = r'\{reminderOptions\.enabled&&<label className="mt-3 block text-sm font-bold">چند روز قبل از سررسید بهت خبر بدم\?.*?</select></label>\}'
-replacement = r'''{reminderOptions.enabled&&<div className="mt-4 space-y-4"><div><p className="mb-3 text-sm font-bold">یادآوری سررسید قسط‌ها چند روز قبل از سررسید بهت خبر بدم؟</p><div data-testid="reminder-days" role="group" aria-label="روزهای یادآوری" className="grid grid-cols-7 gap-1.5">{reminderDayChoices.map(day=><button key={day} type="button" data-testid={\`reminder-day-\${day}\`} role="checkbox" aria-checked={reminderOptions.days.includes(day)} onClick={()=>{const days=reminderOptions.days.includes(day)?reminderOptions.days.filter(d=>d!==day):[...reminderOptions.days,day].sort((a,b)=>a-b);if(!days.length)return;const next={...reminderOptions,days};try{saveReminderOptions(next);setReminderOptions(next);setReminderError('');}catch{setReminderError('تنظیمات ذخیره نشد.');}}} className={\`min-h-11 rounded-xl border text-sm font-bold transition \${reminderOptions.days.includes(day)?'border-[#0F9D8A] bg-[#0F9D8A] text-white shadow-sm':'border-slate-200 bg-slate-50 text-slate-600'}\`}>{day===0?'امروز':fa(day)}</button>)}</div><p className="mt-2 text-xs text-slate-500">می‌تونی چند روز رو هم‌زمان انتخاب کنی.</p></div><label className="block text-sm font-bold">ساعت ارسال یادآوری<input data-testid="reminder-time" type="time" dir="ltr" required className={\`\${field} mt-2\`} value={reminderOptions.time} onChange={e=>{if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(e.target.value))return;const next={...reminderOptions,time:e.target.value};try{saveReminderOptions(next);setReminderOptions(next);setReminderError('');}catch{setReminderError('تنظیمات ذخیره نشد.');}}}/></label></div>}'''
+replacement = r'''{reminderOptions.enabled&&<div className="mt-4 space-y-4"><div><p className="mb-3 text-sm font-bold">یادآوری سررسید قسط‌ها چند روز قبل از سررسید بهت خبر بدم؟</p><div data-testid="reminder-days" role="group" aria-label="روزهای یادآوری" className="grid grid-cols-7 gap-1.5">{reminderDayChoices.map(day=><button key={day} type="button" data-testid={'reminder-day-' + day} role="checkbox" aria-checked={reminderOptions.days.includes(day)} onClick={()=>{const days=reminderOptions.days.includes(day)?reminderOptions.days.filter(d=>d!==day):[...reminderOptions.days,day].sort((a,b)=>a-b);if(!days.length)return;const next={...reminderOptions,days};try{saveReminderOptions(next);setReminderOptions(next);setReminderError('');}catch{setReminderError('تنظیمات ذخیره نشد.');}}} className={'min-h-11 rounded-xl border text-sm font-bold transition ' + (reminderOptions.days.includes(day)?'border-[#0F9D8A] bg-[#0F9D8A] text-white shadow-sm':'border-slate-200 bg-slate-50 text-slate-600')}>{day===0?'امروز':fa(day)}</button>)}</div><p className="mt-2 text-xs text-slate-500">می‌تونی چند روز رو هم‌زمان انتخاب کنی.</p></div><label className="block text-sm font-bold">ساعت ارسال یادآوری<input data-testid="reminder-time" type="time" dir="ltr" required className={field + ' mt-2'} value={reminderOptions.time} onChange={e=>{if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(e.target.value))return;const next={...reminderOptions,time:e.target.value};try{saveReminderOptions(next);setReminderOptions(next);setReminderError('');}catch{setReminderError('تنظیمات ذخیره نشد.');}}}/></label></div>}'''
 source, count = re.subn(pattern, lambda _: replacement, source, count=1, flags=re.S)
 if count != 1:
     raise SystemExit("Could not locate the original reminder-day dropdown.")
 app.write_text(source, encoding="utf-8")
 
-Path("src/reminderSync.ts").write_text(r"""import { cancelReminder, scheduleReminder, requestReminderPermission, remindersAreNative } from './lib/reminders';
+Path("src/reminderSync.ts").write_text("""import { cancelReminder, scheduleReminder, requestReminderPermission, remindersAreNative } from './lib/reminders';
 import { toGregorian, type Store } from './logic';
 
 export const reminderDayChoices = [0, 1, 2, 3, 5, 7, 10] as const;
@@ -22,7 +22,7 @@ type Scheduled = Record<string, { id: number; at: number; title: string }>;
 let queue: Promise<void> = Promise.resolve();
 
 function validTime(value: unknown): value is string {
-  return typeof value === 'string' && /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value);
+  return typeof value === 'string' && /^(?:[01]\\d|2[0-3]):[0-5]\\d$/.test(value);
 }
 export function loadReminderOptions(): ReminderOptions {
   try {
@@ -59,7 +59,7 @@ function sync(store: Store, options: ReminderOptions): Promise<void> {
       for (const daysBefore of options.days) {
         const at = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() - daysBefore, hour, minute).getTime();
         if (at <= now) continue;
-        desired[\`\${item.id}:\${daysBefore}\`] = { at, title, daysBefore };
+        desired[item.id + ':' + daysBefore] = { at, title, daysBefore };
       }
     }
     for (const [key, entry] of Object.entries(saved)) {
@@ -74,8 +74,8 @@ function sync(store: Store, options: ReminderOptions): Promise<void> {
       if (saved[key]) continue;
       const id = ++nextId;
       const body = entry.daysBefore === 0
-        ? \`قسط \${entry.title} امروز سررسید می‌شه. اگه دادی، برو توی برنامه و بزن «دادم».\`
-        : \`قسط \${entry.title} تا \${entry.daysBefore.toLocaleString('fa-IR')} روز دیگه سررسید می‌شه. هنوز ندادیش!\`;
+        ? 'قسط ' + entry.title + ' امروز سررسید می‌شه. اگه دادی، برو توی برنامه و بزن «دادم».'
+        : 'قسط ' + entry.title + ' تا ' + entry.daysBefore.toLocaleString('fa-IR') + ' روز دیگه سررسید می‌شه. هنوز ندادیش!';
       await scheduleReminder({ id, title: entry.daysBefore === 0 ? 'امروز روز قسطته!' : 'حواست به قسطت باشه!', body, at: new Date(entry.at) });
       saved[key] = { id, at: entry.at, title: entry.title };
       localStorage.setItem(SCHEDULE_KEY, JSON.stringify(saved));
