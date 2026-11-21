@@ -319,3 +319,28 @@ s = s.replace(
 )
 p.write_text(s, encoding="utf-8")
 print("Same-day reminder wording finalized.")
+
+
+# Final notification copy approved by the user.
+p = Path("src/reminderSync.ts")
+s = p.read_text(encoding="utf-8")
+s = s.replace(
+    "title: group.daysBefore === 0 ? 'یادآوری همان روز سررسید' : 'یادآوری سررسید قسط',",
+    """title: group.daysBefore === 0
+          ? 'یادآوری پرداخت قسط'
+          : 'یادآوری ' + ({1: 'یک', 2: 'دو', 3: 'سه'}[group.daysBefore] || group.daysBefore.toLocaleString('fa-IR')) + ' روز مانده به سررسید',"""
+)
+s = s.replace(
+    """body: group.daysBefore === 0
+          ? 'همان روز سررسید موعد پرداخت این قسط‌هاست: ' + visibleNames
+          : group.daysBefore.toLocaleString('fa-IR') + ' روز جلوتر از سررسید این قسط‌ها را به یادت می‌آوریم: ' + visibleNames,""",
+    """body: group.daysBefore === 0
+          ? 'موعد پرداخت اقساط امروز است.\\nاقساط سررسیدشده: ' + visibleNames
+          : group.daysBefore === 1
+            ? 'فردا موعد پرداخت اقساط است.\\nاقساط پیش‌رو: ' + visibleNames
+            : (group.daysBefore === 2 ? 'دو روز' : 'سه روز') + ' تا موعد پرداخت اقساط باقی مانده است.\\nاقساط پیش‌رو: ' + visibleNames,"""
+)
+if "اقساط سررسیدشده:" not in s or "اقساط پیش‌رو:" not in s:
+    raise SystemExit("Could not apply approved reminder copy; expected source text not found.")
+p.write_text(s, encoding="utf-8")
+print("Approved reminder notification copy applied.")
