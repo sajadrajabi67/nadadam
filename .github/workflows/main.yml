@@ -111,7 +111,7 @@ jobs:
               "ldpi": 81, "mdpi": 108, "hdpi": 162,
               "xhdpi": 216, "xxhdpi": 324, "xxxhdpi": 432
           }.items():
-              output = Path(f"android/app/src/main/res/mipmap-{density}-v4/ic_launcher_foreground.png")
+              output = Path(f"android/app/src/main/res/mipmap-{density}/ic_launcher_foreground.png")
               output.parent.mkdir(parents=True, exist_ok=True)
               foreground.resize((pixels, pixels), Image.Resampling.LANCZOS).save(output)
           print("Adaptive launcher foreground replaced with the approved teal wallet logo.")
