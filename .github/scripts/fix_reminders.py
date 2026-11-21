@@ -344,3 +344,52 @@ if "اقساط سررسیدشده:" not in s or "اقساط پیش‌رو:" not 
     raise SystemExit("Could not apply approved reminder copy; expected source text not found.")
 p.write_text(s, encoding="utf-8")
 print("Approved reminder notification copy applied.")
+
+
+# Public release cleanup: remove internal reminder test and diagnostics from the user interface.
+app = Path("src/App.tsx")
+s = app.read_text(encoding="utf-8")
+s = s.replace(
+    "import { enableReminderPermission, loadReminderOptions, remindersAreNative, saveReminderOptions, syncReminders, type ReminderOptions, reminderDayChoices, runReminderTest, reminderDiagnostics } from './reminderSync';",
+    "import { enableReminderPermission, loadReminderOptions, saveReminderOptions, syncReminders, type ReminderOptions, reminderDayChoices } from './reminderSync';"
+)
+s, test_count = re.subn(
+    r'\{remindersAreNative\(\)&&reminderOptions\.enabled&&<button data-testid="reminder-test".*?</button>\}',
+    '',
+    s,
+    count=1,
+    flags=re.S
+)
+s, diag_count = re.subn(
+    r'\{remindersAreNative\(\)&&<button data-testid="reminder-diagnostics".*?</button>\}',
+    '',
+    s,
+    count=1,
+    flags=re.S
+)
+s = re.sub(r'\{!remindersAreNative\(\)&&<p className="mt-3 text-sm text-slate-500">.*?</p>\}', '', s, count=1, flags=re.S)
+if test_count != 1 or diag_count != 1:
+    raise SystemExit(f"Public cleanup expected one test button and one diagnostics button; got {test_count}, {diag_count}.")
+app.write_text(s, encoding="utf-8")
+
+# Remove the internal-only test and diagnostics helpers from the shipped app bundle.
+p = Path("src/reminderSync.ts")
+s = p.read_text(encoding="utf-8")
+s, test_fn_count = re.subn(
+    r'export async function runReminderTest\(\): Promise<string> \{.*?\n\}\n(?=\nfunction sync)',
+    '',
+    s,
+    count=1,
+    flags=re.S
+)
+s, diag_fn_count = re.subn(
+    r'\nexport async function reminderDiagnostics\(\): Promise<string> \{.*?\n\}\s*$',
+    '\n',
+    s,
+    count=1,
+    flags=re.S
+)
+if test_fn_count != 1 or diag_fn_count != 1:
+    raise SystemExit(f"Public cleanup expected test/diagnostics helpers; got {test_fn_count}, {diag_fn_count}.")
+p.write_text(s, encoding="utf-8")
+print("Public release cleanup applied: test and diagnostic controls removed; reminder settings retained.")
