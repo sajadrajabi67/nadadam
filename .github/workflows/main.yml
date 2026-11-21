@@ -89,6 +89,33 @@ jobs:
           PY
           npx capacitor-assets generate --android
           npx cap sync android
+          # Override the adaptive launcher foreground with the exact approved in-app logo.
+          python3 -m pip install --quiet Pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageChops
+          source = Image.open("public/logo.png").convert("RGBA")
+          white = Image.new("RGB", source.size, (255, 255, 255))
+          difference = ImageChops.difference(source.convert("RGB"), white)
+          mask = difference.convert("L").point(lambda value: 255 if value > 22 else 0)
+          bounds = mask.getbbox()
+          if not bounds:
+              raise SystemExit("Could not detect the logo artwork.")
+          artwork = source.crop(bounds)
+          scale = min(300 / artwork.width, 300 / artwork.height)
+          size = (round(artwork.width * scale), round(artwork.height * scale))
+          artwork = artwork.resize(size, Image.Resampling.LANCZOS)
+          foreground = Image.new("RGBA", (432, 432), (255, 255, 255, 255))
+          foreground.alpha_composite(artwork, ((432 - size[0]) // 2, (432 - size[1]) // 2))
+          for density, pixels in {
+              "ldpi": 81, "mdpi": 108, "hdpi": 162,
+              "xhdpi": 216, "xxhdpi": 324, "xxxhdpi": 432
+          }.items():
+              output = Path(f"android/app/src/main/res/mipmap-{density}-v4/ic_launcher_foreground.png")
+              output.parent.mkdir(parents=True, exist_ok=True)
+              foreground.resize((pixels, pixels), Image.Resampling.LANCZOS).save(output)
+          print("Adaptive launcher foreground replaced with the approved teal wallet logo.")
+          PY
           # Android status-bar notification icons must be monochrome silhouettes with transparent backgrounds.
           mkdir -p android/app/src/main/res/drawable
           cat > android/app/src/main/res/drawable/ic_stat_nadadam.xml <<'XML'
