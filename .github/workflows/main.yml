@@ -41,6 +41,10 @@ jobs:
           python3 ../.github/scripts/patch_safe_save.py
           # Keep the app header fixed while content scrolls underneath, with a soft fading lower edge.
           python3 ../.github/scripts/patch_header.py
+          python3 ../.github/scripts/patch_brand_and_scroll.py
+          mkdir -p public assets
+          cp ../nadadam-logo.png public/logo.png
+          cp ../nadadam-logo.png assets/icon-only.png
           # Export the actual project sources for precise review before editing.
           python3 - <<'PY'
           from pathlib import Path
