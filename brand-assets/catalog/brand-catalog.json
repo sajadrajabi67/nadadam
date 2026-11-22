@@ -778,7 +778,7 @@
       ],
       "logo_path": "../logos/tara-color.svg",
       "official_domain": "https://taracredit.com/",
-      "logo_source_url": "https://way2pay.ir/wp-content/uploads/tara.1404-1.jpg",
+      "logo_source_url": "https://mybishel.com/wp-content/uploads/2023/09/%D9%84%D9%88%DA%AF%D9%88-%D8%AA%D8%A7%D8%B1%D8%A7-360-min.png",
       "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
@@ -790,7 +790,7 @@
       "source_notes": "تصویر لوگوی تارا که کاربر ارائه کرده؛ هنگام ساخت دریافت و به SVG سازگار با نمایشگر برنامه تبدیل می‌شود.",
       "logo_brand_fa": "تارا",
       "source_project": "User-provided Tara logo image",
-      "source_url": "https://way2pay.ir/wp-content/uploads/tara.1404-1.jpg"
+      "source_url": "https://mybishel.com/wp-content/uploads/2023/09/%D9%84%D9%88%DA%AF%D9%88-%D8%AA%D8%A7%D8%B1%D8%A7-360-min.png"
     },
     {
       "id": "azkivam",
@@ -1013,6 +1013,30 @@
       "source_notes": "تصویر لوگوی مخابرات ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
       "asset_status": "available",
       "license_review": "trademark_review_required"
+    },
+    {
+      "id": "bank-cheque",
+      "name_fa": "چک بانکی",
+      "name_en": "Bank Cheque",
+      "aliases": [
+        "چک",
+        "چک بانکی",
+        "برگه چک",
+        "برگهٔ چک",
+        "چک صیادی",
+        "چک صیاد",
+        "دسته چک",
+        "bank cheque",
+        "cheque",
+        "check"
+      ],
+      "logo_path": "../logos/bank-cheque-color.svg",
+      "source_project": "User-provided cheque image",
+      "source_url": "https://i1.delgarm.com/i/813/020901/655d317f020e5.gif",
+      "asset_status": "available",
+      "license_review": "user_provided_reference",
+      "logo_brand_fa": "چک بانکی",
+      "source_notes": "تصویر مرجع چک که کاربر ارائه کرده؛ برای نمایش در نتایج تشخیص عنوان استفاده می‌شود و اطلاعات چاپی یا شخصی آن خوانده نمی‌شود."
     }
   ],
   "document_types": [
