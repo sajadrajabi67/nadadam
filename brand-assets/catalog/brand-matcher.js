@@ -21,6 +21,11 @@ export function normalizeBrandText(value = "") {
 export function matchBrand(title, brands = catalog.brands) {
   const normalizedTitle = normalizeBrandText(title);
   if (!normalizedTitle) return { status: "no_match", brand: null, matches: [] };
+  const excludedNames = catalog.excluded_brand_names ?? [];
+  if (excludedNames.some(name => {
+    const excluded = normalizeBrandText(name);
+    return excluded && (normalizedTitle === excluded || normalizedTitle.includes(` ${excluded} `) || normalizedTitle.startsWith(`${excluded} `) || normalizedTitle.endsWith(` ${excluded}`));
+  })) return { status: "no_match", brand: null, matches: [] };
 
   const found = [];
   for (const brand of brands) {
