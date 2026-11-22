@@ -1251,6 +1251,27 @@
       "source_url": "https://cdn.brandfetch.io/idqSUBvqtx/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1781795732537",
       "license_review": "trademark_review_required",
       "verification_status": "brandfetch_identity_confirmed"
+    },
+    {
+      "id": "torob-pay",
+      "name_fa": "ترب‌پی",
+      "name_en": "Torob Pay",
+      "aliases": [
+        "ترب‌پی",
+        "ترب پی",
+        "ترب‌پی چیست",
+        "TorobPay",
+        "Torob Pay",
+        "torob pay"
+      ],
+      "logo_path": "../logos/torob-pay-color.svg",
+      "asset_status": "available",
+      "logo_brand_fa": "ترب‌پی",
+      "notes_fa": "لوگوی ترب‌پی طبق تصویر ارسالی کاربر نمایش داده شود.",
+      "logo_source_url": "https://techfy.ir/wp-content/uploads/2025/09/%D8%AA%D8%B1%D8%A8-%D9%BE%DB%8C-%DA%86%DB%8C%D8%B3%D8%AA%D8%9F.webp",
+      "source_url": "https://techfy.ir/wp-content/uploads/2025/09/%D8%AA%D8%B1%D8%A8-%D9%BE%DB%8C-%DA%86%DB%8C%D8%B3%D8%AA%D8%9F.webp",
+      "source_project": "User-provided Torob Pay logo image",
+      "source_notes": "تصویر لوگوی ترب‌پی ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود."
     }
   ],
   "document_types": [
