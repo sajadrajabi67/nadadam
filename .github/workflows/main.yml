@@ -229,6 +229,8 @@ jobs:
           Path("brand-assets/logos/bimehdotcom-color.svg").write_text(svg, encoding="utf-8")
           PY
           curl --fail --location --retry 3 --retry-delay 2 \
+            --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36" \
+            --referer "https://bimebazar.com/" \
             "https://bimebazar.com/hedgehog/brand/bmbzr/logo/logo_512_black.png" \
             --output /tmp/bimebazar-logo.png
           file /tmp/bimebazar-logo.png
