@@ -108,6 +108,7 @@ export function matchBrand(title: string) {
   const matches = [...byId.values()].map(({ brand, alias }) => ({
     id: brand.id,
     name_fa: brand.name_fa,
+    logo_brand_fa: brand.logo_brand_fa ?? brand.name_fa,
     asset_status: brand.asset_status,
     logo_path: brand.logo_path,
     matched_alias: alias
