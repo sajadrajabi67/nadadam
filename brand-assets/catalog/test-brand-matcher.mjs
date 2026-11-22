@@ -5,6 +5,7 @@ const cases = [
   ["وام مسکن سجاد", "maskan"],
   ["قسط بلو بانک", "blu-bank"],
   ["پرداخت اسنپ پی", "snapp-pay"],
+  ["پرداخت اسنپ پی", "snapp-pay"],
   ["دیجی پی ماهانه", "digipay"],
   ["کارت بانک ملی", "melli"]
 ];
@@ -38,6 +39,7 @@ for (const [input, expected] of approvedBrandCases) {
   assert.equal(result.status, "match", input);
   assert.equal(result.brand.id, expected, input);
 }
+assert.equal(matchBrand("پرداخت اسنپ پی").brand.logo_brand_fa, "اسنپ‌پی");
 assert.equal(matchBrand("دیما").brand.logo_brand_fa, "دیما"); // Dima must keep its own user-provided logo.
 assert.equal(matchBrand("سلام پی").brand.logo_brand_fa, "باسلام");
 
