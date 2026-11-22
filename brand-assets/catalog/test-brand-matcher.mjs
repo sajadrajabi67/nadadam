@@ -46,4 +46,4 @@ const cheque = matchDocumentType("تصویر برگه چک صیادی");
 assert.equal(cheque.status, "match");
 assert.equal(cheque.document_type.id, "bank-cheque");
 assert.equal(matchDocumentType("یک رسید عادی خرید").status, "no_match");
-console.log("approved brands and cheque: 14 additional assertions passed");
+console.log("approved brands and cheque: 25 additional assertions passed");
