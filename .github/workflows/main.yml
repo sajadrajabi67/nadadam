@@ -88,15 +88,45 @@ jobs:
             --output /tmp/asiatech-logo
           file /tmp/asiatech-logo
           test "$(stat -c%s /tmp/asiatech-logo)" -gt 500
+          python3 -m pip install --quiet pillow
           python3 - <<'PY'
           from pathlib import Path
+          from PIL import Image
           import base64
-          p = Path("/tmp/asiatech-logo")
-          suffix = p.read_bytes()[:12]
-          mime = "image/png" if suffix.startswith(bytes([137]) + b"PNG") else ("image/webp" if suffix[8:12] == b"WEBP" else "image/jpeg")
-          data = base64.b64encode(p.read_bytes()).decode("ascii")
-          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:' + mime + ';base64,' + data + '"/></svg>'
+          source = Image.open("/tmp/asiatech-logo").convert("RGBA")
+          width, height = source.size
+
+          # Detect the source image's own background from its four corner patches.
+          patch = max(1, min(width, height, 12))
+          pixels = []
+          for left, top in ((0, 0), (width-patch, 0), (0, height-patch), (width-patch, height-patch)):
+              crop = source.crop((left, top, left+patch, top+patch))
+              pixels.extend(list(crop.getdata()))
+          opaque = [p for p in pixels if p[3] > 220]
+          if opaque:
+              rgb = tuple(sorted(p[i] for p in opaque)[len(opaque)//2] for i in range(3))
+              background = "#{:02X}{:02X}{:02X}".format(*rgb)
+          else:
+              background = "#FFFFFF"
+
+          # Keep the complete original image proportional, centered on a square canvas.
+          scale = min(512 / width, 512 / height)
+          fitted_width = round(width * scale)
+          fitted_height = round(height * scale)
+          data = base64.b64encode(Path("/tmp/asiatech-logo").read_bytes()).decode("ascii")
+          fmt = Image.open("/tmp/asiatech-logo").format
+          mime = {"PNG":"image/png", "WEBP":"image/webp", "JPEG":"image/jpeg"}.get(fmt, "image/png")
+          x = (512 - fitted_width) // 2
+          y = (512 - fitted_height) // 2
+          svg = (
+              '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">'
+              '<rect width="512" height="512" fill="' + background + '"/>'
+              '<image x="' + str(x) + '" y="' + str(y) + '" width="' + str(fitted_width) + '" height="' + str(fitted_height) + '" '
+              'preserveAspectRatio="none" href="data:' + mime + ';base64,' + data + '"/>'
+              '</svg>'
+          )
           Path("brand-assets/logos/asiatech-color.svg").write_text(svg, encoding="utf-8")
+          print(f"Asiatech square asset: {width}x{height} -> {fitted_width}x{fitted_height}, background {background}")
           PY
           grep -q "<svg" brand-assets/logos/asiatech-color.svg
 
