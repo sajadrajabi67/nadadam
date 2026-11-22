@@ -194,42 +194,50 @@ jobs:
 
       - name: Download requested insurance brand logos
         run: |
+          set -euo pipefail
           mkdir -p brand-assets/logos
-          curl --fail --location --retry 3 --retry-delay 2 \
-            "https://play-lh.googleusercontent.com/xmaCGYa5le0y-iDkC5PX44GSjGkv7rHVmlGRbJK1qMNwBeXRhDidnqDVpDZlJmmLAu0M2PmllVf-q-2WBJ3GhXY=w512-h512-rw" \
-            --output /tmp/azki-app-logo.png
-          file /tmp/azki-app-logo.png
-          test "$(stat -c%s /tmp/azki-app-logo.png)" -gt 1000
-          python - <<'PY'
+          # Azki: use the logo image URL supplied by the user; normalize any source format to PNG.
+          curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
+            "https://logoyab.com/wp-content/uploads/2025/03/%D9%84%D9%88%DA%AF%D9%88-%D8%A7%D8%B2%DA%A9%DB%8C-1030x1030.png" \
+            --output /tmp/azki-source
+          # Bimehdotcom: use the exact image URL supplied by the user.
+          curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
+            "https://static.offch.com/storage/logo/bimeh-logo.png" \
+            --output /tmp/bimehdotcom-source
+          # BimeBazar: use the exact image URL supplied by the user.
+          curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
+            "https://logoyab.com/wp-content/uploads/2025/08/Bime-Bazar-New-Logo-1030x1030.png" \
+            --output /tmp/bimebazar-source
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
           from pathlib import Path
+          from PIL import Image
           import base64
-          data = base64.b64encode(Path("/tmp/azki-app-logo.png").read_bytes()).decode("ascii")
-          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
-          Path("brand-assets/logos/azki-insurance-color.svg").write_text(svg, encoding="utf-8")
+
+          sources = {
+              "azki-insurance": "/tmp/azki-source",
+              "bimehdotcom": "/tmp/bimehdotcom-source",
+              "bimebazar": "/tmp/bimebazar-source",
+          }
+          for name, source_path in sources.items():
+              source = Image.open(source_path).convert("RGBA")
+              if source.width < 16 or source.height < 16:
+                  raise SystemExit(f"Invalid {name} logo dimensions: {source.size}")
+              # Keep the complete logo, preserve its aspect ratio, and center it on a square canvas.
+              source.thumbnail((512, 512), Image.Resampling.LANCZOS)
+              canvas = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
+              canvas.alpha_composite(source, ((512-source.width)//2, (512-source.height)//2))
+              output = Path(f"/tmp/{name}-normalized.png")
+              canvas.save(output, format="PNG")
+              data = base64.b64encode(output.read_bytes()).decode("ascii")
+              svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+              Path(f"brand-assets/logos/{name}-color.svg").write_text(svg, encoding="utf-8")
+              print(f"{name}: source {Image.open(source_path).size}; normalized to 512x512 PNG")
           PY
-          grep -q "<svg" brand-assets/logos/azki-insurance-color.svg
-          test "$(stat -c%s brand-assets/logos/azki-insurance-color.svg)" -gt 1000
-          # Keep the verified Bimehdotcom brand mark local so builds do not depend on a blocked image host.
-          cat > brand-assets/logos/bimehdotcom-color.svg <<'SVG'
-          <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-            <rect width="512" height="512" rx="104" fill="#60269E"/>
-            <path fill="#FFFFFF" fill-rule="evenodd" d="M128 80h82v145c25-30 57-46 99-46 77 0 131 57 131 140 0 83-55 139-133 139-45 0-77-17-98-48v38h-81V80zm171 310c47 0 76-30 76-79 0-49-29-79-76-79-48 0-78 30-78 79 0 49 30 79 78 79z"/>
-            <path fill="#31C84A" d="M420 420h92v92h-92z"/>
-          </svg>
-          SVG
-          grep -q "<svg" brand-assets/logos/bimehdotcom-color.svg
-          test "$(stat -c%s brand-assets/logos/bimehdotcom-color.svg)" -gt 300
-          # Recreate the official BimeBazar app mark locally from its published 512px artwork.
-          cat > brand-assets/logos/bimebazar-color.svg <<'SVG'
-          <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-            <rect width="512" height="512" fill="#000000"/>
-            <path fill="#F4BE1A" d="M80 474V217C80 117 158 37 256 37s176 80 176 180v257H80z"/>
-            <path fill="#000000" fill-rule="evenodd" d="M126 211h58c34 0 53 18 53 50 0 16-5 29-15 38 34 10 52 35 52 70 0 38-27 61-70 61h-78V211zm47 34v41h12c16 0 25-7 25-21 0-13-9-20-25-20h-12zm0 73v79h31c21 0 35-13 35-39 0-25-14-40-35-40h-31z"/>
-          </svg>
-          SVG
-          grep -q "<svg" brand-assets/logos/bimebazar-color.svg
-          test "$(stat -c%s brand-assets/logos/bimebazar-color.svg)" -gt 300
-          file brand-assets/logos/bimebazar-color.svg
+          for logo in azki-insurance bimehdotcom bimebazar; do
+            test "$(stat -c%s "brand-assets/logos/$logo-color.svg")" -gt 1000
+          done
+          file brand-assets/logos/azki-insurance-color.svg brand-assets/logos/bimehdotcom-color.svg brand-assets/logos/bimebazar-color.svg
 
       - name: Validate all packaged brand logos
         run: |
