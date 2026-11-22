@@ -9,7 +9,12 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "وب‌سایت رسمی خدمات اعتباری و سازمانی تارا."
+      "notes": "دامنه taracredit.com در بررسی وب به tara360.ir هدایت شد؛ هویت سرویس در سایت مقصد رسمی تأیید شد، اما فایل لوگوی مستقل به‌صورت قابل‌دریافت/آرشیو تأیید نشد.",
+      "canonical_domain": "https://tara360.ir/",
+      "verified_sources": [
+        "https://taracredit.com/",
+        "https://taracredit.com/about-us/"
+      ]
     },
     {
       "id": "azkivam",
@@ -18,7 +23,11 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "وب‌سایت رسمی ازکی‌وام؛ لوگوی مستقل هنوز استخراج و بررسی نشده."
+      "notes": "صفحه رسمی سایت و اطلاعات مالکیت شرکت افرا سرمایه دیجیتال قابل مشاهده است؛ یک تصویر پروفایل X با نام Azkivamcom نیز دیده شد اما فایل آن هنوز وارد آرشیو نشده است.",
+      "verified_sources": [
+        "https://azkivam.com/",
+        "https://www.linkedin.com/company/azkivam"
+      ]
     },
     {
       "id": "lendo",
@@ -27,7 +36,10 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "وب‌سایت رسمی لندو؛ لوگوی مستقل هنوز استخراج و بررسی نشده."
+      "notes": "صفحه اصلی رسمی لندو بازبینی شد؛ تصویر/فایل لوگوی مستقل از صفحه قابل استخراج و ذخیره‌سازی نشد.",
+      "verified_sources": [
+        "https://lendo.ir/"
+      ]
     },
     {
       "id": "ghesta",
@@ -36,7 +48,10 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "وب‌سایت رسمی قسطا کارت."
+      "notes": "صفحه رسمی قسطا کارت و تصاویر محتوایی بررسی شد؛ تصویرهای مشاهده‌شده لوگوی مستقل قابل استفاده نبودند.",
+      "verified_sources": [
+        "https://ghesta.ir/"
+      ]
     },
     {
       "id": "dgshahr",
@@ -45,7 +60,10 @@
       "domain_status": "verified_official",
       "logo_status": "source_identified_not_downloaded",
       "logo_source_url": "https://dgshahr.com/assets/svg/logotype.svg",
-      "notes": "مسیر فایل SVG لوگوتایپ از صفحه رسمی شناسایی شد؛ دریافت فایل به علت محدودیت دسترسی مستقیم در این مرحله انجام نشد."
+      "notes": "نشانی مستقیم SVG لوگوتایپ قبلاً از دامنه رسمی شناسایی شده؛ دریافت باینری/ثبت فایل هنوز انجام نشده است.",
+      "verified_sources": [
+        "https://dgshahr.com/"
+      ]
     },
     {
       "id": "torobpay",
@@ -54,7 +72,10 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "وب‌سایت رسمی ترب‌پی؛ لوگوی مستقل هنوز استخراج و بررسی نشده."
+      "notes": "صفحه رسمی ترب‌پی بازبینی شد؛ خروجی متنی سایت برای شناسایی نشانی فایل لوگو کافی نبود.",
+      "verified_sources": [
+        "https://torobpay.com/"
+      ]
     },
     {
       "id": "technopay",
@@ -63,7 +84,11 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "دامنه در پروفایل رسمی LinkedIn شرکت معرفی شده است."
+      "notes": "وب‌سایت رسمی و صفحه LinkedIn معرفی‌کننده دامنه بررسی شد؛ لوگوی قابل دانلود و قابل ثبت در آرشیو پیدا نشد.",
+      "verified_sources": [
+        "https://technopay.ir/",
+        "https://www.linkedin.com/company/technopayir/"
+      ]
     },
     {
       "id": "vency",
@@ -72,7 +97,10 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "دامنه در پروفایل رسمی LinkedIn ونسی معرفی شده است."
+      "notes": "صفحه رسمی ونسی و دامنه تصاویر storage.vency.ir بررسی شد؛ تصاویر مشاهده‌شده مربوط به آیکون‌های مزایا/محتوای محصول بودند، نه فایل لوگوی مستقل.",
+      "verified_sources": [
+        "https://vency.ir/"
+      ]
     },
     {
       "id": "bajet",
@@ -81,7 +109,11 @@
       "domain_status": "verified_official",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "دامنه در پروفایل رسمی LinkedIn اپلیکیشن باجت معرفی شده است."
+      "notes": "صفحه LinkedIn رسمی باجت دامنه mybajet.ir را معرفی می‌کند؛ صفحه وب‌سایت محتوای قابل استخراج نداشت و فایل لوگو دریافت نشد.",
+      "verified_sources": [
+        "https://mybajet.ir/",
+        "https://www.linkedin.com/company/mybajet/"
+      ]
     },
     {
       "id": "keepa",
@@ -90,7 +122,12 @@
       "domain_status": "official_social_profile_found_domain_needs_confirmation",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "پروفایل رسمی LinkedIn برند کیپا پیدا شد؛ دامنه رسمی وب برای دریافت لوگو هنوز با اطمینان تعیین نشده است."
+      "notes": "صفحه‌های رسمی شبکه اجتماعی/شرکتی کیپا تأیید شدند و هویت بصری جدید در پست رسمی معرفی شده؛ دامنه رسمی قابل انتساب با قطعیت و فایل لوگو هنوز تأیید نشده است.",
+      "verified_sources": [
+        "https://www.linkedin.com/company/keepaco_/",
+        "https://www.linkedin.com/company/keepagroup",
+        "https://www.youtube.com/@Keepaco"
+      ]
     },
     {
       "id": "baloon",
@@ -99,16 +136,24 @@
       "domain_status": "needs_official_source",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "نام و نشان در یک فهرست فروشنده/همکار دیده شد؛ منبع رسمی برند هنوز پیدا نشده است."
+      "notes": "فقط نام بالون در صفحه یک فروشنده/همکار مشاهده شد؛ این صفحه منبع رسمی برند یا لوگوی آن نیست.",
+      "verified_sources": [
+        "https://hematitegold.com/plan"
+      ]
     },
     {
       "id": "manisa",
       "name_fa": "مانیسا",
       "official_domain": null,
-      "domain_status": "needs_official_source",
+      "domain_status": "candidate_domain_needs_primary_confirmation",
       "logo_status": "pending_download",
       "logo_source_url": null,
-      "notes": "نام سرویس در صفحات فروش اقساطی همکار دیده شد؛ منبع رسمی برند هنوز پیدا نشده است."
+      "notes": "دامنه moneysa.ir در فهرست‌های عمومی و گزارش رسانه‌ای به مانیسا نسبت داده شده، اما مالکیت دامنه از منبع اولیه خود برند مستقلاً تأیید نشد؛ لوگو دریافت نشد.",
+      "verified_sources": [
+        "https://moneysa.ir/",
+        "https://andishemoaser.ir/"
+      ],
+      "candidate_domain": "https://moneysa.ir/"
     }
   ],
   "usage_policy": [
@@ -127,5 +172,7 @@
     "https://www.linkedin.com/company/vency-ir/",
     "https://www.linkedin.com/company/mybajet/",
     "https://www.linkedin.com/company/keepaco_/"
-  ]
+  ],
+  "last_reviewed": "2026-11-22",
+  "review_note": "بررسی وب‌سایت‌ها و صفحات رسمی/شرکتی انجام شد؛ هیچ فایل لوگویی در این مرحله به‌صورت باینری دانلود و به آرشیو افزوده نشد. وضعیت pending عمداً حفظ شده است."
 }
