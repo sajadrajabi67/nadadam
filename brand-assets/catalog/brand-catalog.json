@@ -1219,10 +1219,10 @@
       "official_domain": "https://www.azki.com/",
       "logo_path": "../logos/azki-insurance-color.svg",
       "asset_status": "available",
-      "source_project": "Official Azki website",
-      "source_url": "https://www.azki.com/file/public/sega/azki-logo-simple.svg",
+      "source_project": "User-provided Google Play app icon",
+      "source_url": "https://play-lh.googleusercontent.com/xmaCGYa5le0y-iDkC5PX44GSjGkv7rHVmlGRbJK1qMNwBeXRhDidnqDVpDZlJmmLAu0M2PmllVf-q-2WBJ3GhXY",
       "license_review": "trademark_review_required",
-      "verification_status": "official_site_asset"
+      "verification_status": "user_supplied_logo_source"
     },
     {
       "id": "bimehdotcom",
