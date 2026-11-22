@@ -242,7 +242,7 @@ jobs:
               Path(f"brand-assets/logos/{name}-color.svg").write_text(svg, encoding="utf-8")
               print(f"{name}: source {Image.open(source_path).size}; normalized to 512x512 PNG")
           PY
-          for logo in azki-insurance bimehdotcom bimebazar; do
+          for logo in azki-insurance bimehdotcom bimebazar azkivam; do
             test "$(stat -c%s "brand-assets/logos/$logo-color.svg")" -gt 1000
           done
           file brand-assets/logos/azki-insurance-color.svg brand-assets/logos/bimehdotcom-color.svg brand-assets/logos/bimebazar-color.svg
