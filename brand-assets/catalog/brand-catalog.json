@@ -161,21 +161,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "futurebank",
-      "name_fa": "آینده‌ساز",
-      "name_en": "Future Bank",
-      "aliases": [
-        "آینده‌ساز",
-        "Future Bank",
-        "futurebank"
-      ],
-      "logo_path": "../logos/futurebank-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "gardeshgari",
       "name_fa": "گردشگری",
       "name_en": "Tourism Bank",
@@ -218,38 +203,6 @@
         "id pay"
       ],
       "logo_path": "../logos/idpay-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "iran-europe",
-      "name_fa": "ایران و اروپا",
-      "name_en": "Iran Europe",
-      "aliases": [
-        "ایران و اروپا",
-        "Iran Europe",
-        "بانک ایران و اروپا",
-        "iran europe"
-      ],
-      "logo_path": "../logos/iran-europe-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "iran-venezuela",
-      "name_fa": "ایران و ونزوئلا",
-      "name_en": "Iran Venezuela",
-      "aliases": [
-        "ایران و ونزوئلا",
-        "Iran Venezuela",
-        "بانک ایران و ونزوئلا",
-        "iran venezuela"
-      ],
-      "logo_path": "../logos/iran-venezuela-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
@@ -401,23 +354,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "next-pay",
-      "name_fa": "نکست‌پی",
-      "name_en": "NextPay",
-      "aliases": [
-        "نکست‌پی",
-        "NextPay",
-        "نکست پی",
-        "nextpay",
-        "next pay"
-      ],
-      "logo_path": "../logos/next-pay-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "noor",
       "name_fa": "نور",
       "name_en": "Noor",
@@ -450,22 +386,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "pasargad-pep",
-      "name_fa": "پرداخت الکترونیک پاسارگاد",
-      "name_en": "Pasargad PEP",
-      "aliases": [
-        "پرداخت الکترونیک پاسارگاد",
-        "Pasargad PEP",
-        "پاسارگاد پی ای پی",
-        "pasargad pep"
-      ],
-      "logo_path": "../logos/pasargad pep-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "pasargad",
       "name_fa": "پاسارگاد",
       "name_en": "Pasargad",
@@ -476,40 +396,6 @@
         "pasargad"
       ],
       "logo_path": "../logos/pasargad-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "pay-ir",
-      "name_fa": "پی‌آی‌آر",
-      "name_en": "Pay.ir",
-      "aliases": [
-        "پی‌آی‌آر",
-        "Pay.ir",
-        "پی دات آی آر",
-        "pay.ir",
-        "pay ir"
-      ],
-      "logo_path": "../logos/pay-ir-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "payping",
-      "name_fa": "پی‌پینگ",
-      "name_en": "PayPing",
-      "aliases": [
-        "پی‌پینگ",
-        "PayPing",
-        "پی پینگ",
-        "payping",
-        "pay ping"
-      ],
-      "logo_path": "../logos/payping-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
@@ -564,21 +450,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "sadad",
-      "name_fa": "سداد",
-      "name_en": "Sadad",
-      "aliases": [
-        "سداد",
-        "Sadad",
-        "sadad"
-      ],
-      "logo_path": "../logos/sadad-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "saderat",
       "name_fa": "صادرات",
       "name_en": "Saderat",
@@ -590,22 +461,6 @@
         "saderat"
       ],
       "logo_path": "../logos/saderat-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "saman-kish",
-      "name_fa": "سامان کیش",
-      "name_en": "Saman Kish",
-      "aliases": [
-        "سامان کیش",
-        "Saman Kish",
-        "پرداخت الکترونیک سامان کیش",
-        "saman kish"
-      ],
-      "logo_path": "../logos/saman kish-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
@@ -781,21 +636,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "shaparak",
-      "name_fa": "شاپرک",
-      "name_en": "Shaparak",
-      "aliases": [
-        "شاپرک",
-        "Shaparak",
-        "shaparak"
-      ],
-      "logo_path": "../logos/shaparak-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "sina",
       "name_fa": "سینا",
       "name_en": "Sina",
@@ -923,53 +763,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "vandar",
-      "name_fa": "وندار",
-      "name_en": "Vandar",
-      "aliases": [
-        "وندار",
-        "Vandar",
-        "vandar"
-      ],
-      "logo_path": "../logos/vandar-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "zarrinpal",
-      "name_fa": "زرین‌پال",
-      "name_en": "Zarinpal",
-      "aliases": [
-        "زرین‌پال",
-        "Zarinpal",
-        "زرین پال",
-        "zarinpal",
-        "zarin pal"
-      ],
-      "logo_path": "../logos/zarrinpal-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "zibal",
-      "name_fa": "زیبال",
-      "name_en": "Zibal",
-      "aliases": [
-        "زیبال",
-        "Zibal",
-        "zibal"
-      ],
-      "logo_path": "../logos/zibal-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "tara",
       "name_fa": "تارا",
       "name_en": "Tara",
@@ -1051,26 +844,6 @@
       "logo_brand_fa": "تکنوپی",
       "source_project": "farzane-na/tecnolife",
       "source_url": "https://github.com/farzane-na/tecnolife/blob/main/src/asset/logo/technoPayFooter_new.svg"
-    },
-    {
-      "id": "gsmpay",
-      "name_fa": "جی‌اس‌ام‌پی",
-      "name_en": "GSM Pay",
-      "aliases": [
-        "جی‌اس‌ام‌پی",
-        "جی اس ام پی",
-        "GSM Pay",
-        "GSMPay",
-        "gsm pay",
-        "gsmpay"
-      ],
-      "logo_path": "../logos/gsmpay-color.svg",
-      "asset_status": "available",
-      "logo_brand_fa": "جی‌اس‌ام‌پی",
-      "source_project": "athkco/gsmpay-woocommerce",
-      "source_url": "https://github.com/athkco/gsmpay-woocommerce/blob/master/assets/images/logo.png",
-      "license_review": "trademark_review_required",
-      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
     },
     {
       "id": "vepod",
