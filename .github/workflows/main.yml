@@ -18,33 +18,30 @@ jobs:
       - name: Get source code
         uses: actions/checkout@v4
 
-      - name: Download and prepare searchable cheque image
+      - name: Use replacement cheque logo and download new DigiPay logo
         run: |
-          mkdir -p brand-assets/references brand-assets/logos
+          test -s brand-assets/logos/bank-cheque-color.svg
           curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
-            "https://i1.delgarm.com/i/813/020901/655d317f020e5.gif" \
-            --output brand-assets/references/bank-cheque.gif
-          file brand-assets/references/bank-cheque.gif
-          test "$(stat -c%s brand-assets/references/bank-cheque.gif)" -gt 5000
+            "https://logoyab.com/wp-content/uploads/2026/09/%D8%AF%DB%8C%D8%AC%DB%8C-%D9%BE%DB%8C-1030x1030.png" \
+            --output /tmp/digipay-logo.png
+          file /tmp/digipay-logo.png
+          test "$(stat -c%s /tmp/digipay-logo.png)" -gt 1000
           python3 -m pip install --quiet pillow
           python3 - <<'PY'
           from pathlib import Path
           from PIL import Image
           import base64
-          source = Image.open("brand-assets/references/bank-cheque.gif")
-          source.seek(0)
-          frame = source.convert("RGBA")
-          frame.thumbnail((512, 512), Image.Resampling.LANCZOS)
+          source = Image.open("/tmp/digipay-logo.png").convert("RGBA")
+          source.thumbnail((512, 512), Image.Resampling.LANCZOS)
           canvas = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
-          canvas.alpha_composite(frame, ((512-frame.width)//2, (512-frame.height)//2))
-          output = Path("/tmp/bank-cheque.png")
-          canvas.save(output, format="PNG")
+          canvas.alpha_composite(source, ((512-source.width)//2, (512-source.height)//2))
+          output = Path("/tmp/digipay-normalized.png")
+          canvas.save(output, format="PNG", optimize=True)
           data = base64.b64encode(output.read_bytes()).decode("ascii")
           svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" preserveAspectRatio="xMidYMid meet" href="data:image/png;base64,' + data + '"/></svg>'
-          Path("brand-assets/logos/bank-cheque-color.svg").write_text(svg, encoding="utf-8")
-          print(f"Prepared cheque display image from GIF frame {source.tell() + 1}")
+          Path("brand-assets/logos/digipay-color.svg").write_text(svg, encoding="utf-8")
           PY
-          test "$(stat -c%s brand-assets/logos/bank-cheque-color.svg)" -gt 1000
+          test "$(stat -c%s brand-assets/logos/digipay-color.svg)" -gt 1000
 
       - name: Download user-provided Basalam logo for Basalam and SalamPay
         run: |
