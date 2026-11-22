@@ -2,7 +2,7 @@
 
 این فهرست برای ردیابی فایل‌های SVG موجود در همین پوشه است.
 
-تعداد فایل‌های SVG ثبت‌شده هنگام تهیه این فهرست: 59
+تعداد فایل‌های SVG ثبت‌شده هنگام تهیه این فهرست: 64
 
 ## فایل‌ها
 
@@ -65,6 +65,14 @@
 - [vandar-color.svg](./vandar-color.svg)
 - [zarrinpal-color.svg](./zarrinpal-color.svg)
 - [zibal-color.svg](./zibal-color.svg)
+
+## لوگوهای سرویس‌های اعتباری افزوده‌شده از گیت‌هاب
+
+- [azkivam-color.svg](./azkivam-color.svg)
+- [basalam-color.svg](./basalam-color.svg)
+- [gsmpay-color.svg](./gsmpay-color.svg)
+- [technopay-color.svg](./technopay-color.svg)
+- [wepod-color.svg](./wepod-color.svg)
 
 ## منبع و حقوق
 
