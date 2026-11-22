@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - feature/brand-logo-recognition
+      - feature/credit-brands-and-cheque
 
 jobs:
   build:
@@ -13,6 +14,205 @@ jobs:
     steps:
       - name: Get source code
         uses: actions/checkout@v4
+
+      - name: Download approved cheque reference image
+        run: |
+          mkdir -p brand-assets/references
+          if curl --fail --location --max-redirs 5 --retry 2 --retry-delay 2 \
+            "https://i1.delgarm.com/i/813/020901/655d317f020e5.gif" \
+            --output brand-assets/references/bank-cheque.gif; then
+            file brand-assets/references/bank-cheque.gif
+            test "$(stat -c%s brand-assets/references/bank-cheque.gif)" -gt 5000
+          else
+            echo "Cheque reference host is unavailable; continuing without the optional reference image."
+            rm -f brand-assets/references/bank-cheque.gif
+          fi
+
+      - name: Download user-provided Basalam logo for Basalam and SalamPay
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://statics.basalam.com/public-81/admin/0Vlq5j/05-12/fbLmC9QTrqwir7qCYUD9M5qAMoeEXiZw9HdwWHCkbW7LcrALwJ.png" \
+            --output /tmp/basalam-logo.png
+          file /tmp/basalam-logo.png
+          test "$(stat -c%s /tmp/basalam-logo.png)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/basalam-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/basalam-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/basalam-color.svg
+          test "$(stat -c%s brand-assets/logos/basalam-color.svg)" -gt 1000
+
+      - name: Download user-provided Torob Pay logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://techfy.ir/wp-content/uploads/2025/09/%D8%AA%D8%B1%D8%A8-%D9%BE%DB%8C-%DA%86%DB%8C%D8%B3%D8%AA%D8%9F.webp" \
+            --output /tmp/torob-pay-logo.webp
+          file /tmp/torob-pay-logo.webp
+          test "$(stat -c%s /tmp/torob-pay-logo.webp)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/torob-pay-logo.webp").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/webp;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/torob-pay-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/torob-pay-color.svg
+          test "$(stat -c%s brand-assets/logos/torob-pay-color.svg)" -gt 1000
+
+      - name: Download user-provided Talasea logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://media.licdn.com/dms/image/v2/D4E0BAQGzL4Y_UyjYxA/company-logo_200_200/B4EZ2gAXyeIMAI-/0/1776505946013/talasea_logo?e=2147483647&v=beta&t=c4JeWONZcZwwEYCxZmaIPMyUw3M9bK-LE1NAdAK_5vc" \
+            --output /tmp/talasea-logo
+          file /tmp/talasea-logo
+          test "$(stat -c%s /tmp/talasea-logo)" -gt 500
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          p = Path("/tmp/talasea-logo")
+          raw = p.read_bytes()
+          mime = "image/jpeg" if raw.startswith(bytes([255, 216, 255])) else ("image/webp" if raw[8:12] == b"WEBP" else "image/png")
+          data = base64.b64encode(raw).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:' + mime + ';base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/talasea-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/talasea-color.svg
+
+      - name: Download user-provided Asiatech logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIAjy5YF9L2RnoWn_jqUKM31SYZADG_fr77A&s" \
+            --output /tmp/asiatech-logo
+          file /tmp/asiatech-logo
+          test "$(stat -c%s /tmp/asiatech-logo)" -gt 500
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import base64
+          source = Image.open("/tmp/asiatech-logo").convert("RGBA")
+          width, height = source.size
+
+          # Detect the source image's own background from its four corner patches.
+          patch = max(1, min(width, height, 12))
+          pixels = []
+          for left, top in ((0, 0), (width-patch, 0), (0, height-patch), (width-patch, height-patch)):
+              crop = source.crop((left, top, left+patch, top+patch))
+              pixels.extend(list(crop.getdata()))
+          opaque = [p for p in pixels if p[3] > 220]
+          if opaque:
+              rgb = tuple(sorted(p[i] for p in opaque)[len(opaque)//2] for i in range(3))
+              background = "#{:02X}{:02X}{:02X}".format(*rgb)
+          else:
+              background = "#FFFFFF"
+
+          # Keep the complete original image proportional, centered on a square canvas.
+          scale = min(512 / width, 512 / height)
+          fitted_width = round(width * scale)
+          fitted_height = round(height * scale)
+          data = base64.b64encode(Path("/tmp/asiatech-logo").read_bytes()).decode("ascii")
+          fmt = Image.open("/tmp/asiatech-logo").format
+          mime = {"PNG":"image/png", "WEBP":"image/webp", "JPEG":"image/jpeg"}.get(fmt, "image/png")
+          x = (512 - fitted_width) // 2
+          y = (512 - fitted_height) // 2
+          svg = (
+              '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">'
+              '<rect width="512" height="512" fill="' + background + '"/>'
+              '<image x="' + str(x) + '" y="' + str(y) + '" width="' + str(fitted_width) + '" height="' + str(fitted_height) + '" '
+              'preserveAspectRatio="none" href="data:' + mime + ';base64,' + data + '"/>'
+              '</svg>'
+          )
+          Path("brand-assets/logos/asiatech-color.svg").write_text(svg, encoding="utf-8")
+          print(f"Asiatech square asset: {width}x{height} -> {fitted_width}x{fitted_height}, background {background}")
+          PY
+          grep -q "<svg" brand-assets/logos/asiatech-color.svg
+
+      - name: Download user-provided Telecommunication Company of Iran logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://media.hamshahrionline.ir/d/2022/07/11/4/4699873.jpg?ts=1657543367000" \
+            --output /tmp/telecommunication-company-of-iran-logo.jpg
+          file /tmp/telecommunication-company-of-iran-logo.jpg
+          test "$(stat -c%s /tmp/telecommunication-company-of-iran-logo.jpg)" -gt 500
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/telecommunication-company-of-iran-logo.jpg").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/jpeg;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/telecommunication-company-of-iran-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/telecommunication-company-of-iran-color.svg
+
+      - name: Download official Tara logo asset
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://cdn.brandfetch.io/idi6KFMdnT/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747645203468" \
+            --output brand-assets/logos/tara-color.svg
+          grep -q "<svg" brand-assets/logos/tara-color.svg
+          test "$(stat -c%s brand-assets/logos/tara-color.svg)" -gt 500
+          
+      - name: Download user-provided Dima logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://appkhan.com/wp-content/uploads/2025/12/dima-icon.png" \
+            --output /tmp/dima-logo.png
+          file /tmp/dima-logo.png
+          test "$(stat -c%s /tmp/dima-logo.png)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/dima-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/dima-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/dima-color.svg
+          test "$(stat -c%s brand-assets/logos/dima-color.svg)" -gt 1000
+
+      - name: Download requested insurance brand logos
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://play-lh.googleusercontent.com/xmaCGYa5le0y-iDkC5PX44GSjGkv7rHVmlGRbJK1qMNwBeXRhDidnqDVpDZlJmmLAu0M2PmllVf-q-2WBJ3GhXY=w512-h512-rw" \
+            --output /tmp/azki-app-logo.png
+          file /tmp/azki-app-logo.png
+          test "$(stat -c%s /tmp/azki-app-logo.png)" -gt 1000
+          python - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/azki-app-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/azki-insurance-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/azki-insurance-color.svg
+          test "$(stat -c%s brand-assets/logos/azki-insurance-color.svg)" -gt 1000
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://cdn.brandfetch.io/idqSUBvqtx/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1781795732537" \
+            --output brand-assets/logos/bimehdotcom-color.svg
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://dmboard.media/wp-content/uploads/2025/08/Picture1-3-scaled.png" \
+            --output /tmp/bimebazar-logo.png
+          file /tmp/bimebazar-logo.png
+          test "$(stat -c%s /tmp/bimebazar-logo.png)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/bimebazar-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/bimebazar-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/bimebazar-color.svg
+          test "$(stat -c%s brand-assets/logos/bimebazar-color.svg)" -gt 1000
+          file brand-assets/logos/bimebazar-color.svg
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

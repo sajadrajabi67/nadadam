@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "description_fa": "کاتالوگ مستقل تشخیص نام بانک‌ها، پرداخت‌یارها و سرویس‌های اعتباری؛ مستقل از سورس اپلیکیشن.",
+  "description_fa": "کاتالوگ مستقل تشخیص نام بانک‌ها، پرداخت‌یارها و سرویس‌های اعتباری به‌همراه انواع سند مالی؛ مستقل از سورس اپلیکیشن.",
   "normalization": {
     "persian_yeh": "ی→ی",
     "arabic_yeh": "ي→ی",
@@ -68,13 +68,15 @@
       "aliases": [
         "بانکینو",
         "Bankino",
-        "bankino"
+        "bankino",
+        "بانک اینو"
       ],
       "logo_path": "../logos/bankino-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "logo_brand_fa": "بانکینو"
     },
     {
       "id": "blu-bank",
@@ -159,21 +161,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "futurebank",
-      "name_fa": "آینده‌ساز",
-      "name_en": "Future Bank",
-      "aliases": [
-        "آینده‌ساز",
-        "Future Bank",
-        "futurebank"
-      ],
-      "logo_path": "../logos/futurebank-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "gardeshgari",
       "name_fa": "گردشگری",
       "name_en": "Tourism Bank",
@@ -216,38 +203,6 @@
         "id pay"
       ],
       "logo_path": "../logos/idpay-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "iran-europe",
-      "name_fa": "ایران و اروپا",
-      "name_en": "Iran Europe",
-      "aliases": [
-        "ایران و اروپا",
-        "Iran Europe",
-        "بانک ایران و اروپا",
-        "iran europe"
-      ],
-      "logo_path": "../logos/iran-europe-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "iran-venezuela",
-      "name_fa": "ایران و ونزوئلا",
-      "name_en": "Iran Venezuela",
-      "aliases": [
-        "ایران و ونزوئلا",
-        "Iran Venezuela",
-        "بانک ایران و ونزوئلا",
-        "iran venezuela"
-      ],
-      "logo_path": "../logos/iran-venezuela-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
@@ -399,23 +354,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "next-pay",
-      "name_fa": "نکست‌پی",
-      "name_en": "NextPay",
-      "aliases": [
-        "نکست‌پی",
-        "NextPay",
-        "نکست پی",
-        "nextpay",
-        "next pay"
-      ],
-      "logo_path": "../logos/next-pay-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "noor",
       "name_fa": "نور",
       "name_en": "Noor",
@@ -448,22 +386,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "pasargad-pep",
-      "name_fa": "پرداخت الکترونیک پاسارگاد",
-      "name_en": "Pasargad PEP",
-      "aliases": [
-        "پرداخت الکترونیک پاسارگاد",
-        "Pasargad PEP",
-        "پاسارگاد پی ای پی",
-        "pasargad pep"
-      ],
-      "logo_path": "../logos/pasargad pep-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "pasargad",
       "name_fa": "پاسارگاد",
       "name_en": "Pasargad",
@@ -474,40 +396,6 @@
         "pasargad"
       ],
       "logo_path": "../logos/pasargad-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "pay-ir",
-      "name_fa": "پی‌آی‌آر",
-      "name_en": "Pay.ir",
-      "aliases": [
-        "پی‌آی‌آر",
-        "Pay.ir",
-        "پی دات آی آر",
-        "pay.ir",
-        "pay ir"
-      ],
-      "logo_path": "../logos/pay-ir-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "payping",
-      "name_fa": "پی‌پینگ",
-      "name_en": "PayPing",
-      "aliases": [
-        "پی‌پینگ",
-        "PayPing",
-        "پی پینگ",
-        "payping",
-        "pay ping"
-      ],
-      "logo_path": "../logos/payping-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
@@ -562,21 +450,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "sadad",
-      "name_fa": "سداد",
-      "name_en": "Sadad",
-      "aliases": [
-        "سداد",
-        "Sadad",
-        "sadad"
-      ],
-      "logo_path": "../logos/sadad-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "saderat",
       "name_fa": "صادرات",
       "name_en": "Saderat",
@@ -588,22 +461,6 @@
         "saderat"
       ],
       "logo_path": "../logos/saderat-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "saman-kish",
-      "name_fa": "سامان کیش",
-      "name_en": "Saman Kish",
-      "aliases": [
-        "سامان کیش",
-        "Saman Kish",
-        "پرداخت الکترونیک سامان کیش",
-        "saman kish"
-      ],
-      "logo_path": "../logos/saman kish-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
@@ -779,21 +636,6 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "shaparak",
-      "name_fa": "شاپرک",
-      "name_en": "Shaparak",
-      "aliases": [
-        "شاپرک",
-        "Shaparak",
-        "shaparak"
-      ],
-      "logo_path": "../logos/shaparak-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "sina",
       "name_fa": "سینا",
       "name_en": "Sina",
@@ -921,64 +763,22 @@
       "license_review": "trademark_review_required"
     },
     {
-      "id": "vandar",
-      "name_fa": "وندار",
-      "name_en": "Vandar",
-      "aliases": [
-        "وندار",
-        "Vandar",
-        "vandar"
-      ],
-      "logo_path": "../logos/vandar-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "zarrinpal",
-      "name_fa": "زرین‌پال",
-      "name_en": "Zarinpal",
-      "aliases": [
-        "زرین‌پال",
-        "Zarinpal",
-        "زرین پال",
-        "zarinpal",
-        "zarin pal"
-      ],
-      "logo_path": "../logos/zarrinpal-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
-      "id": "zibal",
-      "name_fa": "زیبال",
-      "name_en": "Zibal",
-      "aliases": [
-        "زیبال",
-        "Zibal",
-        "zibal"
-      ],
-      "logo_path": "../logos/zibal-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
-      "asset_status": "available",
-      "license_review": "trademark_review_required"
-    },
-    {
       "id": "tara",
       "name_fa": "تارا",
       "name_en": "Tara",
       "aliases": [
         "تارا",
-        "tara"
+        "tara",
+        "Tara",
+        "Tara Credit",
+        "تارا ۳۶۰",
+        "تارا360",
+        "tara360"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/tara-color.svg",
       "official_domain": "https://taracredit.com/",
-      "logo_source_url": null,
-      "asset_status": "pending",
+      "logo_source_url": "https://tara360.ir/wp-content/uploads/2024/08/tar_sanfi_v3.png",
+      "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
@@ -986,7 +786,10 @@
         "https://taracredit.com/about-us/"
       ],
       "canonical_domain": "https://tara360.ir/",
-      "source_notes": "دامنه قدیمی به tara360.ir هدایت می‌شود؛ فایل لوگوی قابل آرشیو هنوز دریافت نشده."
+      "source_notes": "فایل PNG ارائه‌شده توسط کاربر از دامنه رسمی تارا دریافت و هنگام ساخت به آرشیو SVG سازگار با نمایشگر برنامه تبدیل می‌شود.",
+      "logo_brand_fa": "تارا",
+      "source_project": "Official Tara360 website",
+      "source_url": "https://tara360.ir/wp-content/uploads/2024/08/tar_sanfi_v3.png"
     },
     {
       "id": "azkivam",
@@ -996,99 +799,24 @@
         "ازکی وام",
         "ازکی‌وام",
         "azkivam",
-        "azki vam"
+        "azki vam",
+        "AzkiVam",
+        "Azki Vam"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/azkivam-color.svg",
       "official_domain": "https://azkivam.com/",
       "logo_source_url": null,
-      "asset_status": "pending",
+      "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
         "https://azkivam.com/",
         "https://www.linkedin.com/company/azkivam"
       ],
-      "source_notes": "وب‌سایت و صفحه شرکتی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
-    },
-    {
-      "id": "lendo",
-      "name_fa": "لندو",
-      "name_en": "Lendo",
-      "aliases": [
-        "لندو",
-        "lendo"
-      ],
-      "logo_path": null,
-      "official_domain": "https://lendo.ir/",
-      "logo_source_url": null,
-      "asset_status": "pending",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://lendo.ir/"
-      ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
-    },
-    {
-      "id": "ghesta",
-      "name_fa": "قسطا",
-      "name_en": "Ghesta",
-      "aliases": [
-        "قسطا",
-        "ghesta"
-      ],
-      "logo_path": null,
-      "official_domain": "https://ghesta.ir/",
-      "logo_source_url": null,
-      "asset_status": "pending",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://ghesta.ir/"
-      ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
-    },
-    {
-      "id": "dgshahr",
-      "name_fa": "دیجی‌شهر",
-      "name_en": "DigiShahr",
-      "aliases": [
-        "دیجی شهر",
-        "دیجی‌شهر",
-        "dgshahr",
-        "digi shahr"
-      ],
-      "logo_path": null,
-      "official_domain": "https://dgshahr.com/",
-      "logo_source_url": "https://dgshahr.com/assets/svg/logotype.svg",
-      "asset_status": "pending",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://dgshahr.com/"
-      ],
-      "source_notes": "نشانی SVG رسمی شناسایی شده اما فایل هنوز دانلود/بازبینی نشده."
-    },
-    {
-      "id": "torobpay",
-      "name_fa": "ترب‌پی",
-      "name_en": "TorobPay",
-      "aliases": [
-        "ترب پی",
-        "ترب‌پی",
-        "torobpay",
-        "torob pay"
-      ],
-      "logo_path": null,
-      "official_domain": "https://torobpay.com/",
-      "logo_source_url": null,
-      "asset_status": "pending",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://torobpay.com/"
-      ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد.",
+      "logo_brand_fa": "ازکی‌وام",
+      "source_project": "Arminsoleymani/Azki",
+      "source_url": "https://github.com/Arminsoleymani/Azki/blob/main/assets/Images/azkivam-logo.svg"
     },
     {
       "id": "technopay",
@@ -1098,119 +826,253 @@
         "تکنو پی",
         "تکنوپی",
         "technopay",
-        "techno pay"
+        "techno pay",
+        "TechnoPay",
+        "Techno Pay"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/technopay-color.svg",
       "official_domain": "https://technopay.ir/",
       "logo_source_url": null,
-      "asset_status": "pending",
+      "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
         "https://technopay.ir/",
         "https://www.linkedin.com/company/technopayir/"
       ],
-      "source_notes": "وب‌سایت و صفحه شرکتی معرفی‌کننده دامنه بررسی شد؛ فایل لوگو هنوز دریافت نشده."
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد.",
+      "logo_brand_fa": "تکنوپی",
+      "source_project": "farzane-na/tecnolife",
+      "source_url": "https://github.com/farzane-na/tecnolife/blob/main/src/asset/logo/technoPayFooter_new.svg"
     },
     {
-      "id": "vency",
-      "name_fa": "ونسی",
-      "name_en": "Vency",
+      "id": "vepod",
+      "name_fa": "ویپاد",
+      "name_en": "Vepod",
       "aliases": [
-        "ونسی",
-        "vency"
+        "ویپاد",
+        "وی پاد",
+        "Vepod",
+        "WePod",
+        "vepod",
+        "wepod"
       ],
-      "logo_path": null,
-      "official_domain": "https://vency.ir/",
-      "logo_source_url": null,
-      "asset_status": "pending",
+      "logo_path": "../logos/wepod-color.svg",
+      "asset_status": "available",
+      "logo_brand_fa": "ویپاد",
+      "source_project": "mehrnet/IranianBanks",
+      "source_url": "https://github.com/mehrnet/IranianBanks/blob/main/logos/png/512x512/wepod.png",
       "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://vency.ir/"
-      ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ تصاویر محتوایی به‌عنوان لوگوی مستقل استفاده نشدند."
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
     },
     {
-      "id": "bajet",
-      "name_fa": "باجت",
-      "name_en": "Bajet",
+      "id": "dima",
+      "name_fa": "دیما",
+      "name_en": "Dima",
       "aliases": [
-        "باجت",
-        "bajet"
+        "دیما",
+        "دیما بانک ملت",
+        "Dima",
+        "Dima Bank Mellat",
+        "com.bmelat.mobile"
       ],
-      "logo_path": null,
-      "official_domain": "https://mybajet.ir/",
-      "logo_source_url": null,
-      "asset_status": "pending",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://mybajet.ir/",
-        "https://www.linkedin.com/company/mybajet/"
-      ],
-      "source_notes": "صفحه شرکتی دامنه رسمی را معرفی می‌کند؛ فایل لوگو هنوز دریافت نشده."
+      "logo_path": "../logos/dima-color.svg",
+      "asset_status": "available",
+      "notes_fa": "نشان نمایشی اختصاصی دیما بر اساس تصویر ارسالی کاربر؛ از لوگوی بانک ملت استفاده نشود.",
+      "logo_source_url": "https://appkhan.com/wp-content/uploads/2025/12/dima-icon.png",
+      "source_url": "https://appkhan.com/wp-content/uploads/2025/12/dima-icon.png",
+      "source_project": "User-provided Dima app icon",
+      "source_notes": "لوگوی دیما طبق تصویر ارسالی کاربر؛ فایل در زمان ساخت از منبع دریافت و به SVG بسته‌بندی می‌شود."
     },
     {
-      "id": "keepa",
-      "name_fa": "کیپا",
-      "name_en": "Keepa",
+      "id": "salam-pay",
+      "name_fa": "سلام‌پی",
+      "name_en": "SalamPay",
       "aliases": [
-        "کیپا",
-        "keepa"
+        "سلام‌پی",
+        "سلام پی",
+        "SalamPay",
+        "Salam Pay",
+        "salampay",
+        "باسلام",
+        "Basalam"
       ],
-      "logo_path": null,
-      "official_domain": null,
-      "logo_source_url": null,
-      "asset_status": "pending",
+      "logo_path": "../logos/basalam-color.svg",
+      "asset_status": "available",
+      "logo_brand_fa": "باسلام",
+      "notes_fa": "لوگوی باسلام برای نمایش در تشخیص هر دو عنوان باسلام و سلام‌پی استفاده شود.",
+      "source_project": "User-provided Basalam logo for Basalam and SalamPay",
+      "source_url": "https://statics.basalam.com/public-81/admin/0Vlq5j/05-12/fbLmC9QTrqwir7qCYUD9M5qAMoeEXiZw9HdwWHCkbW7LcrALwJ.png",
       "license_review": "trademark_review_required",
-      "verification_status": "official_social_identity_confirmed_domain_unconfirmed",
-      "identity_sources": [
-        "https://www.linkedin.com/company/keepaco_/",
-        "https://www.linkedin.com/company/keepagroup",
-        "https://www.youtube.com/@Keepaco"
-      ],
-      "source_notes": "هویت رسمی در شبکه‌های اجتماعی/شرکتی دیده شد؛ دامنه رسمی و فایل لوگو هنوز قطعی نیست."
+      "source_notes": "تصویر لوگوی ارسالی کاربر برای هر دو نام باسلام و سلام‌پی؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "logo_source_url": "https://statics.basalam.com/public-81/admin/0Vlq5j/05-12/fbLmC9QTrqwir7qCYUD9M5qAMoeEXiZw9HdwWHCkbW7LcrALwJ.png"
     },
     {
-      "id": "baloon",
-      "name_fa": "بالون",
-      "name_en": "Baloon",
+      "id": "bimebazar",
+      "name_fa": "بیمه‌بازار",
+      "name_en": "BimeBazar",
       "aliases": [
-        "بالون",
-        "baloon"
+        "بیمه بازار",
+        "بیمه‌بازار",
+        "بیمهبازار",
+        "BimeBazar",
+        "Bimeh Bazar",
+        "bimebazar"
       ],
-      "logo_path": null,
-      "official_domain": null,
-      "logo_source_url": null,
-      "asset_status": "pending",
+      "official_domain": "https://bimebazar.com/",
+      "logo_path": "../logos/bimebazar-color.svg",
+      "asset_status": "available",
+      "source_project": "User-provided BimeBazar logo image",
+      "source_url": "https://dmboard.media/wp-content/uploads/2025/08/Picture1-3-scaled.png",
       "license_review": "trademark_review_required",
-      "verification_status": "needs_primary_source",
-      "identity_sources": [
-        "https://hematitegold.com/plan"
-      ],
-      "source_notes": "فقط در صفحه فروشنده/همکار دیده شده؛ این منبع برای تأیید هویت یا لوگوی رسمی کافی نیست."
+      "verification_status": "user_supplied_logo_source"
     },
     {
-      "id": "manisa",
-      "name_fa": "مانیسا",
-      "name_en": "Manisa",
+      "id": "azki-insurance",
+      "name_fa": "ازکی",
+      "name_en": "Azki",
       "aliases": [
-        "مانیسا",
-        "manisa"
+        "ازکی",
+        "Azki",
+        "azki.com"
       ],
-      "logo_path": null,
-      "official_domain": null,
-      "logo_source_url": null,
-      "asset_status": "pending",
+      "official_domain": "https://www.azki.com/",
+      "logo_path": "../logos/azki-insurance-color.svg",
+      "asset_status": "available",
+      "source_project": "User-provided Google Play app icon",
+      "source_url": "https://play-lh.googleusercontent.com/xmaCGYa5le0y-iDkC5PX44GSjGkv7rHVmlGRbJK1qMNwBeXRhDidnqDVpDZlJmmLAu0M2PmllVf-q-2WBJ3GhXY",
       "license_review": "trademark_review_required",
-      "verification_status": "candidate_domain_needs_primary_confirmation",
-      "identity_sources": [
-        "https://moneysa.ir/",
-        "https://andishemoaser.ir/"
+      "verification_status": "user_supplied_logo_source"
+    },
+    {
+      "id": "bimehdotcom",
+      "name_fa": "بیمه دات‌کام",
+      "name_en": "Bimehdotcom",
+      "aliases": [
+        "بیمه دات کام",
+        "بیمه دات‌کام",
+        "بیمهداتکام",
+        "Bimehdotcom",
+        "Bimeh.com",
+        "bimeh.com"
       ],
-      "candidate_domain": "https://moneysa.ir/",
-      "source_notes": "دامنه در منابع عمومی و گزارش رسانه‌ای به مانیسا نسبت داده شده؛ مالکیت از منبع اولیه تأیید نشده."
+      "official_domain": "https://www.bimeh.com/",
+      "logo_path": "../logos/bimehdotcom-color.svg",
+      "asset_status": "available",
+      "source_project": "Brandfetch brand asset listing for bimeh.com",
+      "source_url": "https://cdn.brandfetch.io/idqSUBvqtx/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1781795732537",
+      "license_review": "trademark_review_required",
+      "verification_status": "brandfetch_identity_confirmed"
+    },
+    {
+      "id": "torob-pay",
+      "name_fa": "ترب‌پی",
+      "name_en": "Torob Pay",
+      "aliases": [
+        "ترب‌پی",
+        "ترب پی",
+        "ترب‌پی چیست",
+        "TorobPay",
+        "Torob Pay",
+        "torob pay"
+      ],
+      "logo_path": "../logos/torob-pay-color.svg",
+      "asset_status": "available",
+      "logo_brand_fa": "ترب‌پی",
+      "notes_fa": "لوگوی ترب‌پی طبق تصویر ارسالی کاربر نمایش داده شود.",
+      "logo_source_url": "https://techfy.ir/wp-content/uploads/2025/09/%D8%AA%D8%B1%D8%A8-%D9%BE%DB%8C-%DA%86%DB%8C%D8%B3%D8%AA%D8%9F.webp",
+      "source_url": "https://techfy.ir/wp-content/uploads/2025/09/%D8%AA%D8%B1%D8%A8-%D9%BE%DB%8C-%DA%86%DB%8C%D8%B3%D8%AA%D8%9F.webp",
+      "source_project": "User-provided Torob Pay logo image",
+      "source_notes": "تصویر لوگوی ترب‌پی ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود."
+    },
+    {
+      "id": "talasea",
+      "name_fa": "طلاسی",
+      "name_en": "Talasea",
+      "aliases": [
+        "طلاسی",
+        "Talasea",
+        "talasea"
+      ],
+      "logo_path": "../logos/talasea-color.svg",
+      "logo_source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQGzL4Y_UyjYxA/company-logo_200_200/B4EZ2gAXyeIMAI-/0/1776505946013/talasea_logo?e=2147483647&v=beta&t=c4JeWONZcZwwEYCxZmaIPMyUw3M9bK-LE1NAdAK_5vc",
+      "source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQGzL4Y_UyjYxA/company-logo_200_200/B4EZ2gAXyeIMAI-/0/1776505946013/talasea_logo?e=2147483647&v=beta&t=c4JeWONZcZwwEYCxZmaIPMyUw3M9bK-LE1NAdAK_5vc",
+      "source_project": "User-provided Talasea logo",
+      "source_notes": "تصویر لوگوی طلاسی ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "asset_status": "available",
+      "license_review": "trademark_review_required"
+    },
+    {
+      "id": "asiatech",
+      "name_fa": "آسیاتک",
+      "name_en": "Asiatech",
+      "aliases": [
+        "آسیاتک",
+        "آسیا تک",
+        "Asiatech",
+        "AsiaTech",
+        "asiatech"
+      ],
+      "logo_path": "../logos/asiatech-color.svg",
+      "logo_source_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIAjy5YF9L2RnoWn_jqUKM31SYZADG_fr77A&s",
+      "source_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIAjy5YF9L2RnoWn_jqUKM31SYZADG_fr77A&s",
+      "source_project": "User-provided Asiatech logo",
+      "source_notes": "تصویر لوگوی آسیاتک ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "asset_status": "available",
+      "license_review": "trademark_review_required"
+    },
+    {
+      "id": "telecommunication-company-of-iran",
+      "name_fa": "مخابرات",
+      "name_en": "Telecommunication Company of Iran",
+      "aliases": [
+        "مخابرات",
+        "شرکت مخابرات ایران",
+        "مخابرات ایران",
+        "Telecommunication Company of Iran",
+        "TCI"
+      ],
+      "logo_path": "../logos/telecommunication-company-of-iran-color.svg",
+      "logo_source_url": "https://media.hamshahrionline.ir/d/2022/07/11/4/4699873.jpg?ts=1657543367000",
+      "source_url": "https://media.hamshahrionline.ir/d/2022/07/11/4/4699873.jpg?ts=1657543367000",
+      "source_project": "User-provided Telecommunication Company of Iran logo",
+      "source_notes": "تصویر لوگوی مخابرات ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "asset_status": "available",
+      "license_review": "trademark_review_required"
     }
+  ],
+  "document_types": [
+    {
+      "id": "bank-cheque",
+      "name_fa": "چک بانکی",
+      "name_en": "Bank Cheque",
+      "aliases": [
+        "چک",
+        "برگه چک",
+        "برگهٔ چک",
+        "چک بانکی",
+        "چک صیادی",
+        "چک صیاد",
+        "دسته چک",
+        "bank cheque",
+        "cheque",
+        "check"
+      ],
+      "reference_image_path": null,
+      "asset_status": "reference_image_not_archived",
+      "notes_fa": "دسته تشخیص تصویری چک؛ طبق خواسته کاربر فقط شناسایی نوع تصویر لازم است و خواندن اطلاعات چاپی یا شخصی چک انجام نمی‌شود."
+    }
+  ],
+  "excluded_brand_names": [
+    "دیجی‌شهر",
+    "بالون",
+    "ایزی‌پی",
+    "وای‌چک",
+    "وامینه",
+    "باجت",
+    "نوپی",
+    "کالاکارت مهر ایران",
+    "اعتباری‌نو",
+    "تکنوبانک"
   ]
 }
