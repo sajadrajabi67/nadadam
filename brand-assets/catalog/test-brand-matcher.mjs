@@ -49,7 +49,7 @@ assert.equal(matchDocumentType("یک رسید عادی خرید").status, "no_ma
 console.log("approved brands and cheque: 25 additional assertions passed");
 
 // Services not selected for this release must not be recognized.
-for (const [input] of [["دیجی‌شهر","dgshahr"],["بالون","baloon"],["ایزی‌پی","easy-pay"],["وای‌چک","vaycheck"],["وامینه","vamineh"],["باجت","bajet"],["نوپی","noopi"],["کالاکارت مهر ایران","kalakart-mehr-iran"],["اعتباری‌نو","etebari-no"],["قسطا","ghesta"],["ترب‌پی","torobpay"],["کیپا","keepa"],["مانیسا","manisa"]]) {
+for (const [input] of [["دیجی‌شهر","dgshahr"],["بالون","baloon"],["ایزی‌پی","easy-pay"],["وای‌چک","vaycheck"],["وامینه","vamineh"],["باجت","bajet"],["نوپی","noopi"],["کالاکارت مهر ایران","kalakart-mehr-iran"],["اعتباری‌نو","etebari-no"],["قسطا","ghesta"],["ترب‌پی","torobpay"],["کیپا","keepa"],["مانیسا","manisa"],["تکنوبانک","technobank"]]) {
   assert.equal(matchBrand(input).status, "no_match", input);
 }
 console.log("excluded/unselected services: 13 negative assertions passed");
