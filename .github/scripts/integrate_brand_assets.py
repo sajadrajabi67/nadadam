@@ -29,6 +29,14 @@ for brand in available:
 if len(copied) != len(available) or not copied:
     raise SystemExit("Logo copy verification failed.")
 
+# Package the approved cheque reference image as a local, offline app asset.
+CHEQUE_SOURCE = ROOT / "brand-assets" / "references" / "bank-cheque.webp"
+if not CHEQUE_SOURCE.is_file() or CHEQUE_SOURCE.stat().st_size < 5000:
+    raise SystemExit("Cheque reference image is missing or unexpectedly small.")
+PUBLIC_REFERENCES = PROJECT / "public" / "reference-images"
+PUBLIC_REFERENCES.mkdir(parents=True, exist_ok=True)
+shutil.copy2(CHEQUE_SOURCE, PUBLIC_REFERENCES / "bank-cheque.webp")
+
 runtime_catalog = {
     "brands": [
         {
@@ -47,7 +55,7 @@ runtime_catalog = {
             "name_fa": item["name_fa"],
             "aliases": item.get("aliases", []),
             "asset_status": item.get("asset_status", "pending"),
-            "reference_image_path": item.get("reference_image_path"),
+            "reference_image_path": "/reference-images/bank-cheque.webp" if item.get("id") == "bank-cheque" else item.get("reference_image_path"),
         }
         for item in catalog.get("document_types", catalog.get("documentTypes", []))
     ],
