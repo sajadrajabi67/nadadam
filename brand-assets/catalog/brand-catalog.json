@@ -984,7 +984,7 @@
       ],
       "logo_path": "../logos/tara-color.svg",
       "official_domain": "https://taracredit.com/",
-      "logo_source_url": null,
+      "logo_source_url": "https://tara360.ir/wp-content/uploads/2024/08/tar_sanfi_v3.png",
       "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
@@ -993,10 +993,10 @@
         "https://taracredit.com/about-us/"
       ],
       "canonical_domain": "https://tara360.ir/",
-      "source_notes": "لوگوی رسمی تارا از دامنه قدیمی وب‌سایت رسمی تارا دریافت می‌شود؛ فایل در زمان ساخت برنامه بررسی و در آرشیو عمومی برنامه قرار می‌گیرد.",
+      "source_notes": "فایل PNG ارائه‌شده توسط کاربر از دامنه رسمی تارا دریافت و هنگام ساخت به آرشیو SVG سازگار با نمایشگر برنامه تبدیل می‌شود.",
       "logo_brand_fa": "تارا",
-      "source_project": "Official Tara website / Tara360",
-      "source_url": "https://old2.tara360.ir/wp-content/uploads/2023/08/Logo-Tara-FA.svg"
+      "source_project": "Official Tara360 website",
+      "source_url": "https://tara360.ir/wp-content/uploads/2024/08/tar_sanfi_v3.png"
     },
     {
       "id": "azkivam",
