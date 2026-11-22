@@ -26,6 +26,7 @@ jobs:
             --output brand-assets/references/bank-cheque.gif
           file brand-assets/references/bank-cheque.gif
           test "$(stat -c%s brand-assets/references/bank-cheque.gif)" -gt 5000
+          python3 -m pip install --quiet pillow
           python3 - <<'PY'
           from pathlib import Path
           from PIL import Image
