@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>کاتالوگ برندهای ندادم</title>
+<style>
+:root{font-family:Tahoma,Arial,sans-serif;color:#18233b;background:#f4f6fb}
+*{box-sizing:border-box}body{margin:0;padding:24px;max-width:1180px;margin-inline:auto}
+header{margin-bottom:22px}h1{font-size:25px;margin:0 0 8px}.sub{color:#68738a;font-size:14px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+input,select{font:inherit;border:1px solid #d9deea;border-radius:12px;padding:12px;background:#fff}
+input{flex:1;min-width:220px}.stats{font-size:13px;color:#66718a;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.card{background:white;border:1px solid #e4e8f0;border-radius:16px;padding:16px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:9px}
+.logo{height:58px;width:100%;display:flex;align-items:center;justify-content:center}.logo img{max-width:100%;max-height:54px;object-fit:contain}
+.name{font-weight:700;font-size:14px}.en{font-size:11px;color:#8791a5}
+.pending{border-style:dashed;background:#fbfcff}.tag{font-size:11px;border-radius:20px;padding:5px 9px;background:#fff0cf;color:#805500}
+footer{margin-top:24px;color:#778198;font-size:12px;line-height:1.9}
+</style></head>
+<body>
+<header><h1>کاتالوگ برندهای ندادم</h1><div class="sub">پیش‌نمایش مستقل لوگوهای آرشیو و وضعیت سرویس‌های در انتظار لوگو</div></header>
+<div class="tools"><input id="q" type="search" placeholder="جست‌وجوی نام فارسی یا انگلیسی…"><select id="status"><option value="all">همه وضعیت‌ها</option><option value="available">لوگو موجود</option><option value="pending">در انتظار لوگو</option></select></div>
+<div class="stats" id="stats">در حال بارگذاری کاتالوگ…</div><main class="grid" id="grid"></main>
+<footer>این صفحه صرفاً پیش‌نمایش آرشیو است و به اپلیکیشن متصل نیست. وجود فایل لوگو به معنی تأیید مجوز استفاده تجاری از نشان تجاری نیست.</footer>
+<script>
+const grid=document.getElementById('grid'),q=document.getElementById('q'),status=document.getElementById('status'),stats=document.getElementById('stats');
+let brands=[];
+function render(){const term=q.value.trim().toLocaleLowerCase('fa');const state=status.value;const list=brands.filter(b=>(state==='all'||b.asset_status===state)&&(!term||[b.name_fa,b.name_en,...(b.aliases||[])].join(' ').toLocaleLowerCase('fa').includes(term)));stats.textContent=list.length+' مورد از '+brands.length+' برند';grid.replaceChildren();for(const b of list){const card=document.createElement('article');card.className='card'+(b.asset_status==='pending'?' pending':'');if(b.asset_status==='available'){const box=document.createElement('div');box.className='logo';const img=document.createElement('img');img.src=b.logo_path;img.alt=b.name_fa;img.loading='lazy';box.append(img);card.append(box)}else{const tag=document.createElement('span');tag.className='tag';tag.textContent='در انتظار لوگو';card.append(tag)}const name=document.createElement('div');name.className='name';name.textContent=b.name_fa;const en=document.createElement('div');en.className='en';en.textContent=b.name_en;card.append(name,en);grid.append(card)}}
+fetch('./brand-catalog.json').then(r=>{if(!r.ok)throw Error('catalog load failed');return r.json()}).then(d=>{brands=d.brands;render()}).catch(()=>stats.textContent='بارگذاری کاتالوگ ناموفق بود؛ فایل JSON را بررسی کنید.');
+q.addEventListener('input',render);status.addEventListener('change',render);
+</script></body></html>
