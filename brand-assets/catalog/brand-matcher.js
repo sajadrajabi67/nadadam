@@ -48,7 +48,7 @@ export function matchBrand(title, brands = catalog.brands) {
 }
 
 
-export function matchDocumentType(title, documentTypes = catalog.document_types ?? []) {
+export function matchDocumentType(title, documentTypes = catalog.document_types ?? catalog.documentTypes ?? []) {
   const normalizedTitle = normalizeBrandText(title);
   if (!normalizedTitle) return { status: "no_match", document_type: null, matches: [] };
 
