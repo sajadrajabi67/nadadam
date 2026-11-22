@@ -205,8 +205,12 @@ jobs:
             --output /tmp/azki-source
           # Bimehdotcom: use the exact image URL supplied by the user.
           curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
-            "https://static.offch.com/storage/logo/bimeh-logo.png" \
+            "https://myket.ir/asset-files/icons/xlarge/d80acb92-f498-4cd0-b483-3a9e99e4fa59.png" \
             --output /tmp/bimehdotcom-source
+          # AzkiVam: use the exact Myket image URL supplied by the user.
+          curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
+            "https://myket.ir/asset-files/icons/xlarge/7c05daa0-2a8a-4a71-9397-16013cb83fdc.png" \
+            --output /tmp/azkivam-source
           # BimeBazar: use the exact image URL supplied by the user.
           curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
             "https://logoyab.com/wp-content/uploads/2025/08/Bime-Bazar-New-Logo-1030x1030.png" \
@@ -220,6 +224,7 @@ jobs:
           sources = {
               "azki-insurance": "/tmp/azki-source",
               "bimehdotcom": "/tmp/bimehdotcom-source",
+              "azkivam": "/tmp/azkivam-source",
               "bimebazar": "/tmp/bimebazar-source",
           }
           for name, source_path in sources.items():
@@ -255,6 +260,7 @@ jobs:
             brand-assets/logos/bimebazar-color.svg \
             brand-assets/logos/azki-insurance-color.svg \
             brand-assets/logos/bimehdotcom-color.svg \
+            brand-assets/logos/azkivam-color.svg \
             brand-assets/logos/torob-pay-color.svg \
             brand-assets/logos/talasea-color.svg \
             brand-assets/logos/asiatech-color.svg \
