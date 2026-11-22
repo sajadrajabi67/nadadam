@@ -318,7 +318,6 @@ jobs:
           python3 ../.github/scripts/patch_header.py
           python3 ../.github/scripts/patch_brand_and_scroll.py
           # Add the requested creator credit card only to the first (home) page.
-          python3 ../.github/scripts/patch_home_creator.py
           # Add offline brand recognition and the verified SVG logo archive to the app.
           python3 ../.github/scripts/integrate_brand_assets.py
           mkdir -p public assets
