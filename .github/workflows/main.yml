@@ -60,6 +60,62 @@ jobs:
           grep -q "<svg" brand-assets/logos/torob-pay-color.svg
           test "$(stat -c%s brand-assets/logos/torob-pay-color.svg)" -gt 1000
 
+      - name: Download user-provided Talasea logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://media.licdn.com/dms/image/v2/D4E0BAQGzL4Y_UyjYxA/company-logo_200_200/B4EZ2gAXyeIMAI-/0/1776505946013/talasea_logo?e=2147483647&v=beta&t=c4JeWONZcZwwEYCxZmaIPMyUw3M9bK-LE1NAdAK_5vc" \
+            --output /tmp/talasea-logo
+          file /tmp/talasea-logo
+          test "$(stat -c%s /tmp/talasea-logo)" -gt 500
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, mimetypes
+          p = Path("/tmp/talasea-logo")
+          mime = mimetypes.guess_type(p.name)[0] or "image/png"
+          data = base64.b64encode(p.read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:' + mime + ';base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/talasea-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/talasea-color.svg
+
+      - name: Download user-provided Asiatech logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIAjy5YF9L2RnoWn_jqUKM31SYZADG_fr77A&s" \
+            --output /tmp/asiatech-logo
+          file /tmp/asiatech-logo
+          test "$(stat -c%s /tmp/asiatech-logo)" -gt 500
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          p = Path("/tmp/asiatech-logo")
+          suffix = p.read_bytes()[:12]
+          mime = "image/png" if suffix.startswith(b"\\x89PNG") else "image/jpeg"
+          data = base64.b64encode(p.read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:' + mime + ';base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/asiatech-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/asiatech-color.svg
+
+      - name: Download user-provided Telecommunication Company of Iran logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://media.hamshahrionline.ir/d/2022/07/11/4/4699873.jpg?ts=1657543367000" \
+            --output /tmp/telecommunication-company-of-iran-logo.jpg
+          file /tmp/telecommunication-company-of-iran-logo.jpg
+          test "$(stat -c%s /tmp/telecommunication-company-of-iran-logo.jpg)" -gt 500
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/telecommunication-company-of-iran-logo.jpg").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/jpeg;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/telecommunication-company-of-iran-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/telecommunication-company-of-iran-color.svg
+
       - name: Download official Tara logo asset
         run: |
           mkdir -p brand-assets/logos
