@@ -50,13 +50,20 @@ jobs:
             "https://cdn.brandfetch.io/idqSUBvqtx/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1781795732537" \\
             --output brand-assets/logos/bimehdotcom-color.svg
           curl --fail --location --retry 3 --retry-delay 2 \\
-            "https://bimebazar.com/nextPub/svg/background.svg" \\
-            --output brand-assets/logos/bimebazar-color.svg
-          for logo in brand-assets/logos/azki-insurance-color.svg brand-assets/logos/bimehdotcom-color.svg brand-assets/logos/bimebazar-color.svg; do
-            grep -q "<svg" "$logo"
-            test "$(stat -c%s "$logo")" -gt 500
-            file "$logo"
-          done
+            "https://dmboard.media/wp-content/uploads/2025/08/Picture1-3-scaled.png" \\
+            --output /tmp/bimebazar-logo.png
+          file /tmp/bimebazar-logo.png
+          test "$(stat -c%s /tmp/bimebazar-logo.png)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/bimebazar-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/bimebazar-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/bimebazar-color.svg
+          test "$(stat -c%s brand-assets/logos/bimebazar-color.svg)" -gt 1000
+          file brand-assets/logos/bimebazar-color.svg
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
