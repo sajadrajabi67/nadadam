@@ -269,6 +269,9 @@ jobs:
             echo "Downloaded brand logo assets are already up to date."
           else
             git commit -m "Store downloaded brand logos [skip ci]"
+            # Another workflow may have updated main while these assets were downloading.
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
