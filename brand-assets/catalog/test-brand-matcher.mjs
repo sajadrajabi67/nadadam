@@ -24,7 +24,6 @@ console.log("brand matcher: 8 assertions passed");
 
 const approvedBrandCases = [
   ["پیگیری ازکی وام", "azkivam"],
-  ["پرداخت تکنوپی", "technopay"],
   ["وی پاد", "vepod"],
   ["دیما بانک ملت", "dima"],
   ["خرید اعتباری سلام پی", "salam-pay"],
@@ -49,7 +48,7 @@ assert.equal(matchDocumentType("یک رسید عادی خرید").status, "no_ma
 console.log("approved brands and cheque: 25 additional assertions passed");
 
 // Services not selected for this release must not be recognized.
-for (const [input] of [["دیجی‌شهر","dgshahr"],["بالون","baloon"],["ایزی‌پی","easy-pay"],["وای‌چک","vaycheck"],["وامینه","vamineh"],["باجت","bajet"],["نوپی","noopi"],["کالاکارت مهر ایران","kalakart-mehr-iran"],["اعتباری‌نو","etebari-no"],["قسطا","ghesta"],["کیپا","keepa"],["مانیسا","manisa"],["تکنوبانک","technobank"],["لندو","lendo"],["ونسی","vency"],["جی اس ام پی","gsmpay"],["رفاهی پی","refahi-pay"]]) {
+for (const [input] of [["دیجی‌شهر","dgshahr"],["بالون","baloon"],["ایزی‌پی","easy-pay"],["وای‌چک","vaycheck"],["وامینه","vamineh"],["باجت","bajet"],["نوپی","noopi"],["کالاکارت مهر ایران","kalakart-mehr-iran"],["اعتباری‌نو","etebari-no"],["قسطا","ghesta"],["کیپا","keepa"],["مانیسا","manisa"],["تکنوبانک","technobank"],["لندو","lendo"],["ونسی","vency"],["جی اس ام پی","gsmpay"],["رفاهی پی","refahi-pay"],["تکنوپی","technopay"],["پرداخت تکنو پی","technopay"]]) {
   assert.equal(matchBrand(input).status, "no_match", input);
 }
 console.log("excluded/unselected services: 13 negative assertions passed");
