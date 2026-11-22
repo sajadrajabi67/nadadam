@@ -40,6 +40,24 @@ jobs:
           grep -q "<svg" brand-assets/logos/tara-color.svg
           test "$(stat -c%s brand-assets/logos/tara-color.svg)" -gt 1000
 
+      - name: Download user-provided Dima logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://appkhan.com/wp-content/uploads/2025/12/dima-icon.png" \
+            --output /tmp/dima-logo.png
+          file /tmp/dima-logo.png
+          test "$(stat -c%s /tmp/dima-logo.png)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/dima-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/dima-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/dima-color.svg
+          test "$(stat -c%s brand-assets/logos/dima-color.svg)" -gt 1000
+
       - name: Download requested insurance brand logos
         run: |
           mkdir -p brand-assets/logos
