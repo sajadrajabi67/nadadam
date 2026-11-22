@@ -92,7 +92,7 @@ new_import = """const importData = async (file?:File) => {
 if old_import not in s: raise SystemExit("importData block not found")
 s = s.replace(old_import, new_import, 1)
 
-modal_anchor = "  {payAsk&&<div role=\\"dialog\\""
+modal_anchor = '  {payAsk&&<div role="dialog"'
 modal = """  {actionConfirm&&<div role="dialog" aria-modal="true" aria-labelledby="action-confirm-title" className="fixed inset-0 z-[55] flex items-center justify-center bg-slate-900/50 p-4"><div className="w-full max-w-sm rounded-[28px] bg-white p-6 text-[#0B1F2A] shadow-2xl"><div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#E3F5F2] text-[#0F9D8A]"><CircleHelp size={28}/></div><h3 id="action-confirm-title" className="text-center text-lg font-black">{actionConfirm.kind==='duplicate'?'ثبت بدهی مشابه':'بازیابی اطلاعات'}</h3><p className="mt-3 text-center text-sm leading-7 text-slate-600">{actionConfirm.kind==='duplicate'?'به نظر می‌رسد بدهی مشابهی قبلاً ثبت شده است. با این حال می‌خواهی بدهی جدید ثبت شود؟':'اطلاعات فعلی با اطلاعات فایل پشتیبان جایگزین می‌شوند. ادامه می‌دهی؟'}</p><div className="mt-6 grid gap-3"><button data-testid="action-confirm-yes" onClick={confirmPendingAction} className={button + ' w-full bg-[linear-gradient(135deg,#14B8A6,#0B6E63)] text-white shadow-lg shadow-teal-300/30'}>بله، ادامه بده</button><button data-testid="action-confirm-no" onClick={()=>{setActionConfirm(null);setPendingImport(null);allowDuplicateRef.current=false;}} className={button + ' w-full bg-slate-100 text-slate-700'}>انصراف</button></div></div></div>}
 """
 if modal_anchor not in s: raise SystemExit("pay confirmation modal anchor not found")
