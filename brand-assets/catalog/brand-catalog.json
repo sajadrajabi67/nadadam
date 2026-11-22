@@ -1034,17 +1034,19 @@
         "lendo",
         "Lendo"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/lendo-color.svg",
       "official_domain": "https://lendo.ir/",
-      "logo_source_url": null,
+      "logo_source_url": "https://static.offch.com/storage/logo/LENDO-LOGO.png",
       "asset_status": "pending",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
         "https://lendo.ir/"
       ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده.",
-      "logo_brand_fa": "لندو"
+      "source_notes": "آدرس فایل لوگوی لندو توسط کاربر ارائه شده؛ فایل نهایی هنوز در آرشیو ثبت نشده است.",
+      "logo_brand_fa": "لندو",
+      "source_project": "User-provided Lendo logo source",
+      "source_url": "https://static.offch.com/storage/logo/LENDO-LOGO.png"
     },
     {
       "id": "technopay",
