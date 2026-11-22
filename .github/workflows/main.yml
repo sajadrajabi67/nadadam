@@ -210,7 +210,8 @@ jobs:
           grep -q "<svg" brand-assets/logos/azki-insurance-color.svg
           test "$(stat -c%s brand-assets/logos/azki-insurance-color.svg)" -gt 1000
           curl --fail --location --retry 3 --retry-delay 2 \
-            "https://cdn.brandfetch.io/idqSUBvqtx/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1769052262044" \
+            --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36" \
+            "https://unavatar.io/domain/bimeh.com" \
             --output /tmp/bimehdotcom-official-app.png
           file /tmp/bimehdotcom-official-app.png
           test "$(stat -c%s /tmp/bimehdotcom-official-app.png)" -gt 1000
