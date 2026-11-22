@@ -1,0 +1,35 @@
+name: Inspect packaged app source
+on:
+  push:
+    branches: [inspect-brand-integration]
+    paths:
+      - ".github/workflows/inspect-source.yml"
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract source-only inspection copies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/old /tmp/updated inspection-source/project-zip inspection-source/project-updated
+          unzip -q project.zip -d /tmp/old
+          unzip -q project-updated.zip -d /tmp/updated
+          for pair in "/tmp/old inspection-source/project-zip" "/tmp/updated inspection-source/project-updated"; do
+            set -- $pair
+            src="$1"; dst="$2"
+            for item in src package.json index.html vite.config.ts vite.config.js tsconfig.json capacitor.config.json; do
+              if [ -e "$src/$item" ]; then cp -R "$src/$item" "$dst/"; fi
+            done
+          done
+          find inspection-source -maxdepth 4 -type f -print
+      - name: Commit inspection copies
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add inspection-source
+          git commit -m "chore: extract source for authorized brand integration review"
+          git push
