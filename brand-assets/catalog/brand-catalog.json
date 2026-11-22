@@ -666,7 +666,8 @@
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "logo_brand_fa": "اسنپ‌پی"
     },
     {
       "id": "standard-chartered",
@@ -817,33 +818,6 @@
       "logo_brand_fa": "ازکی‌وام",
       "source_project": "Arminsoleymani/Azki",
       "source_url": "https://github.com/Arminsoleymani/Azki/blob/main/assets/Images/azkivam-logo.svg"
-    },
-    {
-      "id": "technopay",
-      "name_fa": "تکنوپی",
-      "name_en": "TechnoPay",
-      "aliases": [
-        "تکنو پی",
-        "تکنوپی",
-        "technopay",
-        "techno pay",
-        "TechnoPay",
-        "Techno Pay"
-      ],
-      "logo_path": "../logos/technopay-color.svg",
-      "official_domain": "https://technopay.ir/",
-      "logo_source_url": null,
-      "asset_status": "available",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://technopay.ir/",
-        "https://www.linkedin.com/company/technopayir/"
-      ],
-      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد.",
-      "logo_brand_fa": "تکنوپی",
-      "source_project": "farzane-na/tecnolife",
-      "source_url": "https://github.com/farzane-na/tecnolife/blob/main/src/asset/logo/technoPayFooter_new.svg"
     },
     {
       "id": "vepod",
