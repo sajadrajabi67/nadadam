@@ -1026,29 +1026,6 @@
       "source_url": "https://github.com/Arminsoleymani/Azki/blob/main/assets/Images/azkivam-logo.svg"
     },
     {
-      "id": "lendo",
-      "name_fa": "لندو",
-      "name_en": "Lendo",
-      "aliases": [
-        "لندو",
-        "lendo",
-        "Lendo"
-      ],
-      "logo_path": "../logos/lendo-color.svg",
-      "official_domain": "https://lendo.ir/",
-      "logo_source_url": "https://static.offch.com/storage/logo/LENDO-LOGO.png",
-      "asset_status": "pending",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://lendo.ir/"
-      ],
-      "source_notes": "آدرس فایل لوگوی لندو توسط کاربر ارائه شده؛ فایل نهایی هنوز در آرشیو ثبت نشده است.",
-      "logo_brand_fa": "لندو",
-      "source_project": "User-provided Lendo logo source",
-      "source_url": "https://static.offch.com/storage/logo/LENDO-LOGO.png"
-    },
-    {
       "id": "technopay",
       "name_fa": "تکنوپی",
       "name_en": "TechnoPay",
@@ -1074,29 +1051,6 @@
       "logo_brand_fa": "تکنوپی",
       "source_project": "farzane-na/tecnolife",
       "source_url": "https://github.com/farzane-na/tecnolife/blob/main/src/asset/logo/technoPayFooter_new.svg"
-    },
-    {
-      "id": "vency",
-      "name_fa": "ونسی",
-      "name_en": "Vency",
-      "aliases": [
-        "ونسی",
-        "vency",
-        "Vency"
-      ],
-      "logo_path": "../logos/vency-color.svg",
-      "official_domain": "https://vency.ir/",
-      "logo_source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQERq3lPozBCIg/company-logo_200_200/company-logo_200_200/0/1714902149448?e=2147483647&v=beta&t=mTrh7kKHSeK78zrWGy53OKybKSnPCDOdXMryP-tpMRs",
-      "asset_status": "pending",
-      "license_review": "trademark_review_required",
-      "verification_status": "official_identity_confirmed",
-      "identity_sources": [
-        "https://vency.ir/"
-      ],
-      "source_notes": "آدرس لوگوی ونسی توسط کاربر ارائه شده؛ فایل نهایی هنوز در آرشیو ثبت نشده است.",
-      "logo_brand_fa": "ونسی",
-      "source_project": "User-provided Vency LinkedIn logo",
-      "source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQERq3lPozBCIg/company-logo_200_200/company-logo_200_200/0/1714902149448?e=2147483647&v=beta&t=mTrh7kKHSeK78zrWGy53OKybKSnPCDOdXMryP-tpMRs"
     },
     {
       "id": "gsmpay",
@@ -1137,21 +1091,6 @@
       "source_url": "https://github.com/mehrnet/IranianBanks/blob/main/logos/png/512x512/wepod.png",
       "license_review": "trademark_review_required",
       "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
-    },
-    {
-      "id": "refahi-pay",
-      "name_fa": "رفاهی‌پی",
-      "name_en": "RefahiPay",
-      "aliases": [
-        "رفاهی‌پی",
-        "رفاهی پی",
-        "RefahiPay",
-        "Refahi Pay",
-        "refahipay"
-      ],
-      "logo_path": null,
-      "asset_status": "pending",
-      "logo_brand_fa": "رفاهی‌پی"
     },
     {
       "id": "dima",
