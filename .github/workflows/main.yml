@@ -250,25 +250,14 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            brand-assets/logos/tara-color.svg \
-            brand-assets/references/bank-cheque.gif \
-            brand-assets/logos/dima-color.svg \
-            brand-assets/logos/bimebazar-color.svg \
-            brand-assets/logos/azki-insurance-color.svg \
-            brand-assets/logos/bimehdotcom-color.svg \
-            brand-assets/logos/azkivam-color.svg \
-            brand-assets/logos/torob-pay-color.svg \
-            brand-assets/logos/talasea-color.svg \
-            brand-assets/logos/asiatech-color.svg \
-            brand-assets/logos/telecommunication-company-of-iran-color.svg
+          git add brand-assets/logos/ brand-assets/references/
           if git diff --cached --quiet; then
             echo "Downloaded brand logo assets are already up to date."
           else
             git commit -m "Store downloaded brand logos [skip ci]"
             # Another workflow may have updated main while these assets were downloading.
             git fetch origin "$GITHUB_REF_NAME"
-            git rebase "origin/$GITHUB_REF_NAME"
+            git rebase --autostash "origin/$GITHUB_REF_NAME"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
