@@ -33,6 +33,24 @@ jobs:
           grep -q "<svg" brand-assets/logos/tara-color.svg
           test "$(stat -c%s brand-assets/logos/tara-color.svg)" -gt 500
 
+      - name: Download requested insurance brand logos
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \\
+            "https://www.azki.com/file/public/sega/azki-logo-simple.svg" \\
+            --output brand-assets/logos/azki-insurance-color.svg
+          curl --fail --location --retry 3 --retry-delay 2 \\
+            "https://cdn.brandfetch.io/idqSUBvqtx/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1781795732537" \\
+            --output brand-assets/logos/bimehdotcom-color.svg
+          curl --fail --location --retry 3 --retry-delay 2 \\
+            "https://bimebazar.com/nextPub/svg/background.svg" \\
+            --output brand-assets/logos/bimebazar-color.svg
+          for logo in brand-assets/logos/azki-insurance-color.svg brand-assets/logos/bimehdotcom-color.svg brand-assets/logos/bimebazar-color.svg; do
+            grep -q "<svg" "$logo"
+            test "$(stat -c%s "$logo")" -gt 500
+            file "$logo"
+          done
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
