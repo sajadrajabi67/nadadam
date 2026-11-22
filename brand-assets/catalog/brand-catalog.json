@@ -683,7 +683,8 @@
         "بانک سپه انصار",
         "بانک انصار",
         "انصار",
-        "sepah ansar"
+        "sepah ansar",
+        "بانک سپه"
       ],
       "logo_path": "../logos/sepah-merged-ansar-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
