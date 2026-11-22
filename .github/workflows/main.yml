@@ -155,7 +155,7 @@ jobs:
         run: |
           mkdir -p brand-assets/logos
           curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
-            "https://cdn.brandfetch.io/domain/tara360.ir/fallback/lettermark/theme/dark/h/400/w/400/icon?c=1bfwsmEH20zzEfSNTed" \
+            "https://play-lh.googleusercontent.com/UofKHbRqJobkQaeQf8jjezzfh4rlhORHti__1cLJke514gHwj0OlNlhYYyFE9-9ePYo2y8JECqfOrrKz99G8wQ=w240-h480" \
             --output /tmp/tara-logo.png
           file /tmp/tara-logo.png
           test "$(stat -c%s /tmp/tara-logo.png)" -gt 500
