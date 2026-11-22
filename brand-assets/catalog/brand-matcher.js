@@ -18,7 +18,10 @@ export function normalizeBrandText(value = "") {
     .replace(/\s+/g, " ");
 }
 
-function containsWholePhrase(title, phrase) {\n  return Boolean(title && phrase && (\` \${title} \`).includes(\` \${phrase} \`));\n}\n\nexport function matchBrand(title, brands = catalog.brands) {
+function containsWholePhrase(title, phrase) {
+  return Boolean(title && phrase && (" " + title + " ").includes(" " + phrase + " "));
+}
+export function matchBrand(title, brands = catalog.brands) {
   const normalizedTitle = normalizeBrandText(title);
   if (!normalizedTitle) return { status: "no_match", brand: null, matches: [] };
   const excludedNames = catalog.excluded_brand_names ?? [];
