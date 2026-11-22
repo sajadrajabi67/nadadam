@@ -27,11 +27,18 @@ jobs:
       - name: Download official Tara logo asset
         run: |
           mkdir -p brand-assets/logos
-          curl --fail --location --retry 3 --retry-delay 2 \\
-            "https://cdn.brandfetch.io/idi6KFMdnT/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747645203468" \\
-            --output brand-assets/logos/tara-color.svg
+          curl --fail --location --retry 3 --retry-delay 2 "https://tara360.ir/wp-content/uploads/2024/08/tar_sanfi_v3.png" --output /tmp/tara-logo.png
+          file /tmp/tara-logo.png
+          test "$(stat -c%s /tmp/tara-logo.png)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/tara-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/tara-color.svg").write_text(svg, encoding="utf-8")
+          PY
           grep -q "<svg" brand-assets/logos/tara-color.svg
-          test "$(stat -c%s brand-assets/logos/tara-color.svg)" -gt 500
+          test "$(stat -c%s brand-assets/logos/tara-color.svg)" -gt 1000
 
       - name: Download requested insurance brand logos
         run: |
