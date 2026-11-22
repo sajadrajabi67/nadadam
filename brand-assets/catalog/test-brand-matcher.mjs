@@ -46,6 +46,14 @@ const cheque = matchDocumentType("تصویر برگه چک صیادی");
 assert.equal(cheque.status, "match");
 assert.equal(cheque.document_type.id, "bank-cheque");
 assert.equal(matchDocumentType("یک رسید عادی خرید").status, "no_match");
+
+// The cheque logo is a substring match: any title containing «چک» must show it,
+// not only titles that describe a bank cheque or cheque document.
+for (const input of ["چک", "چک ماشین", "چک‌ماشین", "چک خونه", "چک‌خونه", "چک خودرو", "برگشت چک", "پرداخت با چک"]) {
+  const result = matchBrand(input);
+  assert.equal(result.status, "match", input);
+  assert.equal(result.brand.id, "bank-cheque", input);
+}
 console.log("approved brands and cheque: 25 additional assertions passed");
 
 // Services not selected for this release must not be recognized.
