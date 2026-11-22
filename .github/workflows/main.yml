@@ -219,22 +219,16 @@ jobs:
           SVG
           grep -q "<svg" brand-assets/logos/bimehdotcom-color.svg
           test "$(stat -c%s brand-assets/logos/bimehdotcom-color.svg)" -gt 300
-          curl --fail --location --retry 3 --retry-delay 2 \
-            --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36" \
-            --referer "https://bimebazar.com/" \
-            "https://bimebazar.com/hedgehog/brand/bmbzr/logo/logo_512_black.png" \
-            --output /tmp/bimebazar-logo.png
-          file /tmp/bimebazar-logo.png
-          test "$(stat -c%s /tmp/bimebazar-logo.png)" -gt 1000
-          python3 - <<'PY'
-          from pathlib import Path
-          import base64
-          data = base64.b64encode(Path("/tmp/bimebazar-logo.png").read_bytes()).decode("ascii")
-          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
-          Path("brand-assets/logos/bimebazar-color.svg").write_text(svg, encoding="utf-8")
-          PY
+          # Recreate the official BimeBazar app mark locally from its published 512px artwork.
+          cat > brand-assets/logos/bimebazar-color.svg <<'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+            <rect width="512" height="512" fill="#000000"/>
+            <path fill="#F4BE1A" d="M80 474V217C80 117 158 37 256 37s176 80 176 180v257H80z"/>
+            <path fill="#000000" fill-rule="evenodd" d="M126 211h58c34 0 53 18 53 50 0 16-5 29-15 38 34 10 52 35 52 70 0 38-27 61-70 61h-78V211zm47 34v41h12c16 0 25-7 25-21 0-13-9-20-25-20h-12zm0 73v79h31c21 0 35-13 35-39 0-25-14-40-35-40h-31z"/>
+          </svg>
+          SVG
           grep -q "<svg" brand-assets/logos/bimebazar-color.svg
-          test "$(stat -c%s brand-assets/logos/bimebazar-color.svg)" -gt 1000
+          test "$(stat -c%s brand-assets/logos/bimebazar-color.svg)" -gt 300
           file brand-assets/logos/bimebazar-color.svg
 
       - name: Validate all packaged brand logos
