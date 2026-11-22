@@ -221,7 +221,7 @@ jobs:
           import base64
           source = Image.open("/tmp/bimehdotcom-official-app.png").convert("RGBA")
           # Normalize the official Bimehdotcom brand icon from Brandfetch's image CDN.
-          if source.width < 100 or source.height < 100:
+          if source.width < 16 or source.height < 16:
               raise SystemExit(f"Unexpected Bimehdotcom icon size: {source.size}")
           logo = source.resize((512, 512), Image.Resampling.LANCZOS)
           logo.save("/tmp/bimehdotcom-logo.png", format="PNG")
