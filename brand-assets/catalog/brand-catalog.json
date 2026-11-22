@@ -1164,10 +1164,13 @@
         "Dima Bank Mellat",
         "com.bmelat.mobile"
       ],
-      "logo_path": "../logos/mellat-color.svg",
+      "logo_path": "../logos/dima-color.svg",
       "asset_status": "available",
-      "logo_brand_fa": "بانک ملت",
-      "notes_fa": "طبق تأیید کاربر، نام تشخیص «دیما» است اما نشان نمایشی باید لوگوی بانک ملت باشد."
+      "notes_fa": "نشان نمایشی اختصاصی دیما بر اساس تصویر ارسالی کاربر؛ از لوگوی بانک ملت استفاده نشود.",
+      "logo_source_url": "https://appkhan.com/wp-content/uploads/2025/12/dima-icon.png",
+      "source_url": "https://appkhan.com/wp-content/uploads/2025/12/dima-icon.png",
+      "source_project": "User-provided Dima app icon",
+      "source_notes": "لوگوی دیما طبق تصویر ارسالی کاربر؛ فایل در زمان ساخت از منبع دریافت و به SVG بسته‌بندی می‌شود."
     },
     {
       "id": "salam-pay",
