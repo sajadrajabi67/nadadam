@@ -19,10 +19,10 @@ jobs:
         run: |
           mkdir -p brand-assets/references
           curl --fail --location --retry 3 --retry-delay 2 \
-            "https://rayanmohaseban.com/wp-content/uploads/2023/11/check-500x500.webp" \
-            --output brand-assets/references/bank-cheque.webp
-          file brand-assets/references/bank-cheque.webp
-          test "$(stat -c%s brand-assets/references/bank-cheque.webp)" -gt 5000
+            "https://i1.delgarm.com/i/813/020901/655d317f020e5.gif" \
+            --output brand-assets/references/bank-cheque.gif
+          file brand-assets/references/bank-cheque.gif
+          test "$(stat -c%s brand-assets/references/bank-cheque.gif)" -gt 5000
 
       - name: Download official Tara logo asset
         run: |
