@@ -229,7 +229,7 @@ jobs:
           Path("brand-assets/logos/bimehdotcom-color.svg").write_text(svg, encoding="utf-8")
           PY
           curl --fail --location --retry 3 --retry-delay 2 \
-            "https://dmboard.media/wp-content/uploads/2025/08/Picture1-3-scaled.png" \
+            "https://bimebazar.com/hedgehog/brand/bmbzr/logo/logo_512_black.png" \
             --output /tmp/bimebazar-logo.png
           file /tmp/bimebazar-logo.png
           test "$(stat -c%s /tmp/bimebazar-logo.png)" -gt 1000
