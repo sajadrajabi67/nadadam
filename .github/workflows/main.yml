@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - feature/brand-logo-recognition
 
 jobs:
   build:
@@ -17,6 +18,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Test brand matcher
+        run: node brand-assets/catalog/test-brand-matcher.mjs
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -42,6 +46,8 @@ jobs:
           # Keep the app header fixed while content scrolls underneath, with a soft fading lower edge.
           python3 ../.github/scripts/patch_header.py
           python3 ../.github/scripts/patch_brand_and_scroll.py
+          # Add offline brand recognition and the verified SVG logo archive to the app.
+          python3 ../.github/scripts/integrate_brand_assets.py
           mkdir -p public assets
           cp ../nadadam-logo.png public/logo.png
           cp ../nadadam-logo.png assets/icon-only.png
