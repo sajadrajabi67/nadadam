@@ -15,6 +15,15 @@ jobs:
       - name: Get source code
         uses: actions/checkout@v4
 
+      - name: Download approved cheque reference image
+        run: |
+          mkdir -p brand-assets/references
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://rayanmohaseban.com/wp-content/uploads/2023/11/check-500x500.webp" \
+            --output brand-assets/references/bank-cheque.webp
+          file brand-assets/references/bank-cheque.webp
+          test "$(stat -c%s brand-assets/references/bank-cheque.webp)" -gt 5000
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
