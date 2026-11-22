@@ -75,7 +75,8 @@
       "source_project": "houtanrocky/iranian-banks-react-icons",
       "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
       "asset_status": "available",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "logo_brand_fa": "بانکینو"
     },
     {
       "id": "blu-bank",
@@ -992,7 +993,8 @@
         "https://taracredit.com/about-us/"
       ],
       "canonical_domain": "https://tara360.ir/",
-      "source_notes": "دامنه قدیمی به tara360.ir هدایت می‌شود؛ فایل لوگوی قابل آرشیو هنوز دریافت نشده."
+      "source_notes": "دامنه قدیمی به tara360.ir هدایت می‌شود؛ فایل لوگوی قابل آرشیو هنوز دریافت نشده.",
+      "logo_brand_fa": "تارا"
     },
     {
       "id": "azkivam",
@@ -1002,7 +1004,9 @@
         "ازکی وام",
         "ازکی‌وام",
         "azkivam",
-        "azki vam"
+        "azki vam",
+        "AzkiVam",
+        "Azki Vam"
       ],
       "logo_path": null,
       "official_domain": "https://azkivam.com/",
@@ -1014,7 +1018,8 @@
         "https://azkivam.com/",
         "https://www.linkedin.com/company/azkivam"
       ],
-      "source_notes": "وب‌سایت و صفحه شرکتی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
+      "source_notes": "وب‌سایت و صفحه شرکتی بررسی شد؛ فایل لوگو هنوز دریافت نشده.",
+      "logo_brand_fa": "ازکی‌وام"
     },
     {
       "id": "lendo",
@@ -1022,7 +1027,8 @@
       "name_en": "Lendo",
       "aliases": [
         "لندو",
-        "lendo"
+        "lendo",
+        "Lendo"
       ],
       "logo_path": null,
       "official_domain": "https://lendo.ir/",
@@ -1033,7 +1039,8 @@
       "identity_sources": [
         "https://lendo.ir/"
       ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
+      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده.",
+      "logo_brand_fa": "لندو"
     },
     {
       "id": "ghesta",
@@ -1104,7 +1111,9 @@
         "تکنو پی",
         "تکنوپی",
         "technopay",
-        "techno pay"
+        "techno pay",
+        "TechnoPay",
+        "Techno Pay"
       ],
       "logo_path": null,
       "official_domain": "https://technopay.ir/",
@@ -1116,7 +1125,8 @@
         "https://technopay.ir/",
         "https://www.linkedin.com/company/technopayir/"
       ],
-      "source_notes": "وب‌سایت و صفحه شرکتی معرفی‌کننده دامنه بررسی شد؛ فایل لوگو هنوز دریافت نشده."
+      "source_notes": "وب‌سایت و صفحه شرکتی معرفی‌کننده دامنه بررسی شد؛ فایل لوگو هنوز دریافت نشده.",
+      "logo_brand_fa": "تکنوپی"
     },
     {
       "id": "vency",
@@ -1124,7 +1134,8 @@
       "name_en": "Vency",
       "aliases": [
         "ونسی",
-        "vency"
+        "vency",
+        "Vency"
       ],
       "logo_path": null,
       "official_domain": "https://vency.ir/",
@@ -1135,7 +1146,8 @@
       "identity_sources": [
         "https://vency.ir/"
       ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ تصاویر محتوایی به‌عنوان لوگوی مستقل استفاده نشدند."
+      "source_notes": "وب‌سایت رسمی بررسی شد؛ تصاویر محتوایی به‌عنوان لوگوی مستقل استفاده نشدند.",
+      "logo_brand_fa": "ونسی"
     },
     {
       "id": "bajet",
