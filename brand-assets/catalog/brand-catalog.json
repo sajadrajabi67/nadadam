@@ -1084,17 +1084,19 @@
         "vency",
         "Vency"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/vency-color.svg",
       "official_domain": "https://vency.ir/",
-      "logo_source_url": null,
+      "logo_source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQERq3lPozBCIg/company-logo_200_200/company-logo_200_200/0/1714902149448?e=2147483647&v=beta&t=mTrh7kKHSeK78zrWGy53OKybKSnPCDOdXMryP-tpMRs",
       "asset_status": "pending",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
         "https://vency.ir/"
       ],
-      "source_notes": "وب‌سایت رسمی بررسی شد؛ تصاویر محتوایی به‌عنوان لوگوی مستقل استفاده نشدند.",
-      "logo_brand_fa": "ونسی"
+      "source_notes": "آدرس لوگوی ونسی توسط کاربر ارائه شده؛ فایل نهایی هنوز در آرشیو ثبت نشده است.",
+      "logo_brand_fa": "ونسی",
+      "source_project": "User-provided Vency LinkedIn logo",
+      "source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQERq3lPozBCIg/company-logo_200_200/company-logo_200_200/0/1714902149448?e=2147483647&v=beta&t=mTrh7kKHSeK78zrWGy53OKybKSnPCDOdXMryP-tpMRs"
     },
     {
       "id": "gsmpay",
