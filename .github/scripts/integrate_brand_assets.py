@@ -147,7 +147,10 @@ if import_line not in s:
 brand_helper = r'''
 const brandMark = (value: string, size = "h-10 w-10") => {
   const result = matchBrand(value);
-  if (result.status !== "match" || result.brand.asset_status !== "available" || !result.brand.logo_path) return null;
+  if (result.status !== "match") return null;
+  if (result.brand.asset_status !== "available" || !result.brand.logo_path) {
+    return <span title={result.brand.name_fa + " (لوگو هنوز در آرشیو نیست)"} data-testid="brand-pending-mark" className={"flex " + size + " shrink-0 items-center justify-center rounded-xl bg-[#E3F5F2] px-1 text-[10px] font-black text-[#0B6E63] ring-1 ring-[#CDEBE6]"}>{result.brand.name_fa}</span>;
+  }
   const filename = result.brand.logo_path.split("/").pop() || "";
   return <span title={result.brand.name_fa} className={"flex " + size + " shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-1 ring-1 ring-slate-100"}><img src={"/brand-logos/" + encodeURIComponent(filename)} alt={"لوگوی " + result.brand.name_fa} className="h-full w-full object-contain" loading="lazy" decoding="async"/></span>;
 };
