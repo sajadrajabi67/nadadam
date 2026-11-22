@@ -139,10 +139,11 @@
         "digi pay"
       ],
       "logo_path": "../logos/digipay-color.svg",
-      "source_project": "houtanrocky/iranian-banks-react-icons",
-      "source_url": "https://github.com/houtanrocky/iranian-banks-react-icons",
+      "source_project": "User-provided DigiPay logo source",
+      "source_url": "https://logoyab.com/wp-content/uploads/2026/09/%D8%AF%DB%8C%D8%AC%DB%8C-%D9%BE%DB%8C-1030x1030.png",
       "asset_status": "available",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "source_notes": "لوگوی جایگزین دیجی‌پی طبق لینک ارائه‌شده توسط کاربر."
     },
     {
       "id": "eghtesad-novin",
@@ -1031,12 +1032,12 @@
         "check"
       ],
       "logo_path": "../logos/bank-cheque-color.svg",
-      "source_project": "User-provided cheque image",
-      "source_url": "https://i1.delgarm.com/i/813/020901/655d317f020e5.gif",
+      "source_project": "User-uploaded cheque image",
+      "source_url": "User-provided image in this conversation",
       "asset_status": "available",
       "license_review": "user_provided_reference",
       "logo_brand_fa": "چک بانکی",
-      "source_notes": "تصویر مرجع چک که کاربر ارائه کرده؛ برای نمایش در نتایج تشخیص عنوان استفاده می‌شود و اطلاعات چاپی یا شخصی آن خوانده نمی‌شود."
+      "source_notes": "لوگوی جدید چک؛ تصویر صورتی چک بانکی با نقوش اسلیمی که کاربر بارگذاری کرده است."
     }
   ],
   "document_types": [
@@ -1056,9 +1057,9 @@
         "cheque",
         "check"
       ],
-      "reference_image_path": "../references/bank-cheque.gif",
+      "reference_image_path": "../logos/bank-cheque-color.svg",
       "asset_status": "available",
-      "notes_fa": "تصویر مرجع GIF ارائه‌شده توسط کاربر برای تشخیص نوع چک؛ فقط شناسایی نوع تصویر انجام می‌شود و اطلاعات چاپی یا شخصی چک خوانده نمی‌شود."
+      "notes_fa": "لوگوی جدید چک بانکی ارائه‌شده توسط کاربر."
     }
   ],
   "excluded_brand_names": [
