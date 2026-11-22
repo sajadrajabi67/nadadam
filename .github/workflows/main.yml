@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - feature/brand-logo-recognition
+      - feature/credit-brands-and-cheque
 
 jobs:
   build:
