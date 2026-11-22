@@ -210,20 +210,22 @@ jobs:
           grep -q "<svg" brand-assets/logos/azki-insurance-color.svg
           test "$(stat -c%s brand-assets/logos/azki-insurance-color.svg)" -gt 1000
           curl --fail --location --retry 3 --retry-delay 2 \
-            "https://cdn.brandfetch.io/idqSUBvqtx/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1781795732635" \
-            --output /tmp/bimehdotcom-logo.jpg
-          file /tmp/bimehdotcom-logo.jpg
-          test "$(stat -c%s /tmp/bimehdotcom-logo.jpg)" -gt 500
+            "https://assets.bimeh.com/images/app/pwaPhone.png" \
+            --output /tmp/bimehdotcom-official-app.png
+          file /tmp/bimehdotcom-official-app.png
+          test "$(stat -c%s /tmp/bimehdotcom-official-app.png)" -gt 1000
           python3 - <<'PY'
           from pathlib import Path
           from PIL import Image
           import base64
-          p = Path("/tmp/bimehdotcom-logo.jpg")
-          image = Image.open(p)
-          if image.format != "JPEG":
-              raise SystemExit(f"Unexpected Bimehdotcom image format: {image.format}")
-          data = base64.b64encode(p.read_bytes()).decode("ascii")
-          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" preserveAspectRatio="xMidYMid meet" href="data:image/jpeg;base64,' + data + '"/></svg>'
+          source = Image.open("/tmp/bimehdotcom-official-app.png").convert("RGBA")
+          # Crop the official Bimeh.com app mark from its own published app preview.
+          if source.width < 190 or source.height < 300:
+              raise SystemExit(f"Unexpected official Bimeh app preview size: {source.size}")
+          logo = source.crop((118, 72, 198, 152)).resize((512, 512), Image.Resampling.LANCZOS)
+          logo.save("/tmp/bimehdotcom-logo.png", format="PNG")
+          data = base64.b64encode(Path("/tmp/bimehdotcom-logo.png").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/png;base64,' + data + '"/></svg>'
           Path("brand-assets/logos/bimehdotcom-color.svg").write_text(svg, encoding="utf-8")
           PY
           curl --fail --location --retry 3 --retry-delay 2 \
