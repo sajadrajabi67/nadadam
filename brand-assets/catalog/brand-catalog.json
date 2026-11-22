@@ -1186,6 +1186,63 @@
       "source_url": "https://github.com/WordPressBugBounty/plugins-sync-basalam/blob/main/sync-basalam/assets/images/basalam.svg",
       "license_review": "trademark_review_required",
       "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
+    },
+    {
+      "id": "bimebazar",
+      "name_fa": "بیمه‌بازار",
+      "name_en": "BimeBazar",
+      "aliases": [
+        "بیمه بازار",
+        "بیمه‌بازار",
+        "بیمهبازار",
+        "BimeBazar",
+        "Bimeh Bazar",
+        "bimebazar"
+      ],
+      "official_domain": "https://bimebazar.com/",
+      "logo_path": "../logos/bimebazar-color.svg",
+      "asset_status": "available",
+      "source_project": "Official BimeBazar website",
+      "source_url": "https://bimebazar.com/nextPub/svg/background.svg",
+      "license_review": "trademark_review_required",
+      "verification_status": "official_site_asset"
+    },
+    {
+      "id": "azki-insurance",
+      "name_fa": "ازکی",
+      "name_en": "Azki",
+      "aliases": [
+        "ازکی",
+        "Azki",
+        "azki.com"
+      ],
+      "official_domain": "https://www.azki.com/",
+      "logo_path": "../logos/azki-insurance-color.svg",
+      "asset_status": "available",
+      "source_project": "Official Azki website",
+      "source_url": "https://www.azki.com/file/public/sega/azki-logo-simple.svg",
+      "license_review": "trademark_review_required",
+      "verification_status": "official_site_asset"
+    },
+    {
+      "id": "bimehdotcom",
+      "name_fa": "بیمه دات‌کام",
+      "name_en": "Bimehdotcom",
+      "aliases": [
+        "بیمه دات کام",
+        "بیمه دات‌کام",
+        "بیمهداتکام",
+        "Bimehdotcom",
+        "Bimeh.com",
+        "bimeh.com"
+      ],
+      "official_domain": "https://www.bimeh.com/",
+      "logo_path": "../logos/bimehdotcom-color.svg",
+      "asset_status": "available",
+      "source_project": "Brandfetch brand asset listing for bimeh.com",
+      "source_url": "https://cdn.brandfetch.io/idqSUBvqtx/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1781795732537",
+      "license_review": "trademark_review_required",
+      "verification_status": "brandfetch_identity_confirmed"
     }
   ],
   "document_types": [
