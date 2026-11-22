@@ -39,7 +39,7 @@ for (const [input, expected] of approvedBrandCases) {
   assert.equal(result.status, "match", input);
   assert.equal(result.brand.id, expected, input);
 }
-assert.equal(matchBrand("دیما").brand.logo_brand_fa, "بانک ملت");
+assert.equal(matchBrand("دیما").brand.logo_brand_fa, "دیما"); // Dima must keep its own user-provided logo.
 assert.equal(matchBrand("سلام پی").brand.logo_brand_fa, "باسلام");
 
 const cheque = matchDocumentType("تصویر برگه چک صیادی");
