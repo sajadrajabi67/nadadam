@@ -26,7 +26,7 @@ public class BackupStoragePlugin extends Plugin {
     public void saveBackup(PluginCall call) {
         String fileName = call.getString("fileName");
         String content = call.getString("content");
-        if (fileName == null || !fileName.matches("[\\\\p{L}\\\\p{N}_-]+\\\\.json") || content == null) {
+        if (fileName == null || !fileName.endsWith(".json") || fileName.indexOf("/") >= 0 || fileName.indexOf("\\\\") >= 0 || content == null) {
             call.reject("نام یا محتوای فایل پشتیبان معتبر نیست.");
             return;
         }
