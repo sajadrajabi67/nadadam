@@ -979,7 +979,14 @@
       "official_domain": "https://taracredit.com/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://taracredit.com/",
+        "https://taracredit.com/about-us/"
+      ],
+      "canonical_domain": "https://tara360.ir/",
+      "source_notes": "دامنه قدیمی به tara360.ir هدایت می‌شود؛ فایل لوگوی قابل آرشیو هنوز دریافت نشده."
     },
     {
       "id": "azkivam",
@@ -995,7 +1002,13 @@
       "official_domain": "https://azkivam.com/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://azkivam.com/",
+        "https://www.linkedin.com/company/azkivam"
+      ],
+      "source_notes": "وب‌سایت و صفحه شرکتی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
     },
     {
       "id": "lendo",
@@ -1009,7 +1022,12 @@
       "official_domain": "https://lendo.ir/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://lendo.ir/"
+      ],
+      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
     },
     {
       "id": "ghesta",
@@ -1023,7 +1041,12 @@
       "official_domain": "https://ghesta.ir/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://ghesta.ir/"
+      ],
+      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
     },
     {
       "id": "dgshahr",
@@ -1039,7 +1062,12 @@
       "official_domain": "https://dgshahr.com/",
       "logo_source_url": "https://dgshahr.com/assets/svg/logotype.svg",
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://dgshahr.com/"
+      ],
+      "source_notes": "نشانی SVG رسمی شناسایی شده اما فایل هنوز دانلود/بازبینی نشده."
     },
     {
       "id": "torobpay",
@@ -1055,7 +1083,12 @@
       "official_domain": "https://torobpay.com/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://torobpay.com/"
+      ],
+      "source_notes": "وب‌سایت رسمی بررسی شد؛ فایل لوگو هنوز دریافت نشده."
     },
     {
       "id": "technopay",
@@ -1071,7 +1104,13 @@
       "official_domain": "https://technopay.ir/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://technopay.ir/",
+        "https://www.linkedin.com/company/technopayir/"
+      ],
+      "source_notes": "وب‌سایت و صفحه شرکتی معرفی‌کننده دامنه بررسی شد؛ فایل لوگو هنوز دریافت نشده."
     },
     {
       "id": "vency",
@@ -1085,7 +1124,12 @@
       "official_domain": "https://vency.ir/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://vency.ir/"
+      ],
+      "source_notes": "وب‌سایت رسمی بررسی شد؛ تصاویر محتوایی به‌عنوان لوگوی مستقل استفاده نشدند."
     },
     {
       "id": "bajet",
@@ -1099,7 +1143,13 @@
       "official_domain": "https://mybajet.ir/",
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_identity_confirmed",
+      "identity_sources": [
+        "https://mybajet.ir/",
+        "https://www.linkedin.com/company/mybajet/"
+      ],
+      "source_notes": "صفحه شرکتی دامنه رسمی را معرفی می‌کند؛ فایل لوگو هنوز دریافت نشده."
     },
     {
       "id": "keepa",
@@ -1113,7 +1163,14 @@
       "official_domain": null,
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "official_social_identity_confirmed_domain_unconfirmed",
+      "identity_sources": [
+        "https://www.linkedin.com/company/keepaco_/",
+        "https://www.linkedin.com/company/keepagroup",
+        "https://www.youtube.com/@Keepaco"
+      ],
+      "source_notes": "هویت رسمی در شبکه‌های اجتماعی/شرکتی دیده شد؛ دامنه رسمی و فایل لوگو هنوز قطعی نیست."
     },
     {
       "id": "baloon",
@@ -1127,7 +1184,12 @@
       "official_domain": null,
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "needs_primary_source",
+      "identity_sources": [
+        "https://hematitegold.com/plan"
+      ],
+      "source_notes": "فقط در صفحه فروشنده/همکار دیده شده؛ این منبع برای تأیید هویت یا لوگوی رسمی کافی نیست."
     },
     {
       "id": "manisa",
@@ -1141,7 +1203,14 @@
       "official_domain": null,
       "logo_source_url": null,
       "asset_status": "pending",
-      "license_review": "trademark_review_required"
+      "license_review": "trademark_review_required",
+      "verification_status": "candidate_domain_needs_primary_confirmation",
+      "identity_sources": [
+        "https://moneysa.ir/",
+        "https://andishemoaser.ir/"
+      ],
+      "candidate_domain": "https://moneysa.ir/",
+      "source_notes": "دامنه در منابع عمومی و گزارش رسانه‌ای به مانیسا نسبت داده شده؛ مالکیت از منبع اولیه تأیید نشده."
     }
   ]
 }
