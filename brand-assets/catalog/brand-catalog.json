@@ -984,6 +984,61 @@
       "source_url": "https://techfy.ir/wp-content/uploads/2025/09/%D8%AA%D8%B1%D8%A8-%D9%BE%DB%8C-%DA%86%DB%8C%D8%B3%D8%AA%D8%9F.webp",
       "source_project": "User-provided Torob Pay logo image",
       "source_notes": "تصویر لوگوی ترب‌پی ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود."
+    },
+    {
+      "id": "talasea",
+      "name_fa": "طلاسی",
+      "name_en": "Talasea",
+      "aliases": [
+        "طلاسی",
+        "Talasea",
+        "talasea"
+      ],
+      "logo_path": "../logos/talasea-color.svg",
+      "logo_source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQGzL4Y_UyjYxA/company-logo_200_200/B4EZ2gAXyeIMAI-/0/1776505946013/talasea_logo?e=2147483647&v=beta&t=c4JeWONZcZwwEYCxZmaIPMyUw3M9bK-LE1NAdAK_5vc",
+      "source_url": "https://media.licdn.com/dms/image/v2/D4E0BAQGzL4Y_UyjYxA/company-logo_200_200/B4EZ2gAXyeIMAI-/0/1776505946013/talasea_logo?e=2147483647&v=beta&t=c4JeWONZcZwwEYCxZmaIPMyUw3M9bK-LE1NAdAK_5vc",
+      "source_project": "User-provided Talasea logo",
+      "source_notes": "تصویر لوگوی طلاسی ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "asset_status": "available",
+      "license_review": "trademark_review_required"
+    },
+    {
+      "id": "asiatech",
+      "name_fa": "آسیاتک",
+      "name_en": "Asiatech",
+      "aliases": [
+        "آسیاتک",
+        "آسیا تک",
+        "Asiatech",
+        "AsiaTech",
+        "asiatech"
+      ],
+      "logo_path": "../logos/asiatech-color.svg",
+      "logo_source_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIAjy5YF9L2RnoWn_jqUKM31SYZADG_fr77A&s",
+      "source_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIAjy5YF9L2RnoWn_jqUKM31SYZADG_fr77A&s",
+      "source_project": "User-provided Asiatech logo",
+      "source_notes": "تصویر لوگوی آسیاتک ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "asset_status": "available",
+      "license_review": "trademark_review_required"
+    },
+    {
+      "id": "telecommunication-company-of-iran",
+      "name_fa": "مخابرات",
+      "name_en": "Telecommunication Company of Iran",
+      "aliases": [
+        "مخابرات",
+        "شرکت مخابرات ایران",
+        "مخابرات ایران",
+        "Telecommunication Company of Iran",
+        "TCI"
+      ],
+      "logo_path": "../logos/telecommunication-company-of-iran-color.svg",
+      "logo_source_url": "https://media.hamshahrionline.ir/d/2022/07/11/4/4699873.jpg?ts=1657543367000",
+      "source_url": "https://media.hamshahrionline.ir/d/2022/07/11/4/4699873.jpg?ts=1657543367000",
+      "source_project": "User-provided Telecommunication Company of Iran logo",
+      "source_notes": "تصویر لوگوی مخابرات ارسالی کاربر؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "asset_status": "available",
+      "license_review": "trademark_review_required"
     }
   ],
   "document_types": [
