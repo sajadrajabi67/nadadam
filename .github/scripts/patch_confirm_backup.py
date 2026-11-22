@@ -35,7 +35,7 @@ s = s.replace(old_duplicate, new_duplicate, 1)
 
 old_export = "const exportData = () => { const blob=new Blob([JSON.stringify({format:'debt-manager-v1',data:store},null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='nadadam-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000); notice('فایل در پوشهٔ دانلود ذخیره شد.'); };"
 new_export = """const exportData = async () => {
-    const data = JSON.stringify({format:'debt-manager-v1',data:store}, null, 2);
+    const data = JSON.stringify({format:'debt-manager-v1',creator:{name:'Sajad Rajabi',handle:'@Sajadrajabi67',platforms:['Instagram','Telegram']},data:store}, null, 2);
     const current = today();
     const pad = (value:number) => fa(String(value).padStart(2, '0'));
     const fileName = 'ندادم_' + fa(current.y) + '-' + pad(current.m) + '-' + pad(current.d) + '.json';
