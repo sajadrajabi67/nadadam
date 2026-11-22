@@ -39,7 +39,18 @@ runtime_catalog = {
             "asset_status": b.get("asset_status", "pending"),
         }
         for b in brands
-    ]
+    ],
+    "excluded_brand_names": catalog.get("excluded_brand_names", []),
+    "document_types": [
+        {
+            "id": item["id"],
+            "name_fa": item["name_fa"],
+            "aliases": item.get("aliases", []),
+            "asset_status": item.get("asset_status", "pending"),
+            "reference_image_path": item.get("reference_image_path"),
+        }
+        for item in catalog.get("document_types", catalog.get("documentTypes", []))
+    ],
 }
 catalog_json = json.dumps(runtime_catalog, ensure_ascii=False, separators=(",", ":"))
 matcher = r'''
@@ -61,6 +72,11 @@ export function normalizeBrandText(value = ""): string {
 export function matchBrand(title: string) {
   const normalizedTitle = normalizeBrandText(title);
   if (!normalizedTitle) return { status: "no_match" as const, brand: null, matches: [] as const };
+  const excluded = brandCatalog.excluded_brand_names ?? [];
+  if (excluded.some(name => {
+    const normalized = normalizeBrandText(name);
+    return normalized && (normalizedTitle === normalized || normalizedTitle.includes(" " + normalized + " ") || normalizedTitle.startsWith(normalized + " ") || normalizedTitle.endsWith(" " + normalized));
+  })) return { status: "no_match" as const, brand: null, matches: [] as const };
 
   const found: Array<{ brand: typeof brandCatalog.brands[number]; alias: string; normalizedAlias: string; length: number }> = [];
   for (const brand of brandCatalog.brands) {
@@ -87,6 +103,34 @@ export function matchBrand(title: string) {
   }));
   if (matches.length > 1) return { status: "ambiguity" as const, brand: null, matches };
   return { status: "match" as const, brand: matches[0], matches };
+}
+
+export function matchDocumentType(title: string) {
+  const normalizedTitle = normalizeBrandText(title);
+  if (!normalizedTitle) return { status: "no_match" as const, document_type: null, matches: [] as const };
+  const found: Array<{ item: typeof brandCatalog.document_types[number]; alias: string; normalizedAlias: string; length: number }> = [];
+  for (const item of brandCatalog.document_types) {
+    for (const alias of item.aliases) {
+      const normalizedAlias = normalizeBrandText(alias);
+      if (normalizedAlias && normalizedTitle.includes(normalizedAlias)) {
+        found.push({ item, alias, normalizedAlias, length: normalizedAlias.length });
+      }
+    }
+  }
+  if (!found.length) return { status: "no_match" as const, document_type: null, matches: [] as const };
+  const longest = Math.max(...found.map(item => item.length));
+  const best = found.filter(item => item.length === longest);
+  const byId = new Map<string, typeof best[number]>();
+  for (const item of best) if (!byId.has(item.item.id)) byId.set(item.item.id, item);
+  const matches = [...byId.values()].map(({ item, alias }) => ({
+    id: item.id,
+    name_fa: item.name_fa,
+    asset_status: item.asset_status,
+    reference_image_path: item.reference_image_path,
+    matched_alias: alias
+  }));
+  if (matches.length > 1) return { status: "ambiguity" as const, document_type: null, matches };
+  return { status: "match" as const, document_type: matches[0], matches };
 }
 '''.replace("__CATALOG__", catalog_json)
 
