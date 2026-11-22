@@ -24,11 +24,11 @@ jobs:
           file brand-assets/references/bank-cheque.webp
           test "$(stat -c%s brand-assets/references/bank-cheque.webp)" -gt 5000
 
-      - name: Download official Tara logo
+      - name: Download official Tara logo asset
         run: |
           mkdir -p brand-assets/logos
           curl --fail --location --retry 3 --retry-delay 2 \\
-            "https://old2.tara360.ir/wp-content/uploads/2023/08/Logo-Tara-FA.svg" \\
+            "https://cdn.brandfetch.io/idi6KFMdnT/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747645203468" \\
             --output brand-assets/logos/tara-color.svg
           grep -q "<svg" brand-assets/logos/tara-color.svg
           test "$(stat -c%s brand-assets/logos/tara-color.svg)" -gt 500
