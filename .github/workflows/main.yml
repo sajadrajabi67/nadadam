@@ -42,6 +42,24 @@ jobs:
           grep -q "<svg" brand-assets/logos/basalam-color.svg
           test "$(stat -c%s brand-assets/logos/basalam-color.svg)" -gt 1000
 
+      - name: Download user-provided Torob Pay logo
+        run: |
+          mkdir -p brand-assets/logos
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://techfy.ir/wp-content/uploads/2025/09/%D8%AA%D8%B1%D8%A8-%D9%BE%DB%8C-%DA%86%DB%8C%D8%B3%D8%AA%D8%9F.webp" \
+            --output /tmp/torob-pay-logo.webp
+          file /tmp/torob-pay-logo.webp
+          test "$(stat -c%s /tmp/torob-pay-logo.webp)" -gt 1000
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          data = base64.b64encode(Path("/tmp/torob-pay-logo.webp").read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:image/webp;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/torob-pay-color.svg").write_text(svg, encoding="utf-8")
+          PY
+          grep -q "<svg" brand-assets/logos/torob-pay-color.svg
+          test "$(stat -c%s brand-assets/logos/torob-pay-color.svg)" -gt 1000
+
       - name: Download official Tara logo asset
         run: |
           mkdir -p brand-assets/logos
