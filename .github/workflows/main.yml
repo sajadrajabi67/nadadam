@@ -315,6 +315,8 @@ jobs:
           python3 ../.github/scripts/fix_reminders.py
           # Guard debt creation against UUID/WebView failures and catch pre-save exceptions.
           python3 ../.github/scripts/patch_safe_save.py
+          # Replace native browser confirms and save dated backups into Downloads/ندادم.
+          python3 ../.github/scripts/patch_confirm_backup.py
           # Keep the app header fixed while content scrolls underneath, with a soft fading lower edge.
           python3 ../.github/scripts/patch_header.py
           python3 ../.github/scripts/patch_brand_and_scroll.py
@@ -354,6 +356,8 @@ jobs:
           # Fail the build if the compiled CSS still points at the wrong font path.
           grep -q '/fonts/Vazirmatn-wght.woff2' dist/assets/*.css
           npx cap add android
+          # Register the native MediaStore writer for the Downloads/ندادم backup folder.
+          python3 ../.github/scripts/patch_android_backup.py
           # Exact alarms are required for reminders to fire at the selected clock time on Android 12+.
           python3 - <<'PY'
           from pathlib import Path
