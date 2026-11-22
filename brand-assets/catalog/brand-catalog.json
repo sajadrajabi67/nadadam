@@ -1008,18 +1008,20 @@
         "AzkiVam",
         "Azki Vam"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/azkivam-color.svg",
       "official_domain": "https://azkivam.com/",
       "logo_source_url": null,
-      "asset_status": "pending",
+      "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
         "https://azkivam.com/",
         "https://www.linkedin.com/company/azkivam"
       ],
-      "source_notes": "وب‌سایت و صفحه شرکتی بررسی شد؛ فایل لوگو هنوز دریافت نشده.",
-      "logo_brand_fa": "ازکی‌وام"
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد.",
+      "logo_brand_fa": "ازکی‌وام",
+      "source_project": "Arminsoleymani/Azki",
+      "source_url": "https://github.com/Arminsoleymani/Azki/blob/main/assets/Images/azkivam-logo.svg"
     },
     {
       "id": "lendo",
@@ -1054,18 +1056,20 @@
         "TechnoPay",
         "Techno Pay"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/technopay-color.svg",
       "official_domain": "https://technopay.ir/",
       "logo_source_url": null,
-      "asset_status": "pending",
+      "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
         "https://technopay.ir/",
         "https://www.linkedin.com/company/technopayir/"
       ],
-      "source_notes": "وب‌سایت و صفحه شرکتی معرفی‌کننده دامنه بررسی شد؛ فایل لوگو هنوز دریافت نشده.",
-      "logo_brand_fa": "تکنوپی"
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد.",
+      "logo_brand_fa": "تکنوپی",
+      "source_project": "farzane-na/tecnolife",
+      "source_url": "https://github.com/farzane-na/tecnolife/blob/main/src/asset/logo/technoPayFooter_new.svg"
     },
     {
       "id": "vency",
@@ -1100,9 +1104,13 @@
         "gsm pay",
         "gsmpay"
       ],
-      "logo_path": null,
-      "asset_status": "pending",
-      "logo_brand_fa": "جی‌اس‌ام‌پی"
+      "logo_path": "../logos/gsmpay-color.svg",
+      "asset_status": "available",
+      "logo_brand_fa": "جی‌اس‌ام‌پی",
+      "source_project": "athkco/gsmpay-woocommerce",
+      "source_url": "https://github.com/athkco/gsmpay-woocommerce/blob/master/assets/images/logo.png",
+      "license_review": "trademark_review_required",
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
     },
     {
       "id": "vepod",
@@ -1116,9 +1124,13 @@
         "vepod",
         "wepod"
       ],
-      "logo_path": null,
-      "asset_status": "pending",
-      "logo_brand_fa": "ویپاد"
+      "logo_path": "../logos/wepod-color.svg",
+      "asset_status": "available",
+      "logo_brand_fa": "ویپاد",
+      "source_project": "mehrnet/IranianBanks",
+      "source_url": "https://github.com/mehrnet/IranianBanks/blob/main/logos/png/512x512/wepod.png",
+      "license_review": "trademark_review_required",
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
     },
     {
       "id": "refahi-pay",
@@ -1164,10 +1176,14 @@
         "باسلام",
         "Basalam"
       ],
-      "logo_path": null,
-      "asset_status": "pending",
+      "logo_path": "../logos/basalam-color.svg",
+      "asset_status": "available",
       "logo_brand_fa": "باسلام",
-      "notes_fa": "طبق تأیید کاربر، نشان نمایشی باید لوگوی باسلام باشد."
+      "notes_fa": "طبق تأیید کاربر، نشان نمایشی باید لوگوی باسلام باشد.",
+      "source_project": "WordPressBugBounty/plugins-sync-basalam",
+      "source_url": "https://github.com/WordPressBugBounty/plugins-sync-basalam/blob/main/sync-basalam/assets/images/basalam.svg",
+      "license_review": "trademark_review_required",
+      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
     }
   ],
   "document_types": [
