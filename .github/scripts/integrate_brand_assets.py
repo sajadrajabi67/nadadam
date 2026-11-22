@@ -29,15 +29,14 @@ for brand in available:
 if len(copied) != len(available) or not copied:
     raise SystemExit("Logo copy verification failed.")
 
-# Package the cheque reference image when its external source is reachable.
-# It is optional so a temporary third-party redirect failure cannot block APK builds.
-CHEQUE_SOURCE = ROOT / "brand-assets" / "references" / "bank-cheque.gif"
+# Package the exact user-uploaded cheque design for cheque recognition.
+CHEQUE_SOURCE = ROOT / "brand-assets" / "logos" / "bank-cheque-color.svg"
 if CHEQUE_SOURCE.is_file() and CHEQUE_SOURCE.stat().st_size >= 5000:
     PUBLIC_REFERENCES = PROJECT / "public" / "reference-images"
     PUBLIC_REFERENCES.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(CHEQUE_SOURCE, PUBLIC_REFERENCES / "bank-cheque.gif")
+    shutil.copy2(CHEQUE_SOURCE, PUBLIC_REFERENCES / "bank-cheque.svg")
 else:
-    print("Optional cheque reference image unavailable; continuing without it.")
+    print("User-uploaded cheque design unavailable; continuing without the optional reference image.")
 
 runtime_catalog = {
     "brands": [
@@ -58,7 +57,7 @@ runtime_catalog = {
             "name_fa": item["name_fa"],
             "aliases": item.get("aliases", []),
             "asset_status": item.get("asset_status", "pending"),
-            "reference_image_path": "/reference-images/bank-cheque.gif" if item.get("id") == "bank-cheque" else item.get("reference_image_path"),
+            "reference_image_path": "/reference-images/bank-cheque.svg" if item.get("id") == "bank-cheque" else item.get("reference_image_path"),
         }
         for item in catalog.get("document_types", catalog.get("documentTypes", []))
     ],
