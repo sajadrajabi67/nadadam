@@ -778,7 +778,7 @@
       ],
       "logo_path": "../logos/tara-color.svg",
       "official_domain": "https://taracredit.com/",
-      "logo_source_url": "https://tara360.ir/wp-content/uploads/2024/08/tar_sanfi_v3.png",
+      "logo_source_url": "https://way2pay.ir/wp-content/uploads/tara.1404-1.jpg",
       "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
@@ -787,10 +787,10 @@
         "https://taracredit.com/about-us/"
       ],
       "canonical_domain": "https://tara360.ir/",
-      "source_notes": "فایل PNG ارائه‌شده توسط کاربر از دامنه رسمی تارا دریافت و هنگام ساخت به آرشیو SVG سازگار با نمایشگر برنامه تبدیل می‌شود.",
+      "source_notes": "تصویر لوگوی تارا که کاربر ارائه کرده؛ هنگام ساخت دریافت و به SVG سازگار با نمایشگر برنامه تبدیل می‌شود.",
       "logo_brand_fa": "تارا",
-      "source_project": "Official Tara360 website",
-      "source_url": "https://tara360.ir/wp-content/uploads/2024/08/tar_sanfi_v3.png"
+      "source_project": "User-provided Tara logo image",
+      "source_url": "https://way2pay.ir/wp-content/uploads/tara.1404-1.jpg"
     },
     {
       "id": "azkivam",
@@ -1032,9 +1032,9 @@
         "cheque",
         "check"
       ],
-      "reference_image_path": null,
-      "asset_status": "reference_image_not_archived",
-      "notes_fa": "دسته تشخیص تصویری چک؛ طبق خواسته کاربر فقط شناسایی نوع تصویر لازم است و خواندن اطلاعات چاپی یا شخصی چک انجام نمی‌شود."
+      "reference_image_path": "../references/bank-cheque.gif",
+      "asset_status": "available",
+      "notes_fa": "تصویر مرجع GIF ارائه‌شده توسط کاربر برای تشخیص نوع چک؛ فقط شناسایی نوع تصویر انجام می‌شود و اطلاعات چاپی یا شخصی چک خوانده نمی‌شود."
     }
   ],
   "excluded_brand_names": [
