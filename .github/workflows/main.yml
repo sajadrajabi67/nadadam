@@ -155,8 +155,23 @@ jobs:
         run: |
           mkdir -p brand-assets/logos
           curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
-            "https://cdn.brandfetch.io/idi6KFMdnT/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747645203468" \
-            --output brand-assets/logos/tara-color.svg
+            "https://cdn.brandfetch.io/domain/tara360.ir/fallback/lettermark/theme/dark/h/400/w/400/icon?c=1bfwsmEH20zzEfSNTed" \
+            --output /tmp/tara-logo.png
+          file /tmp/tara-logo.png
+          test "$(stat -c%s /tmp/tara-logo.png)" -gt 500
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import base64
+          p = Path("/tmp/tara-logo.png")
+          image = Image.open(p)
+          mime = "image/png" if image.format == "PNG" else "image/jpeg" if image.format == "JPEG" else None
+          if not mime:
+              raise SystemExit(f"Unexpected Tara image format: {image.format}")
+          data = base64.b64encode(p.read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" preserveAspectRatio="xMidYMid meet" href="data:' + mime + ';base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/tara-color.svg").write_text(svg, encoding="utf-8")
+          PY
           grep -q "<svg" brand-assets/logos/tara-color.svg
           test "$(stat -c%s brand-assets/logos/tara-color.svg)" -gt 500
       - name: Download user-provided Dima logo
@@ -195,8 +210,22 @@ jobs:
           grep -q "<svg" brand-assets/logos/azki-insurance-color.svg
           test "$(stat -c%s brand-assets/logos/azki-insurance-color.svg)" -gt 1000
           curl --fail --location --retry 3 --retry-delay 2 \
-            "https://cdn.brandfetch.io/idqSUBvqtx/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1781795732537" \
-            --output brand-assets/logos/bimehdotcom-color.svg
+            "https://cdn.brandfetch.io/idqSUBvqtx/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1781795732635" \
+            --output /tmp/bimehdotcom-logo.jpg
+          file /tmp/bimehdotcom-logo.jpg
+          test "$(stat -c%s /tmp/bimehdotcom-logo.jpg)" -gt 500
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import base64
+          p = Path("/tmp/bimehdotcom-logo.jpg")
+          image = Image.open(p)
+          if image.format != "JPEG":
+              raise SystemExit(f"Unexpected Bimehdotcom image format: {image.format}")
+          data = base64.b64encode(p.read_bytes()).decode("ascii")
+          svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" preserveAspectRatio="xMidYMid meet" href="data:image/jpeg;base64,' + data + '"/></svg>'
+          Path("brand-assets/logos/bimehdotcom-color.svg").write_text(svg, encoding="utf-8")
+          PY
           curl --fail --location --retry 3 --retry-delay 2 \
             "https://dmboard.media/wp-content/uploads/2025/08/Picture1-3-scaled.png" \
             --output /tmp/bimebazar-logo.png
