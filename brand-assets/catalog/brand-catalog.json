@@ -982,10 +982,10 @@
         "تارا360",
         "tara360"
       ],
-      "logo_path": null,
+      "logo_path": "../logos/tara-color.svg",
       "official_domain": "https://taracredit.com/",
       "logo_source_url": null,
-      "asset_status": "pending",
+      "asset_status": "available",
       "license_review": "trademark_review_required",
       "verification_status": "official_identity_confirmed",
       "identity_sources": [
@@ -993,8 +993,10 @@
         "https://taracredit.com/about-us/"
       ],
       "canonical_domain": "https://tara360.ir/",
-      "source_notes": "دامنه قدیمی به tara360.ir هدایت می‌شود؛ فایل لوگوی قابل آرشیو هنوز دریافت نشده.",
-      "logo_brand_fa": "تارا"
+      "source_notes": "لوگوی رسمی تارا از دامنه قدیمی وب‌سایت رسمی تارا دریافت می‌شود؛ فایل در زمان ساخت برنامه بررسی و در آرشیو عمومی برنامه قرار می‌گیرد.",
+      "logo_brand_fa": "تارا",
+      "source_project": "Official Tara website / Tara360",
+      "source_url": "https://old2.tara360.ir/wp-content/uploads/2023/08/Logo-Tara-FA.svg"
     },
     {
       "id": "azkivam",
