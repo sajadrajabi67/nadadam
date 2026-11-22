@@ -467,3 +467,14 @@ jobs:
         with:
           name: nadadam-apk
           path: app/android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Publish direct APK download (not ZIP)
+        if: success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nadadam-build-${{ github.run_number }}
+          name: ندادم - خروجی ${{ github.run_number }}
+          files: app/android/app/build/outputs/apk/debug/app-debug.apk
+          draft: false
+          prerelease: true
+          make_latest: false
