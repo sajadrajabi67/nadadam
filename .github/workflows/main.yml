@@ -158,7 +158,7 @@ jobs:
         run: |
           mkdir -p brand-assets/logos
           curl --fail --location --max-redirs 5 --retry 3 --retry-delay 2 \
-            "https://play-lh.googleusercontent.com/UofKHbRqJobkQaeQf8jjezzfh4rlhORHti__1cLJke514gHwj0OlNlhYYyFE9-9ePYo2y8JECqfOrrKz99G8wQ=w240-h480" \
+            "https://way2pay.ir/wp-content/uploads/tara.1404-1.jpg" \
             --output /tmp/tara-logo.png
           file /tmp/tara-logo.png
           test "$(stat -c%s /tmp/tara-logo.png)" -gt 500
@@ -256,6 +256,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
             brand-assets/logos/tara-color.svg \
+            brand-assets/references/bank-cheque.gif \
             brand-assets/logos/dima-color.svg \
             brand-assets/logos/bimebazar-color.svg \
             brand-assets/logos/azki-insurance-color.svg \
