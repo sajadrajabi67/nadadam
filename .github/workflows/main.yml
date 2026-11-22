@@ -70,10 +70,11 @@ jobs:
           test "$(stat -c%s /tmp/talasea-logo)" -gt 500
           python3 - <<'PY'
           from pathlib import Path
-          import base64, mimetypes
+          import base64
           p = Path("/tmp/talasea-logo")
-          mime = mimetypes.guess_type(p.name)[0] or "image/png"
-          data = base64.b64encode(p.read_bytes()).decode("ascii")
+          raw = p.read_bytes()
+          mime = "image/jpeg" if raw.startswith(bytes([255, 216, 255])) else ("image/webp" if raw[8:12] == b"WEBP" else "image/png")
+          data = base64.b64encode(raw).decode("ascii")
           svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:' + mime + ';base64,' + data + '"/></svg>'
           Path("brand-assets/logos/talasea-color.svg").write_text(svg, encoding="utf-8")
           PY
@@ -92,7 +93,7 @@ jobs:
           import base64
           p = Path("/tmp/asiatech-logo")
           suffix = p.read_bytes()[:12]
-          mime = "image/png" if suffix.startswith(b"\\x89PNG") else "image/jpeg"
+          mime = "image/png" if suffix.startswith(bytes([137]) + b"PNG") else ("image/webp" if suffix[8:12] == b"WEBP" else "image/jpeg")
           data = base64.b64encode(p.read_bytes()).decode("ascii")
           svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" href="data:' + mime + ';base64,' + data + '"/></svg>'
           Path("brand-assets/logos/asiatech-color.svg").write_text(svg, encoding="utf-8")
