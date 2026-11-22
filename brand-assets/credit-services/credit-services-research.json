@@ -1,0 +1,131 @@
+{
+  "version": "0.1",
+  "purpose": "ثبت دامنه‌ها و وضعیت گردآوری لوگوهای سرویس‌های اعتباری ایران برای آرشیو ندادم؛ این فایل به‌تنهایی مجوز استفاده از علائم تجاری ایجاد نمی‌کند.",
+  "entries": [
+    {
+      "id": "tara",
+      "name_fa": "تارا",
+      "official_domain": "https://taracredit.com/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "وب‌سایت رسمی خدمات اعتباری و سازمانی تارا."
+    },
+    {
+      "id": "azkivam",
+      "name_fa": "ازکی‌وام",
+      "official_domain": "https://azkivam.com/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "وب‌سایت رسمی ازکی‌وام؛ لوگوی مستقل هنوز استخراج و بررسی نشده."
+    },
+    {
+      "id": "lendo",
+      "name_fa": "لندو",
+      "official_domain": "https://lendo.ir/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "وب‌سایت رسمی لندو؛ لوگوی مستقل هنوز استخراج و بررسی نشده."
+    },
+    {
+      "id": "ghesta",
+      "name_fa": "قسطا",
+      "official_domain": "https://ghesta.ir/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "وب‌سایت رسمی قسطا کارت."
+    },
+    {
+      "id": "dgshahr",
+      "name_fa": "دیجی‌شهر",
+      "official_domain": "https://dgshahr.com/",
+      "domain_status": "verified_official",
+      "logo_status": "source_identified_not_downloaded",
+      "logo_source_url": "https://dgshahr.com/assets/svg/logotype.svg",
+      "notes": "مسیر فایل SVG لوگوتایپ از صفحه رسمی شناسایی شد؛ دریافت فایل به علت محدودیت دسترسی مستقیم در این مرحله انجام نشد."
+    },
+    {
+      "id": "torobpay",
+      "name_fa": "ترب‌پی",
+      "official_domain": "https://torobpay.com/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "وب‌سایت رسمی ترب‌پی؛ لوگوی مستقل هنوز استخراج و بررسی نشده."
+    },
+    {
+      "id": "technopay",
+      "name_fa": "تکنوپی",
+      "official_domain": "https://technopay.ir/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "دامنه در پروفایل رسمی LinkedIn شرکت معرفی شده است."
+    },
+    {
+      "id": "vency",
+      "name_fa": "ونسی",
+      "official_domain": "https://vency.ir/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "دامنه در پروفایل رسمی LinkedIn ونسی معرفی شده است."
+    },
+    {
+      "id": "bajet",
+      "name_fa": "باجت",
+      "official_domain": "https://mybajet.ir/",
+      "domain_status": "verified_official",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "دامنه در پروفایل رسمی LinkedIn اپلیکیشن باجت معرفی شده است."
+    },
+    {
+      "id": "keepa",
+      "name_fa": "کیپا",
+      "official_domain": null,
+      "domain_status": "official_social_profile_found_domain_needs_confirmation",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "پروفایل رسمی LinkedIn برند کیپا پیدا شد؛ دامنه رسمی وب برای دریافت لوگو هنوز با اطمینان تعیین نشده است."
+    },
+    {
+      "id": "baloon",
+      "name_fa": "بالون",
+      "official_domain": null,
+      "domain_status": "needs_official_source",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "نام و نشان در یک فهرست فروشنده/همکار دیده شد؛ منبع رسمی برند هنوز پیدا نشده است."
+    },
+    {
+      "id": "manisa",
+      "name_fa": "مانیسا",
+      "official_domain": null,
+      "domain_status": "needs_official_source",
+      "logo_status": "pending_download",
+      "logo_source_url": null,
+      "notes": "نام سرویس در صفحات فروش اقساطی همکار دیده شد؛ منبع رسمی برند هنوز پیدا نشده است."
+    }
+  ],
+  "usage_policy": [
+    "لوگوهای رسمی یا فایل‌هایی که منبع و مالکیت آن‌ها روشن نیست نباید با لوگوی ساختگی جایگزین شوند.",
+    "فایل‌های دریافت‌شده از سایت رسمی باید با نام و مسیر منبع ثبت شوند.",
+    "پیش از انتشار عمومی، مجوز استفاده از نشان تجاری هر برند جداگانه بررسی شود."
+  ],
+  "sources": [
+    "https://taracredit.com/",
+    "https://azkivam.com/",
+    "https://lendo.ir/",
+    "https://ghesta.ir/",
+    "https://dgshahr.com/",
+    "https://torobpay.com/",
+    "https://www.linkedin.com/company/technopayir/",
+    "https://www.linkedin.com/company/vency-ir/",
+    "https://www.linkedin.com/company/mybajet/",
+    "https://www.linkedin.com/company/keepaco_/"
+  ]
+}
