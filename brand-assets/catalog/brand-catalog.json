@@ -1188,11 +1188,12 @@
       "logo_path": "../logos/basalam-color.svg",
       "asset_status": "available",
       "logo_brand_fa": "باسلام",
-      "notes_fa": "طبق تأیید کاربر، نشان نمایشی باید لوگوی باسلام باشد.",
-      "source_project": "WordPressBugBounty/plugins-sync-basalam",
-      "source_url": "https://github.com/WordPressBugBounty/plugins-sync-basalam/blob/main/sync-basalam/assets/images/basalam.svg",
+      "notes_fa": "لوگوی باسلام برای نمایش در تشخیص هر دو عنوان باسلام و سلام‌پی استفاده شود.",
+      "source_project": "User-provided Basalam logo for Basalam and SalamPay",
+      "source_url": "https://statics.basalam.com/public-81/admin/0Vlq5j/05-12/fbLmC9QTrqwir7qCYUD9M5qAMoeEXiZw9HdwWHCkbW7LcrALwJ.png",
       "license_review": "trademark_review_required",
-      "source_notes": "فایل گرافیکی از مخزن عمومی گیت‌هاب دریافت و برای استفاده محلی در برنامه آرشیو شد."
+      "source_notes": "تصویر لوگوی ارسالی کاربر برای هر دو نام باسلام و سلام‌پی؛ هنگام build دریافت و به SVG بسته‌بندی می‌شود.",
+      "logo_source_url": "https://statics.basalam.com/public-81/admin/0Vlq5j/05-12/fbLmC9QTrqwir7qCYUD9M5qAMoeEXiZw9HdwWHCkbW7LcrALwJ.png"
     },
     {
       "id": "bimebazar",
