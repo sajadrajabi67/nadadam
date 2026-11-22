@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "description_fa": "کاتالوگ مستقل تشخیص نام بانک‌ها، پرداخت‌یارها و سرویس‌های اعتباری؛ مستقل از سورس اپلیکیشن.",
+  "description_fa": "کاتالوگ مستقل تشخیص نام بانک‌ها، پرداخت‌یارها و سرویس‌های اعتباری به‌همراه انواع سند مالی؛ مستقل از سورس اپلیکیشن.",
   "normalization": {
     "persian_yeh": "ی→ی",
     "arabic_yeh": "ي→ی",
@@ -68,7 +68,8 @@
       "aliases": [
         "بانکینو",
         "Bankino",
-        "bankino"
+        "bankino",
+        "بانک اینو"
       ],
       "logo_path": "../logos/bankino-color.svg",
       "source_project": "houtanrocky/iranian-banks-react-icons",
@@ -973,7 +974,12 @@
       "name_en": "Tara",
       "aliases": [
         "تارا",
-        "tara"
+        "tara",
+        "Tara",
+        "Tara Credit",
+        "تارا ۳۶۰",
+        "تارا360",
+        "tara360"
       ],
       "logo_path": null,
       "official_domain": "https://taracredit.com/",
@@ -1211,6 +1217,109 @@
       ],
       "candidate_domain": "https://moneysa.ir/",
       "source_notes": "دامنه در منابع عمومی و گزارش رسانه‌ای به مانیسا نسبت داده شده؛ مالکیت از منبع اولیه تأیید نشده."
+    },
+    {
+      "id": "gsmpay",
+      "name_fa": "جی‌اس‌ام‌پی",
+      "name_en": "GSM Pay",
+      "aliases": [
+        "جی‌اس‌ام‌پی",
+        "جی اس ام پی",
+        "GSM Pay",
+        "GSMPay",
+        "gsm pay",
+        "gsmpay"
+      ],
+      "logo_path": null,
+      "asset_status": "pending",
+      "logo_brand_fa": "جی‌اس‌ام‌پی"
+    },
+    {
+      "id": "vepod",
+      "name_fa": "ویپاد",
+      "name_en": "Vepod",
+      "aliases": [
+        "ویپاد",
+        "وی پاد",
+        "Vepod",
+        "WePod",
+        "vepod",
+        "wepod"
+      ],
+      "logo_path": null,
+      "asset_status": "pending",
+      "logo_brand_fa": "ویپاد"
+    },
+    {
+      "id": "refahi-pay",
+      "name_fa": "رفاهی‌پی",
+      "name_en": "RefahiPay",
+      "aliases": [
+        "رفاهی‌پی",
+        "رفاهی پی",
+        "RefahiPay",
+        "Refahi Pay",
+        "refahipay"
+      ],
+      "logo_path": null,
+      "asset_status": "pending",
+      "logo_brand_fa": "رفاهی‌پی"
+    },
+    {
+      "id": "dima",
+      "name_fa": "دیما",
+      "name_en": "Dima",
+      "aliases": [
+        "دیما",
+        "دیما بانک ملت",
+        "Dima",
+        "Dima Bank Mellat",
+        "com.bmelat.mobile"
+      ],
+      "logo_path": "../logos/mellat-color.svg",
+      "asset_status": "available",
+      "logo_brand_fa": "بانک ملت",
+      "notes_fa": "طبق تأیید کاربر، نام تشخیص «دیما» است اما نشان نمایشی باید لوگوی بانک ملت باشد."
+    },
+    {
+      "id": "salam-pay",
+      "name_fa": "سلام‌پی",
+      "name_en": "SalamPay",
+      "aliases": [
+        "سلام‌پی",
+        "سلام پی",
+        "SalamPay",
+        "Salam Pay",
+        "salampay",
+        "باسلام",
+        "Basalam"
+      ],
+      "logo_path": null,
+      "asset_status": "pending",
+      "logo_brand_fa": "باسلام",
+      "notes_fa": "طبق تأیید کاربر، نشان نمایشی باید لوگوی باسلام باشد."
+    }
+  ],
+  "document_types": [
+    {
+      "id": "bank-cheque",
+      "name_fa": "چک بانکی",
+      "name_en": "Bank Cheque",
+      "aliases": [
+        "چک",
+        "برگه چک",
+        "برگهٔ چک",
+        "چک بانکی",
+        "چک صیادی",
+        "چک صیاد",
+        "دسته چک",
+        "bank cheque",
+        "cheque",
+        "check"
+      ],
+      "reference_image_path": null,
+      "asset_status": "reference_image_not_archived",
+      "notes_fa": "دسته تشخیص تصویری چک؛ طبق خواسته کاربر فقط شناسایی نوع تصویر لازم است و خواندن اطلاعات چاپی یا شخصی چک انجام نمی‌شود."
     }
   ]
 }
