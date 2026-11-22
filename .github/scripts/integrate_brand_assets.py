@@ -46,6 +46,7 @@ runtime_catalog = {
             "name_fa": b["name_fa"],
             "aliases": b.get("aliases", []),
             "logo_path": b.get("logo_path"),
+            "logo_brand_fa": b.get("logo_brand_fa"),
             "asset_status": b.get("asset_status", "pending"),
         }
         for b in brands
